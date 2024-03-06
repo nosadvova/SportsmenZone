@@ -1,0 +1,42 @@
+/* 
+  Localizable.strings
+  SportsmenZone
+
+  Created by Vova Novosad on 23.02.2024.
+  
+*/
+
+"login" = "Login";
+"register" = "Register";
+"registration" = "Registration";
+"email" = "Email";
+"password" = "Password";
+"full-name" = "Full name";
+"repeat-password" = "Repeat password";
+"forgot-password" = "Forgot password?";
+"continue" = "Continue";
+"finish" = "Finish!";
+
+"registerPassword.noMatch" = "Those passwords do not match";
+"registerPassword.notValid" = "Password must be 6-18 characters(letters, numbers, special characters)";
+
+"OTP.title" = "Verify your email address";
+"OTP.description" = "Enter 4 digit code we'll text you on Email";
+"OTP.didntReceive" = "Didn’t receive anything?";
+"OTP.resendCode" = "Resend code";
+
+"forgotPassword.title" = "Forgot password?";
+"forgotPassword.description" = "No worries, we'll send you code for reset.";
+"forgotPassword.reset-password" = "Reset password";
+
+"chooseUser.title" = "Are you a sportsmen or a trainer?";
+"chooseUser.description" = "Choose your user type based on whether you are a sportsmen or a gym trainer.";
+"chooseUser.sportsmen" = "Sportsmen";
+"chooseUser.trainer" = "Trainer";
+"chooseUser.sportsmenDescription" = "I'm an athlete!";
+"chooseUser.trainerDescription" = "I'm a coach!";
+
+"authorizationSuccess.title" = "Registration success";
+"authorizationSuccess.description" = "Congratulations, your account has been successfully created!";
+
+
