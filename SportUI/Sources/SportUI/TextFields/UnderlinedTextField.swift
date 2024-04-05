@@ -28,7 +28,7 @@ public struct UnderlinedTextField: View {
         text: Binding<String>,
         isCorrect: Binding<Bool> = .constant(true),
         icon: String? = nil,
-        defaultBorderColor: Color = .lightGrayColor,
+        defaultBorderColor: Color = .inactiveButtonBackgroundColor,
         defaultForegroundStyle: Color = .mainTextColor,
         isSecuredTextField: Bool = false
     ) {

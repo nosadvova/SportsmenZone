@@ -6,38 +6,72 @@
 //
 
 import SwiftUI
+import Models
 import Combine
 
 final class RegistrationViewModel: ObservableObject {
-    @Published var fullName: String = ""
+    @Published var firstName: String = ""
+    @Published var lastName: String = ""
     @Published var email: String = "asdfrt@gmail.com"
     @Published var password: String = "123456"
     @Published var repeatPassword: String = "123456"
     @Published var errorText: String = ""
     
-    @Published var isFullNameValid = false
+    @Published var isFirstNameValid = false
+    @Published var isLastNameValid = false
     @Published var isEmailValid = true
     @Published var isPasswordValid = true
     @Published var arePasswordsEqual = false
     @Published var isContinueEnabled = false
     
     private var cancellables = Set<AnyCancellable>()
+    private var globalDataStorage: GlobalDataStorage
+    private var networkService: AuthenticationAPI
     
-    init() {
+    init(
+        networkService: AuthenticationAPI = RealAuthenticationAPI(),
+        globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared
+    ) {
+        self.networkService = networkService
+        self.globalDataStorage = globalDataStorage
         setupBindings()
+//        storeData()
+    }
+    
+    func storeData() {
+        Task {
+            let user = await globalDataStorage.user
+            
+            let newPersonalInfo = (user?.personalInformation ?? PersonalInformation())
+                .copy(firstName: firstName, lastName: lastName, email: email)
+            await globalDataStorage.setData(personalInformation: newPersonalInfo)
+//            guard let personalInfo = await globalDataStorage.personalInformation else {
+//                print("not found personal info")
+//                return
+//            }
+//
+//            let newUserInfo = personalInfo.copy(firstName: firstName, lastName: lastName, email: email)
+//            await globalDataStorage.setData(personalInformation: newUserInfo)
+        }
     }
     
     private func setupBindings() {
-        $fullName
+        $firstName
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .map { !$0.isEmpty }
-            .assign(to: \.isFullNameValid, on: self)
+            .assign(to: \.isFirstNameValid, on: self)
+            .store(in: &cancellables)
+        
+        $lastName
+            .debounce(for: 0.5, scheduler: RunLoop.main)
+            .map { !$0.isEmpty }
+            .assign(to: \.isLastNameValid, on: self)
             .store(in: &cancellables)
         
         $email
             .debounce(for: 0.5, scheduler: RunLoop.main)
             .map {
-                guard !$0.isEmpty else { return true }
+                guard !$0.isEmpty else { return false }
                 return $0.isEmailValid
             }
             .assign(to: \.isEmailValid, on: self)
@@ -51,7 +85,7 @@ final class RegistrationViewModel: ObservableObject {
             }
             .assign(to: \.isPasswordValid, on: self)
             .store(in: &cancellables)
-
+        
         
         Publishers
             .CombineLatest3($password, $repeatPassword, $isPasswordValid)
@@ -67,14 +101,14 @@ final class RegistrationViewModel: ObservableObject {
         
         
         Publishers
-            .CombineLatest3($isFullNameValid, $isEmailValid, $arePasswordsEqual)
-            .map { isFullNameValid, isEmailValid, arePasswordsEqual in
+            .CombineLatest4($isFirstNameValid, $isLastNameValid, $isEmailValid, $arePasswordsEqual)
+            .map { isFirstNameValid, isLastNameValid, isEmailValid, arePasswordsEqual in
                 guard !self.password.isEmpty &&
-                        !self.repeatPassword.isEmpty &&
-                        !self.fullName.isEmpty
+                        !self.repeatPassword.isEmpty
+                        //                        !self.fullName.isEmpty
                 else { return false }
                 
-                return isFullNameValid && isEmailValid && arePasswordsEqual
+                return isFirstNameValid && isLastNameValid && isEmailValid && arePasswordsEqual
             }
             .assign(to: \.isContinueEnabled, on: self)
             .store(in: &cancellables)

@@ -41,7 +41,10 @@ struct RegistrationView: View {
             registrationFormView
             
             Button {
-                routerManager.push(.authentication(.otp(isAuthProcess: true, email: viewModel.email)))
+                routerManager.push(.authentication(.chooseUser))
+                Task {
+                    viewModel.storeData()
+                }
             } label: {
                 HStack {
                     Text(S.register)
@@ -53,6 +56,7 @@ struct RegistrationView: View {
             .buttonStyle(RoundButtonStyle(sideAlignment: .center, backgroundColor: .sunsetColor, foregroundStyle: .white))
         }
         .background(Color.backgroundColor)
+        .ignoresSafeArea(.keyboard)
     }
 }
 
@@ -65,7 +69,9 @@ private extension RegistrationView {
     private var registrationFormView: some View {
         VStack(spacing: 10) {
             
-            UnderlinedTextField(placeholder: S.fullName, text: $viewModel.fullName, icon: "person.crop.circle", isSecuredTextField: false)
+            UnderlinedTextField(placeholder: S.fullName, text: $viewModel.firstName, icon: "person.crop.circle", isSecuredTextField: false)
+            
+            UnderlinedTextField(placeholder: S.fullName, text: $viewModel.lastName, icon: "person.crop.circle", isSecuredTextField: false)
             
             UnderlinedTextField(placeholder: S.email, text: $viewModel.email, isCorrect: $viewModel.isEmailValid, isSecuredTextField: false)
             
@@ -75,7 +81,7 @@ private extension RegistrationView {
             
             Text(viewModel.errorText)
                 .font(.sport.system(.caption))
-                .foregroundStyle(viewModel.isPasswordValid ? Color.lightGrayColor : .red)
+                .foregroundStyle(viewModel.isPasswordValid ? Color.inactiveButtonBackgroundColor : .red)
         }
     }
 }

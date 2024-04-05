@@ -43,7 +43,7 @@ struct OTPView: View {
             Spacer()
             
             Button(action: {
-                viewModel.isAuthProcess ? routerManager.push( .authentication(.chooseUser)) : routerManager.push(.authentication(.passwordRecovery))
+                viewModel.isAuthProcess ? routerManager.push( .authentication(.authorizationSuccess)) : routerManager.push(.authentication(.passwordRecovery))
             }, label: {
                 Text(S.continue)
                     .frame(width: 200)

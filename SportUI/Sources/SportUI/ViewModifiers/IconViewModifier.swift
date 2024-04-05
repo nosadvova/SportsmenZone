@@ -17,6 +17,6 @@ public struct IconViewModifier: ViewModifier {
         content
             .scaledToFit()
             .frame(width: 24, height: 24)
-            .foregroundStyle(isCorrect ? Color.lightGrayColor : .red)
+            .foregroundStyle(isCorrect ? Color.placeholderColor : .red)
     }
 }

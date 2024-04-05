@@ -8,10 +8,10 @@
 import SwiftUI
 
 public extension Color {
-    static let backgroundColor = Color(red: 0.957, green: 0.957, blue: 0.957)
+    static let backgroundColor = Color(red: 0.942, green: 0.943, blue: 0.967)
     
     static let mainTextColor = Color(red: 0.099, green: 0.099, blue: 0.099)
-    
+        
     static let defaultBorderColor = Color(red: 0.193, green: 0.193, blue: 0.193)
         
     static let buttonTextColor = Color(red: 0.31, green: 0.31, blue: 0.31)
@@ -21,6 +21,8 @@ public extension Color {
     static let sunsetColor = Color(red: 0.992, green: 0.655, blue: 0.412)
     
     static let oliveColor = Color(red: 0.671, green: 0.761, blue: 0.439)
+    
+    static let darkBlueColor = Color(red: 0.002, green: 0.000, blue: 0.712)
     
     static let inactiveButtonBackgroundColor = Color(red: 0.92, green: 0.92, blue: 0.92)
     

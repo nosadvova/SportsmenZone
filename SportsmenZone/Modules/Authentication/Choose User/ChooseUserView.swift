@@ -17,6 +17,7 @@ enum UserType: String, Identifiable, CaseIterable {
 
 struct ChooseUserView: View {
     @EnvironmentObject private var routerManager: NavigationRouter
+    @StateObject private var viewModel = ChooseUserViewModel()
     @State private var chosenUserType: UserType?
     @State private var isSportsmenSelected = false
     @State private var isTrainerSelected = false
@@ -49,7 +50,7 @@ struct ChooseUserView: View {
             Spacer()
             
             Button {
-                routerManager.push(.authentication(.authorizationSuccess))
+                routerManager.push(.authentication(.otp(isAuthProcess: true, email: viewModel.email)))
             } label: {
                 Text(S.continue)
                     .frame(width: 200)

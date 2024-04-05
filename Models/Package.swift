@@ -4,29 +4,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "SportUI",
-    platforms: [.iOS(.v16)],
+    name: "Models",
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "SportUI",
-            targets: ["SportUI"]),
-    ],
-    dependencies: [
-      .package(name: "SportExtensions", path: "../SportExtensions"),
-      .package(name: "Models", path: "../Models")
+            name: "Models",
+            targets: ["Models"]),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SportUI",
-            dependencies: [
-              .product(name: "SportExtensions", package: "SportExtensions"),
-              .product(name: "Models", package: "Models")
-            ]),
+            name: "Models"),
         .testTarget(
-            name: "SportUITests",
-            dependencies: ["SportUI"]),
+            name: "ModelsTests",
+            dependencies: ["Models"]),
     ]
 )

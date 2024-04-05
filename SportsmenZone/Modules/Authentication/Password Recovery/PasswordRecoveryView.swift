@@ -13,7 +13,7 @@ struct PasswordRecoveryView: View {
     @EnvironmentObject private var routerManager: NavigationRouter
     
     var body: some View {
-        PrimaryScreenStyle(title: S.ForgotPassword.title, textAlignment: .leading, frameAlignment: .leading, description: S.ForgotPassword.description, dismissButton: .back) {
+        PrimaryScreenStyle(title: S.ForgotPassword.resetPassword, textAlignment: .leading, frameAlignment: .leading, description: S.ForgotPassword.description, dismissButton: .back) {
             
             VStack {
                 UnderlinedTextField(placeholder: S.password, text: $viewModel.password, isCorrect: $viewModel.isPasswordValid, isSecuredTextField: true)

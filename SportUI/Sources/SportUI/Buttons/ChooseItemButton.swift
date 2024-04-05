@@ -12,6 +12,7 @@ public struct ChooseItemButton: View {
     private let title: String
     private let description: String
     private let image: Image
+    private let backgroundColor: Color
     let rectangleWidth: CGFloat
     let rectangleHeight: CGFloat
     
@@ -22,6 +23,7 @@ public struct ChooseItemButton: View {
     public init(title: String,
                 description: String,
                 image: Image,
+                backgroundColor: Color = .mustardColor,
                 rectangleWidth:CGFloat = 170,
                 rectangleHeight: CGFloat = 170,
                 isSelected: Binding<Bool>,
@@ -29,6 +31,7 @@ public struct ChooseItemButton: View {
         self.title = title
         self.description = description
         self.image = image
+        self.backgroundColor = backgroundColor
         self.rectangleWidth = rectangleWidth
         self.rectangleHeight = rectangleHeight
         self._isSelected = isSelected
@@ -56,7 +59,7 @@ public struct ChooseItemButton: View {
             .frame(alignment: .center)
             .background(
                 RoundedRectangle(cornerRadius: 25)
-                    .fill(isSelected ? .mustardColor : Color.lightGrayColor)
+                    .fill(isSelected ? backgroundColor.gradient : Color.inactiveButtonBackgroundColor.gradient)
                     .frame(width: rectangleWidth, height: rectangleHeight)
                     .overlay(alignment: .topTrailing, content: {
                         if isSelected {

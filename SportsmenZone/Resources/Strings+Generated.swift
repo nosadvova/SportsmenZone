@@ -12,6 +12,8 @@ import Foundation
 internal enum S {
   /// Continue
   internal static let `continue` = S.tr("Localizable", "continue", fallback: "Continue")
+  /// Dismiss
+  internal static let dismiss = S.tr("Localizable", "dismiss", fallback: "Dismiss")
   /// Email
   internal static let email = S.tr("Localizable", "email", fallback: "Email")
   /// Finish!
@@ -70,6 +72,14 @@ internal enum S {
     internal static let resetPassword = S.tr("Localizable", "forgotPassword.reset-password", fallback: "Reset password")
     /// Forgot password?
     internal static let title = S.tr("Localizable", "forgotPassword.title", fallback: "Forgot password?")
+  }
+  internal enum Gym {
+    /// All sportsmen
+    internal static let allSportsmen = S.tr("Localizable", "gym.all-sportsmen", fallback: "All sportsmen")
+    /// Follow
+    internal static let followButton = S.tr("Localizable", "gym.followButton", fallback: "Follow")
+    /// Do you want to follow the club?
+    internal static let followLabel = S.tr("Localizable", "gym.followLabel", fallback: "Do you want to follow the club?")
   }
   internal enum RegisterPassword {
     /// Those passwords do not match

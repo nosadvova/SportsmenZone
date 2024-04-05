@@ -16,6 +16,7 @@ public struct PrimaryScreenStyle<Content>: View where Content: View {
     private let frameAlignment: Alignment
     private let description: String?
     private let dismissButton: NavigationIcon?
+    private let backgroundColor: Color
     private let content: () -> Content
     
     public init(
@@ -24,6 +25,7 @@ public struct PrimaryScreenStyle<Content>: View where Content: View {
         frameAlignment: Alignment = .leading,
         description: String? = nil,
         dismissButton: NavigationIcon? = nil,
+        backgroundColor: Color = .backgroundColor,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.title = title
@@ -31,6 +33,7 @@ public struct PrimaryScreenStyle<Content>: View where Content: View {
         self.frameAlignment = frameAlignment
         self.description = description
         self.dismissButton = dismissButton
+        self.backgroundColor = backgroundColor
         self.content = content
     }
     
@@ -57,7 +60,7 @@ public struct PrimaryScreenStyle<Content>: View where Content: View {
                         }
                     }
                     .padding(10)
-                    .foregroundStyle(Color.mustardColor)
+                    .foregroundStyle(Color.sunsetColor)
                 }
             }
             
@@ -73,7 +76,7 @@ public struct PrimaryScreenStyle<Content>: View where Content: View {
                     .font(.sport.system(.description))
                     .multilineTextAlignment(textAlignment)
                     .frame(maxWidth: .infinity, alignment: frameAlignment)
-                    .foregroundStyle(Color.lightGrayColor)
+                    .foregroundStyle(Color.gray)
                     .padding(.horizontal, 20)
             }
             
@@ -85,12 +88,13 @@ public struct PrimaryScreenStyle<Content>: View where Content: View {
                 )
                 .padding()
         }
-        .background(Color.backgroundColor)
+        .ignoresSafeArea(.keyboard)
+        .background(backgroundColor)
     }
 }
 
 #Preview {
-    PrimaryScreenStyle(title: "Title long lik title", description: "Description of this screen to check how long text will fit in this fdjfhdjfd fdfhdjfhjdf dfhdjfhjdhfd fhdjhfjdhfjdhfd dhfjdhfjdhfj dfhdjfh", dismissButton: .back, content: {
+    PrimaryScreenStyle(title: "Title long lik title", description: "Description of this screen to check how much will fit in this fdjfhdjfd fdfhdjfhjdf dfhdjfhjdhfd fhdjhfjdhfjdhfd dhfjdhfjdhfj dfhdjfh", dismissButton: .back, content: {
         Text("Content")
     })
 }

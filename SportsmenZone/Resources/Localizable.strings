@@ -16,6 +16,7 @@
 "forgot-password" = "Forgot password?";
 "continue" = "Continue";
 "finish" = "Finish!";
+"dismiss" = "Dismiss";
 
 "registerPassword.noMatch" = "Those passwords do not match";
 "registerPassword.notValid" = "Password must be 6-18 characters(letters, numbers, special characters)";
@@ -39,4 +40,6 @@
 "authorizationSuccess.title" = "Registration success";
 "authorizationSuccess.description" = "Congratulations, your account has been successfully created!";
 
-
+"gym.followLabel" = "Do you want to follow the club?";
+"gym.followButton" = "Follow";
+"gym.all-sportsmen" = "All sportsmen";

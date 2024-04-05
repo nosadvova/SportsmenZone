@@ -35,10 +35,11 @@ public struct ShapeHeaderScreenStyle<Content>: View where Content: View {
             VStack {
                 Text(title)
                     .font(.sport.system(.largeTitle))
-                    .foregroundStyle(Color.mainTextColor)
+                    .foregroundStyle(foregroundColor)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
+                    .padding([.horizontal, .top])
+                    .padding(.bottom, 0.5)
                 
                 if let description {
                     Text(description)
@@ -51,7 +52,7 @@ public struct ShapeHeaderScreenStyle<Content>: View where Content: View {
                 }
             }
             .background(
-                RoundedRectangle(cornerRadius: 25)
+                RoundedRectangle(cornerRadius: 15)
                     .fill(headerColor)
                     .frame(maxWidth: .infinity)
                     .ignoresSafeArea()
@@ -63,14 +64,15 @@ public struct ShapeHeaderScreenStyle<Content>: View where Content: View {
                     maxHeight: .infinity,
                     alignment: .top
                 )
-                .padding()
+                .padding(.horizontal)
         }
-        .background(Color.backgroundColor)
     }
 }
 
 #Preview {
-    ShapeHeaderScreenStyle(title: "Title", description: "Description of screen", color: .sunsetColor, content: {
-        Text("Content")
+    ShapeHeaderScreenStyle(title: "Title", description: "Description of screen", color: .blue, content: {
+        ScrollView {
+            Text("Content")
+        }
     })
 }
