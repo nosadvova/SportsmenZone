@@ -7,20 +7,11 @@
 
 import SwiftUI
 import SportUI
-
-enum UserType: String, Identifiable, CaseIterable {
-    case sportsmen = "Sportsmen"
-    case trainer = "Trainer"
-    
-    var id: Self { self }
-}
+import Models
 
 struct ChooseUserView: View {
     @EnvironmentObject private var routerManager: NavigationRouter
     @StateObject private var viewModel = ChooseUserViewModel()
-    @State private var chosenUserType: UserType?
-    @State private var isSportsmenSelected = false
-    @State private var isTrainerSelected = false
     
     var body: some View {
         PrimaryScreenStyle(title: S.ChooseUser.title, description: S.ChooseUser.description, dismissButton: .back) {
@@ -29,33 +20,34 @@ struct ChooseUserView: View {
                 ChooseItemButton(title: S.ChooseUser.sportsmen,
                                  description: S.ChooseUser.sportsmenDescription,
                                  image: Image(systemName: "person.fill"),
-                                 isSelected: $isSportsmenSelected,
+                                 isSelected: $viewModel.isSportsmenSelected,
                                  action: {
-                    chosenUserType = .sportsmen
-                    isSportsmenSelected = true
-                    isTrainerSelected = false
+                    viewModel.chosenUserType = .Sportsman
+                    viewModel.isSportsmenSelected = true
+                    viewModel.isTrainerSelected = false
                 })
                 
                 ChooseItemButton(title: S.ChooseUser.trainer,
                                  description: S.ChooseUser.trainerDescription,
                                  image: Image(systemName: "person.fill"),
-                                 isSelected: $isTrainerSelected,
+                                 isSelected: $viewModel.isTrainerSelected,
                                  action: {
-                    chosenUserType = .trainer
-                    isSportsmenSelected = false
-                    isTrainerSelected = true
+                    viewModel.chosenUserType = .Trainer
+                    viewModel.isSportsmenSelected = false
+                    viewModel.isTrainerSelected = true
                 })
             }
             
             Spacer()
             
             Button {
+                viewModel.storeData()
                 routerManager.push(.authentication(.otp(isAuthProcess: true, email: viewModel.email)))
             } label: {
                 Text(S.continue)
                     .frame(width: 200)
             }
-            .disabled(!(chosenUserType != nil))
+            .disabled(viewModel.chosenUserType == nil)
             .buttonStyle(RoundButtonStyle(backgroundColor: .sunsetColor, foregroundStyle: .white))
         }
     }

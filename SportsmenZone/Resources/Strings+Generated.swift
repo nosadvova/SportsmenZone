@@ -18,10 +18,12 @@ internal enum S {
   internal static let email = S.tr("Localizable", "email", fallback: "Email")
   /// Finish!
   internal static let finish = S.tr("Localizable", "finish", fallback: "Finish!")
+  /// First name
+  internal static let firstName = S.tr("Localizable", "first-name", fallback: "First name")
   /// Forgot password?
   internal static let forgotPassword = S.tr("Localizable", "forgot-password", fallback: "Forgot password?")
-  /// Full name
-  internal static let fullName = S.tr("Localizable", "full-name", fallback: "Full name")
+  /// Last name
+  internal static let lastName = S.tr("Localizable", "last-name", fallback: "Last name")
   /// Localizable.strings
   ///   SportsmenZone
   /// 

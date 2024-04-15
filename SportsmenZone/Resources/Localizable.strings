@@ -11,7 +11,8 @@
 "registration" = "Registration";
 "email" = "Email";
 "password" = "Password";
-"full-name" = "Full name";
+"first-name" = "First name";
+"last-name" = "Last name";
 "repeat-password" = "Repeat password";
 "forgot-password" = "Forgot password?";
 "continue" = "Continue";

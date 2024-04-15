@@ -7,7 +7,9 @@
 
 import SwiftUI
 import Combine
+import SportUI
 
+@MainActor
 final class LoginViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
@@ -15,11 +17,29 @@ final class LoginViewModel: ObservableObject {
     @Published var isEmailValid = true
     @Published var isPasswordValid = true
     @Published var isContinueEnabled = false
+    @Published var requestLoadable: Loadable<Bool> = .notRequested
+    @Published var showMessage = false
     
+    private var networkService: AuthenticationAPI
     private var cancellables = Set<AnyCancellable>()
     
-    init() {
+    init(networkService: AuthenticationAPI = RealAuthenticationAPI()) {
+        self.networkService = networkService
         setupBindings()
+    }
+    
+    func loginUser() {
+        Task {
+            requestLoadable.loading()
+            do {
+                _ = try await networkService.login(email: email, password: password)
+                requestLoadable = .loaded(true)
+            } catch let error as NetworkError {
+                print("Login error: ", error.customMessage)
+                showMessage = true
+                requestLoadable = .failed(error)
+            }
+        }
     }
     
     private func setupBindings() {
@@ -29,6 +49,7 @@ final class LoginViewModel: ObservableObject {
                 guard !$0.isEmpty else { return true }
                 return $0.isEmailValid
             }
+            .receive(on: DispatchQueue.main)
             .assign(to: \.isEmailValid, on: self)
             .store(in: &cancellables)
         
@@ -38,6 +59,7 @@ final class LoginViewModel: ObservableObject {
                 guard !$0.isEmpty else { return true }
                 return $0.isPasswordValid
             }
+            .receive(on: DispatchQueue.main)
             .assign(to: \.isPasswordValid, on: self)
             .store(in: &cancellables)
         
@@ -49,6 +71,7 @@ final class LoginViewModel: ObservableObject {
                 }
                 return isEmailValid && isPasswordValid
             }
+            .receive(on: DispatchQueue.main)
             .assign(to: \.isContinueEnabled, on: self)
             .store(in: &cancellables)   
     }

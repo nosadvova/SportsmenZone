@@ -9,12 +9,15 @@ import SwiftUI
 import Models
 
 enum GymRoute {
+    case gym
     case allSportsmen
 }
 
 extension GymRoute: View {
     var body: some View {
         switch self {
+        case .gym:
+            GymView()
         case .allSportsmen:
             UserListView(viewModel: GymViewModel())
         }

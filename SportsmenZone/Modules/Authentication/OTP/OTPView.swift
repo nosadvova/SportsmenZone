@@ -43,7 +43,14 @@ struct OTPView: View {
             Spacer()
             
             Button(action: {
-                viewModel.isAuthProcess ? routerManager.push( .authentication(.authorizationSuccess)) : routerManager.push(.authentication(.passwordRecovery))
+                if viewModel.isAuthProcess { 
+                    viewModel.registerUser()
+                    if viewModel.requestLoadable == .loaded(true) {
+                        routerManager.push(.authentication(.authorizationSuccess))
+                    }
+                } else {
+                    routerManager.push(.authentication(.passwordRecovery))
+                }
             }, label: {
                 Text(S.continue)
                     .frame(width: 200)
@@ -51,6 +58,7 @@ struct OTPView: View {
             .disabled(!viewModel.isContinueEnabled)
             .buttonStyle(RoundButtonStyle(backgroundColor: .sunsetColor, foregroundStyle: .white))
         }
+        .modifier(PopupMessageViewModifier(isPresented: $viewModel.showMessage, type: .failure, message: "Bad response"))
     }
 }
 

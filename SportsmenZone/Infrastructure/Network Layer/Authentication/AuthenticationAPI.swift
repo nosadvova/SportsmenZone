@@ -6,10 +6,9 @@
 //
 
 import Foundation
+import Models
 
 protocol AuthenticationAPI {
-  func register(email: String, otp: String) async throws -> AuthToken
-  func login(email: String, otp: String) async throws -> AuthToken
-
-//  func refreshAuthToken(refreshToken: String) async throws -> AuthToken
+  func register(personalInformation: UserInformationModel) async throws -> AuthToken
+  func login(email: String, password: String) async throws -> AuthToken
 }

@@ -10,8 +10,8 @@ import Models
 import Combine
 
 final class RegistrationViewModel: ObservableObject {
-    @Published var firstName: String = ""
-    @Published var lastName: String = ""
+    @Published var firstName: String = "My"
+    @Published var lastName: String = "Name"
     @Published var email: String = "asdfrt@gmail.com"
     @Published var password: String = "123456"
     @Published var repeatPassword: String = "123456"
@@ -26,16 +26,12 @@ final class RegistrationViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private var globalDataStorage: GlobalDataStorage
-    private var networkService: AuthenticationAPI
     
     init(
-        networkService: AuthenticationAPI = RealAuthenticationAPI(),
         globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared
     ) {
-        self.networkService = networkService
         self.globalDataStorage = globalDataStorage
         setupBindings()
-//        storeData()
     }
     
     func storeData() {
@@ -43,15 +39,8 @@ final class RegistrationViewModel: ObservableObject {
             let user = await globalDataStorage.user
             
             let newPersonalInfo = (user?.personalInformation ?? PersonalInformation())
-                .copy(firstName: firstName, lastName: lastName, email: email)
+                .copy(firstName: firstName, lastName: lastName, password: password, email: email)
             await globalDataStorage.setData(personalInformation: newPersonalInfo)
-//            guard let personalInfo = await globalDataStorage.personalInformation else {
-//                print("not found personal info")
-//                return
-//            }
-//
-//            let newUserInfo = personalInfo.copy(firstName: firstName, lastName: lastName, email: email)
-//            await globalDataStorage.setData(personalInformation: newUserInfo)
         }
     }
     

@@ -19,9 +19,9 @@ struct UserListView: View {
                 ForEach(viewModel.sportsmen) { user in
                     UserRow(
                         isInteractionAllowed: true,
-                        userImage: user.userImage,
-                        fullName: user.fullName,
-                        info: user.email ?? "")
+                        userImage: user.personalInformation?.userImage,
+                        fullName: user.personalInformation?.fullName ?? "",
+                        info: user.personalInformation?.email ?? "")
                     {
                         OptionButton(image: "trash.fill", imageColor: .red, title: "Delete user") {
                             print("User deleted")

@@ -34,7 +34,7 @@ public struct PopupMessageViewModifier: ViewModifier {
     public func body(content: Content) -> some View {
         ZStack(alignment: .top) {
             content
-            
+
             if isPresented {
                 HStack {
                     type.image

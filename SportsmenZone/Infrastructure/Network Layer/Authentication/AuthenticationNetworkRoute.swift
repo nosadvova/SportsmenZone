@@ -6,27 +6,20 @@
 //
 
 import Foundation
+import Models
 
 enum AuthenticationNetworkRoute {
-  case register(email: String, otp: String)
-  case login(email: String, otp: String)
-//  case refreshAuthToken(String)
+    case register(personalInformation: UserInformationModel)
+    case login(email: String, password: String)
 }
 
-extension AuthenticationNetworkRoute: ServerRoute {    
-    var pathParams: [String : String]? {
-        return nil
-    }
-    
-    
+extension AuthenticationNetworkRoute: ServerRoute {
     var path: String {
         switch self {
         case .register:
-            return "users/register"
+            return "/users/register"
         case .login:
-            return "users/login"
-//        case .refreshAuthToken:
-//            return "oauth/access-token"
+            return "/users/login"
         }
     }
     
@@ -34,40 +27,24 @@ extension AuthenticationNetworkRoute: ServerRoute {
         return .post
     }
     
-    var header: [String : String]? {
+    var header: [String: String]? {
+        //        var headers: [String: String] = [:]
+        //        headers["Content-Type"] = "application/json"
         return nil
     }
     
     var body: Data? {
         switch self {
-        case let .register(email, otp):
-            struct Request: Encodable {
-                let email: String
-                let otp: String
-            }
+        case let .register(personalInformation):
+            return personalInformation.requestBody()
             
-            return Request(email: email, otp: otp).requestBody()
-            
-        case let .login(email, otp):
+        case let .login(email, password):
             struct Request: Encodable {
                 let email: String
                 let password: String
             }
             
-            return Request(email: email, password: otp).requestBody()
-            
-//        case let .refreshAuthToken(refreshToken):
-//            struct Request: Codable {
-//                let grantType = "refresh_token"
-//                let refreshToken: String
-//                
-//                enum CodingKeys: String, CodingKey {
-//                    case grantType = "grant_type"
-//                    case refreshToken = "refresh_token"
-//                }
-//            }
-            
-//            return Request(refreshToken: refreshToken).requestBody()
+            return Request(email: email, password: password).requestBody()
         }
     }
 }

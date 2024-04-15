@@ -73,9 +73,9 @@ private extension GymView {
                 VStack {
                     UserRow(
                         isInteractionAllowed: false,
-                        userImage: sportsman.userImage,
-                        fullName: sportsman.fullName,
-                        info: sportsman.email ?? "") {}
+                        userImage: sportsman.personalInformation?.userImage,
+                        fullName: sportsman.personalInformation?.fullName ?? "",
+                        info: sportsman.personalInformation?.email ?? "") {}
                 }
                 .padding(EdgeInsets(top: 5, leading: 25, bottom: 5, trailing: 25))
             }

@@ -6,13 +6,15 @@
 //
 
 import Foundation
+import Models
 
 class RealAuthenticationAPI: NetworkService, AuthenticationAPI {
-    func register(email: String, otp: String) async throws -> AuthToken {
-        return try await sendRequest(route: AuthenticationNetworkRoute.register(email: email, otp: otp))
+    
+    func register(personalInformation: UserInformationModel) async throws -> AuthToken {
+        return try await sendRequest(route: AuthenticationNetworkRoute.register(personalInformation: personalInformation))
     }
     
-    func login(email: String, otp: String) async throws -> AuthToken {
-        return try await sendRequest(route: AuthenticationNetworkRoute.login(email: email, otp: otp))
+    func login(email: String, password: String) async throws -> AuthToken {
+        return try await sendRequest(route: AuthenticationNetworkRoute.login(email: email, password: password))
     }
 }

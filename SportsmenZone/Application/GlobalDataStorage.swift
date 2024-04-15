@@ -35,6 +35,10 @@ actor GlobalDataStorage {
         if let personalInformation { self.personalInformation = personalInformation }
     }
     
+    func resetPassword() {
+        personalInformation?.password = nil
+    }
+    
     func reset() {
         user = nil
         training = nil

@@ -7,11 +7,14 @@
 
 import SwiftUI
 import Combine
+import SportUI
+import Models
 
 enum FocusPin {
     case pinOne, pinTwo, pinThree, pinFour
 }
 
+@MainActor
 final class OTPViewModel: ObservableObject {
     @Published var pinOne: String = ""
     @Published var pinTwo: String = ""
@@ -20,26 +23,50 @@ final class OTPViewModel: ObservableObject {
     
     @Published var otpCode: String = ""
     @Published var isContinueEnabled = false
+    @Published var showMessage = false
+    @Published var requestLoadable: Loadable<Bool> = .notRequested
     
     let isAuthProcess: Bool
     let email: String
     let otpValidCode = "1234"
     
+    private var networkService: AuthenticationAPI
+    private var globalDataStorage: GlobalDataStorage
     private var cancellables = Set<AnyCancellable>()
     
-    init(isAuthProcess: Bool, email: String) {
+    init(networkService: AuthenticationAPI = RealAuthenticationAPI(),
+         globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared,
+         isAuthProcess: Bool,
+         email: String) {
+        self.networkService = networkService
+        self.globalDataStorage = globalDataStorage
         self.isAuthProcess = isAuthProcess
         self.email = email
         
         setupBindings()
     }
     
-//    func checkVerificationCode(_ code: String) -> Bool {
-//        if otpCode.count != 4 && otpCode != code {
-//            return false
-//        }
-//        return true
-//    }
+    func registerUser() {
+        Task {
+            guard let personalInformation = await globalDataStorage.personalInformation else { return }
+            let userInformation = UserInformationModel(firstName: personalInformation.firstName ?? "",
+                                                       lastName: personalInformation.lastName ?? "",
+                                                       password: personalInformation.password ?? "",
+                                                       email: personalInformation.email ?? "",
+                                                       userType: personalInformation.userType?.rawValue ?? "")
+            print(userInformation)
+            
+            requestLoadable.loading()
+            do {
+                _ = try await networkService.register(personalInformation: userInformation)
+                requestLoadable = .loaded(true)
+            } catch let error as NetworkError {
+                print("Error while sending request: ", error.customMessage)
+                showMessage = true
+                requestLoadable = .failed(error)
+            }
+        }
+    }
     
     private func setupBindings() {
         

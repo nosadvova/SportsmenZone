@@ -10,19 +10,23 @@ import Foundation
 protocol ServerRoute {
     var host: String { get }
     var scheme: String { get }
+    var port: Int? { get }
     var path: String { get }
     var method: HTTPMethod { get }
     var header: [String: String]? { get }
     var body: Data? { get }
-    var pathParams: [String: String]? { get }
 }
 
 extension ServerRoute {
     var scheme: String {
-        return "http://"
+        return "http"
     }
     
     var host: String {
-        return "localhost:8000/"
+        return "localhost"
+    }
+    
+    var port: Int? {
+        return 8000
     }
 }

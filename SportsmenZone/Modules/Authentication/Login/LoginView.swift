@@ -35,7 +35,7 @@ struct LoginView: View {
                 .padding()
                 
                 Button {
-                    //
+                    viewModel.loginUser()
                 } label: {
                     HStack {
                         Text(S.login)
@@ -64,6 +64,17 @@ struct LoginView: View {
             .buttonStyle(RoundButtonStyle(sideAlignment: .left, backgroundColor: .mustardColor, foregroundStyle: .white))
         }
         .background(Color.backgroundColor)
+        .modifier(PopupMessageViewModifier(isPresented: $viewModel.showMessage,
+                                           type: .failure,
+                                           message: viewModel.requestLoadable.error?.localizedDescription ?? "Bad response"))
+        .onChange(of: viewModel.requestLoadable.value) { oldValue, newValue in
+            Task {
+                if viewModel.requestLoadable == .loaded(true) {
+                    routerManager.replace(with: .gym(.gym))
+                }
+                viewModel.requestLoadable = .notRequested
+            }
+        }
     }
 }
 

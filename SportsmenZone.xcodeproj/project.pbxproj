@@ -136,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				6701AEA72B825A6800127364 /* SportsmenZone */,
+				6701AEAC2B825A6A00127364 /* Assets.xcassets */,
 				6701AEA62B825A6800127364 /* Products */,
 				6701AEBA2B8277BF00127364 /* Frameworks */,
 				678761C22B98D200001320C6 /* Packages */,
@@ -153,12 +154,11 @@
 		6701AEA72B825A6800127364 /* SportsmenZone */ = {
 			isa = PBXGroup;
 			children = (
-				671A24912BB44E0900B02782 /* Infrastructure */,
 				6701AEA82B825A6800127364 /* SportsmenZoneApp.swift */,
 				6701AEAA2B825A6800127364 /* ContentView.swift */,
+				671A24912BB44E0900B02782 /* Infrastructure */,
 				670E19592B8B666F009EC037 /* Application */,
 				6722118B2B88CEF100E40104 /* Resources */,
-				6701AEAC2B825A6A00127364 /* Assets.xcassets */,
 				6701AEB62B82700900127364 /* Modules */,
 				6782B2E92B87A1FF00AE8F1A /* Fonts */,
 				6701AEAE2B825A6A00127364 /* Preview Content */,

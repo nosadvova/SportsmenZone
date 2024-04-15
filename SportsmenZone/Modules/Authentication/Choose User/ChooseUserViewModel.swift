@@ -6,21 +6,28 @@
 //
 
 import Foundation
+import Models
 
 final class ChooseUserViewModel: ObservableObject {
     let globalDataStorage: GlobalDataStorage
     var email: String = ""
+    @Published var chosenUserType: UserType?
+    @Published var isSportsmenSelected = false
+    @Published var isTrainerSelected = false
     
     init(globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared) {
         self.globalDataStorage = globalDataStorage
-        initialData()
+        
+        storeData()
     }
     
-    func initialData() {
+    func storeData() {
         Task {
-            let userEmail = await globalDataStorage.personalInformation
-            email = userEmail?.email ?? "none email provided"
-            print("user email: ", email)
+            let personalInformation = await globalDataStorage.personalInformation
+            email = personalInformation?.email ?? "no email provided"
+
+            let newPersonalInformation = personalInformation?.copy(userType: chosenUserType)
+            await globalDataStorage.setData(personalInformation: newPersonalInformation)
         }
     }
 }

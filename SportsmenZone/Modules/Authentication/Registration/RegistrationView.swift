@@ -42,9 +42,7 @@ struct RegistrationView: View {
             
             Button {
                 routerManager.push(.authentication(.chooseUser))
-                Task {
-                    viewModel.storeData()
-                }
+                viewModel.storeData()
             } label: {
                 HStack {
                     Text(S.register)
@@ -69,9 +67,9 @@ private extension RegistrationView {
     private var registrationFormView: some View {
         VStack(spacing: 10) {
             
-            UnderlinedTextField(placeholder: S.fullName, text: $viewModel.firstName, icon: "person.crop.circle", isSecuredTextField: false)
+            UnderlinedTextField(placeholder: S.firstName, text: $viewModel.firstName, isSecuredTextField: false)
             
-            UnderlinedTextField(placeholder: S.fullName, text: $viewModel.lastName, icon: "person.crop.circle", isSecuredTextField: false)
+            UnderlinedTextField(placeholder: S.lastName, text: $viewModel.lastName, isSecuredTextField: false)
             
             UnderlinedTextField(placeholder: S.email, text: $viewModel.email, isCorrect: $viewModel.isEmailValid, isSecuredTextField: false)
             

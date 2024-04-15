@@ -18,6 +18,7 @@ extension CoreNetwork {
         urlComponents.scheme = route.scheme
         urlComponents.host = route.host
         urlComponents.path = route.path
+        urlComponents.port = route.port
         
         guard let url = urlComponents.url else {
             return nil
