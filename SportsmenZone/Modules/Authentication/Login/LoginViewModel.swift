@@ -18,7 +18,7 @@ final class LoginViewModel: ObservableObject {
     @Published var isPasswordValid = true
     @Published var isContinueEnabled = false
     @Published var requestLoadable: Loadable<Bool> = .notRequested
-    @Published var showMessage = false
+    @Published var showMessage: (Bool, String) = (false, "")
     
     private var networkService: AuthenticationAPI
     private var cancellables = Set<AnyCancellable>()
@@ -36,7 +36,7 @@ final class LoginViewModel: ObservableObject {
                 requestLoadable = .loaded(true)
             } catch let error as NetworkError {
                 print("Login error: ", error.customMessage)
-                showMessage = true
+                showMessage = (true, error.customMessage)
                 requestLoadable = .failed(error)
             }
         }

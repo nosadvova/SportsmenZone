@@ -35,7 +35,7 @@ public extension Loadable {
   mutating func loading() {
     self = .isLoading(last: value)
   }
-
+    
   var isLoading: Binding<Bool> {
     Binding {
       switch self {
@@ -44,6 +44,13 @@ public extension Loadable {
       }
     } set: { _ in }
   }
+    
+    var isError: Binding<Bool> {
+        Binding {
+            error != nil ? true : false
+        }
+        set: { _ in }
+    }
 
   var receivedValue: Binding<Bool> {
     Binding {

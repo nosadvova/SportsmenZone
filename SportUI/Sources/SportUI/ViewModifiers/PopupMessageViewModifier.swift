@@ -60,7 +60,8 @@ public struct PopupMessageViewModifier: ViewModifier {
                 .onTapGesture {
                     withAnimation { isPresented = false }
                 }
-                .transition(.asymmetric(insertion: .move(edge: .top), removal: .move(edge: .top)))
+                .transition(.move(edge: .top)
+                    .combined(with: .opacity))
             }
         }
         .animation(.spring, value: isPresented)

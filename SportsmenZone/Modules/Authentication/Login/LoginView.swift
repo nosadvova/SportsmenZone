@@ -64,9 +64,9 @@ struct LoginView: View {
             .buttonStyle(RoundButtonStyle(sideAlignment: .left, backgroundColor: .mustardColor, foregroundStyle: .white))
         }
         .background(Color.backgroundColor)
-        .modifier(PopupMessageViewModifier(isPresented: $viewModel.showMessage,
+        .modifier(PopupMessageViewModifier(isPresented: $viewModel.showMessage.0,
                                            type: .failure,
-                                           message: viewModel.requestLoadable.error?.localizedDescription ?? "Bad response"))
+                                           message: viewModel.showMessage.1))
         .onChange(of: viewModel.requestLoadable.value) { oldValue, newValue in
             Task {
                 if viewModel.requestLoadable == .loaded(true) {

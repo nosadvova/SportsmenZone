@@ -26,10 +26,7 @@ extension CoreNetwork {
         var request = URLRequest(url: url)
         request.httpMethod = route.method.rawValue
         request.allHTTPHeaderFields = route.header
-        if let body = route.body {
-            let encoder = JSONEncoder()
-            request.httpBody = try? encoder.encode(body)
-        }
+        request.httpBody = route.body
         return request
     }
 }
