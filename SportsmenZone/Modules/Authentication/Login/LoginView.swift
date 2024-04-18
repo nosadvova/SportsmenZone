@@ -64,10 +64,12 @@ struct LoginView: View {
             .buttonStyle(RoundButtonStyle(sideAlignment: .left, backgroundColor: .mustardColor, foregroundStyle: .white))
         }
         .background(Color.backgroundColor)
-        .modifier(PopupMessageViewModifier(isPresented: $viewModel.showMessage.0,
-                                           type: .failure,
-                                           message: viewModel.showMessage.1))
-        .onChange(of: viewModel.requestLoadable.value) { oldValue, newValue in
+        .modifier(PopupMessageViewModifier(
+            isPresented: $viewModel.showMessage.0,
+            type: .failure,
+            message: viewModel.showMessage.1)
+        )
+        .onChange(of: viewModel.requestLoadable.value) { _, _ in
             Task {
                 if viewModel.requestLoadable == .loaded(true) {
                     routerManager.replace(with: .gym(.gym))

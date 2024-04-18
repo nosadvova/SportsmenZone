@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SportExtensions
 
 class NetworkService: CoreNetwork {
     func sendRequest<T>(urlStr: String) async throws -> T where T : Decodable {
@@ -45,13 +46,36 @@ class NetworkService: CoreNetwork {
                         return
                     }
                     guard let decodedResponse = try? JSONDecoder().decode(T.self, from: data) else {
-                        print(String(data: data, encoding: .utf8))
                         continuation.resume(throwing: NetworkError.decode)
                         return
                     }
+
                     continuation.resume(returning: decodedResponse)
                 }
             task.resume()
+        }
+    }
+    
+    func sendRequest(route: ServerRoute) async throws {
+        guard let urlRequest = createRequest(route: route) else {
+            throw NetworkError.decode
+        }
+        
+        do {
+            let (_, response) = try await URLSession.shared.data(for: urlRequest, delegate: nil)
+            guard let response = response as? HTTPURLResponse else {
+                throw NetworkError.noResponse
+            }
+            switch response.statusCode {
+            case 200...299:
+                break
+            case 401:
+                throw NetworkError.unauthorized
+            default:
+                throw NetworkError.unexpectedStatusCode
+            }
+        } catch {
+            throw NetworkError.unknown
         }
     }
     

@@ -9,36 +9,32 @@ import Foundation
 
 public struct AuthToken {
 
-  public var accessToken: String
+  public var token: String
   public var refreshToken: String
-  public let expiresIn: Int
-  private let createdAt: Date
+//  public let expiresAt: Date
+//  private let createdAt: Date
 
-  public init(accessToken: String, refreshToken: String, expiresIn: Int) {
-    self.accessToken = accessToken
+    public init(token: String, refreshToken: String) {
+    self.token = token
     self.refreshToken = refreshToken
-    self.expiresIn = expiresIn
-    self.createdAt = Date()
-  }
-
-  public var isValid: Bool {
-    return createdAt.addingTimeInterval(TimeInterval(expiresIn) - 5 * 60) >= Date()
+//    self.expiresAt = expiresAt
+//    self.createdAt = createdAt
   }
 }
 
 extension AuthToken: Codable {
   enum CodingKeys: String, CodingKey {
-    case accessToken = "access_token"
+    case token
     case refreshToken = "refresh_token"
-    case expiresIn = "expires_in"
-    case createdAt = "created_at"
+//    case expiresAt = "expires_at"
+//    case createdAt = "created_at"
   }
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.accessToken = try container.decode(String.self, forKey: .accessToken)
+    self.token = try container.decode(String.self, forKey: .token)
     self.refreshToken = try container.decode(String.self, forKey: .refreshToken)
-    self.expiresIn = try container.decode(Int.self, forKey: .expiresIn)
-    self.createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt) ?? Date()
+//    self.expiresAt = try container.decode(Date.self, forKey: .expiresAt)
+//    self.createdAt = try container.decode(Date.self, forKey: .createdAt)
   }
 }

@@ -94,7 +94,6 @@ final class RegistrationViewModel: ObservableObject {
             .map { isFirstNameValid, isLastNameValid, isEmailValid, arePasswordsEqual in
                 guard !self.password.isEmpty &&
                         !self.repeatPassword.isEmpty
-                        //                        !self.fullName.isEmpty
                 else { return false }
                 
                 return isFirstNameValid && isLastNameValid && isEmailValid && arePasswordsEqual

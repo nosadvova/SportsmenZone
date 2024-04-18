@@ -48,10 +48,7 @@ public struct UnderlinedTextField: View {
                 Text(placeholder)
                     .font(.sport.system(.caption))
                     .foregroundStyle(foregroundColor)
-                    .transition(.asymmetric(
-                        insertion: .move(edge: .bottom),
-                        removal: .move(edge: .top)
-                    ))
+                    .transition(.move(edge: .top).combined(with: .opacity))
                     .animation(.easeOut, value: isTextFieldFocused)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .opacity(isTextFieldFocused || !text.isEmpty ? 1 : 0)
@@ -122,6 +119,7 @@ extension UnderlinedTextField {
     private var regularTextFieldButton: some View {
         Button(action: {
             text = ""
+            isTextFieldFocused = true
         }, label: {
             if let icon {
                 Image(systemName: icon)
@@ -136,7 +134,7 @@ extension UnderlinedTextField {
 
 #Preview {
     VStack {
-        UnderlinedTextField(placeholder: "Email", text: .constant("dfd"), isCorrect: .constant(true), icon: "person.crop.circle.fill", isSecuredTextField: false)
+        UnderlinedTextField(placeholder: "Email", text: .constant(""), isCorrect: .constant(true), icon: "person.crop.circle.fill", isSecuredTextField: false)
         UnderlinedTextField(placeholder: "Email", text: .constant("dfd"), isCorrect: .constant(true), isSecuredTextField: false)
         UnderlinedTextField(placeholder: "Password", text: .constant("dfd"), isCorrect: .constant(true), isSecuredTextField: true)
     }

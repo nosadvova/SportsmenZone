@@ -10,6 +10,7 @@ import Foundation
 protocol CoreNetwork {
     func sendRequest<T: Decodable>(urlStr: String) async throws -> T
     func sendRequest<T: Decodable>(route: ServerRoute) async throws -> T
+    func sendRequest(route: ServerRoute) async throws
 }
 
 extension CoreNetwork {

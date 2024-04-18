@@ -10,7 +10,7 @@ import Models
 
 class RealAuthenticationAPI: NetworkService, AuthenticationAPI {
     
-    func register(personalInformation: UserInformationModel) async throws -> AuthToken {
+    func register(personalInformation: UserInformationModel) async throws {
         return try await sendRequest(route: AuthenticationNetworkRoute.register(personalInformation: personalInformation))
     }
     

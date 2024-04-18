@@ -10,7 +10,10 @@ import SwiftUI
 struct SportsmenZoneTabView: View {
     var body: some View {
         TabView {
-            //
+            GymView()
+                .tabItem {
+                        Label("Gym", systemImage: "dumbbell")
+                }
         }
     }
 }

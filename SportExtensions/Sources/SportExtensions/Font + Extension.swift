@@ -48,7 +48,7 @@ public struct FontStyle {
             fontName = .regular
             fontSize = 18
         case .largeTitle:
-            fontName = .black
+            fontName = .bold
             fontSize = 38
         }
         

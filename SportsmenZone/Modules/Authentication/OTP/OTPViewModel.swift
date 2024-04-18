@@ -23,7 +23,7 @@ final class OTPViewModel: ObservableObject {
     
     @Published var otpCode: String = ""
     @Published var isContinueEnabled = false
-    @Published var showMessage = false
+    @Published var showMessage = (false, "")
     @Published var requestLoadable: Loadable<Bool> = .notRequested
     
     let isAuthProcess: Bool
@@ -54,7 +54,6 @@ final class OTPViewModel: ObservableObject {
                                                        password: personalInformation.password ?? "",
                                                        email: personalInformation.email ?? "",
                                                        userType: personalInformation.userType?.rawValue ?? "")
-            print(userInformation)
             
             requestLoadable.loading()
             do {
@@ -62,7 +61,7 @@ final class OTPViewModel: ObservableObject {
                 requestLoadable = .loaded(true)
             } catch let error as NetworkError {
                 print("Error while sending request: ", error.customMessage)
-                showMessage = true
+                showMessage = (true, error.customMessage)
                 requestLoadable = .failed(error)
             }
         }

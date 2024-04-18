@@ -11,8 +11,8 @@ import SportUI
 
 @MainActor
 final class LoginViewModel: ObservableObject {
-    @Published var email: String = ""
-    @Published var password: String = ""
+    @Published var email: String = "trainer@gmail.com"
+    @Published var password: String = "123456"
     
     @Published var isEmailValid = true
     @Published var isPasswordValid = true
@@ -32,7 +32,8 @@ final class LoginViewModel: ObservableObject {
         Task {
             requestLoadable.loading()
             do {
-                _ = try await networkService.login(email: email, password: password)
+                let token = try await networkService.login(email: email, password: password)
+//                print(token)
                 requestLoadable = .loaded(true)
             } catch let error as NetworkError {
                 print("Login error: ", error.customMessage)
