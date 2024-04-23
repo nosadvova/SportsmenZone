@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import SportUI
+import CacheProvider
 
 @MainActor
 final class LoginViewModel: ObservableObject {
@@ -21,10 +22,15 @@ final class LoginViewModel: ObservableObject {
     @Published var showMessage: (Bool, String) = (false, "")
     
     private var networkService: AuthenticationAPI
+    private var cacheProvider: CacheProvider
     private var cancellables = Set<AnyCancellable>()
     
-    init(networkService: AuthenticationAPI = RealAuthenticationAPI()) {
+    init(
+        networkService: AuthenticationAPI = RealAuthenticationAPI(),
+        cacheProvider: CacheProvider = LocalCacheProvider(identifier: Constants.StorageKey.identifier)
+    ) {
         self.networkService = networkService
+        self.cacheProvider = cacheProvider
         setupBindings()
     }
     
@@ -33,7 +39,8 @@ final class LoginViewModel: ObservableObject {
             requestLoadable.loading()
             do {
                 let token = try await networkService.login(email: email, password: password)
-//                print(token)
+                print(token)
+                try cacheProvider.setValue(token, forKey: Constants.StorageKey.authToken)
                 requestLoadable = .loaded(true)
             } catch let error as NetworkError {
                 print("Login error: ", error.customMessage)

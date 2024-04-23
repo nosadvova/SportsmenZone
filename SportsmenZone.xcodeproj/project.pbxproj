@@ -18,6 +18,10 @@
 		670E195D2B8B6691009EC037 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670E195C2B8B6691009EC037 /* NavigationRouter.swift */; };
 		670E19602B8D34AD009EC037 /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670E195F2B8D34AD009EC037 /* OTPView.swift */; };
 		670E19622B8D369A009EC037 /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670E19612B8D369A009EC037 /* OTPViewModel.swift */; };
+		6718380C2BD17BEE00058A95 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6718380B2BD17BEE00058A95 /* Constants.swift */; };
+		671838132BD661D200058A95 /* GymAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671838122BD661D200058A95 /* GymAPI.swift */; };
+		671838152BD6625E00058A95 /* GymNetworkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671838142BD6625E00058A95 /* GymNetworkRoute.swift */; };
+		671838172BD6A96300058A95 /* RealGymAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671838162BD6A96300058A95 /* RealGymAPI.swift */; };
 		671A24942BB44E8A00B02782 /* ServerRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A24932BB44E8A00B02782 /* ServerRoute.swift */; };
 		671A24962BB44EB900B02782 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A24952BB44EB900B02782 /* HTTPMethod.swift */; };
 		671A24982BB4500900B02782 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671A24972BB4500900B02782 /* NetworkError.swift */; };
@@ -69,6 +73,10 @@
 		670E195C2B8B6691009EC037 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
 		670E195F2B8D34AD009EC037 /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		670E19612B8D369A009EC037 /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
+		6718380B2BD17BEE00058A95 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		671838122BD661D200058A95 /* GymAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymAPI.swift; sourceTree = "<group>"; };
+		671838142BD6625E00058A95 /* GymNetworkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymNetworkRoute.swift; sourceTree = "<group>"; };
+		671838162BD6A96300058A95 /* RealGymAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealGymAPI.swift; sourceTree = "<group>"; };
 		671A24932BB44E8A00B02782 /* ServerRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerRoute.swift; sourceTree = "<group>"; };
 		671A24952BB44EB900B02782 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		671A24972BB4500900B02782 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -228,6 +236,16 @@
 			path = OTP;
 			sourceTree = "<group>";
 		};
+		6718380D2BD6619A00058A95 /* Gym */ = {
+			isa = PBXGroup;
+			children = (
+				671838122BD661D200058A95 /* GymAPI.swift */,
+				671838142BD6625E00058A95 /* GymNetworkRoute.swift */,
+				671838162BD6A96300058A95 /* RealGymAPI.swift */,
+			);
+			path = Gym;
+			sourceTree = "<group>";
+		};
 		671A24912BB44E0900B02782 /* Infrastructure */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +257,7 @@
 		671A24922BB44E1700B02782 /* Network Layer */ = {
 			isa = PBXGroup;
 			children = (
+				6718380D2BD6619A00058A95 /* Gym */,
 				671A249B2BB4772B00B02782 /* Authentication */,
 				671A24932BB44E8A00B02782 /* ServerRoute.swift */,
 				671A24952BB44EB900B02782 /* HTTPMethod.swift */,
@@ -277,6 +296,7 @@
 				6722118C2B88CF0800E40104 /* Localizable.strings */,
 				6722119C2B88D8CC00E40104 /* Strings+Generated.swift */,
 				6722119D2B88D8CC00E40104 /* swiftgen.yml */,
+				6718380B2BD17BEE00058A95 /* Constants.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -513,9 +533,12 @@
 				670E19622B8D369A009EC037 /* OTPViewModel.swift in Sources */,
 				6732D2502BBB2A550074C44F /* GlobalDataStorage.swift in Sources */,
 				6790FE712BA1E88B007A7097 /* TrainingView.swift in Sources */,
+				671838152BD6625E00058A95 /* GymNetworkRoute.swift in Sources */,
 				670E19552B8A1694009EC037 /* RegistrationView.swift in Sources */,
 				6755B5402BB70C85008DE2A3 /* NetworkService.swift in Sources */,
 				6745D9D42B8E61F900E08171 /* ForgotPasswordViewModel.swift in Sources */,
+				6718380C2BD17BEE00058A95 /* Constants.swift in Sources */,
+				671838132BD661D200058A95 /* GymAPI.swift in Sources */,
 				670E195B2B8B6681009EC037 /* Route.swift in Sources */,
 				6764ABA22BB97913003D0AB5 /* RealAuthenticationAPI.swift in Sources */,
 				674D8EF12BB81C9D009D61CB /* Encodable + Extension.swift in Sources */,
@@ -534,6 +557,7 @@
 				678465FF2B8904D80062F736 /* LoginViewModel.swift in Sources */,
 				671A24982BB4500900B02782 /* NetworkError.swift in Sources */,
 				671A24942BB44E8A00B02782 /* ServerRoute.swift in Sources */,
+				671838172BD6A96300058A95 /* RealGymAPI.swift in Sources */,
 				670A37832B9B7D6600C83A54 /* UserListView.swift in Sources */,
 				67A818F72B8F8353004BEFA0 /* AuthorizationSuccessView.swift in Sources */,
 				6701AEA92B825A6800127364 /* SportsmenZoneApp.swift in Sources */,
