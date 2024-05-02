@@ -10,5 +10,5 @@ import Models
 
 protocol AuthenticationAPI {
   func register(personalInformation: UserInformationModel) async throws
-  func login(email: String, password: String) async throws -> AuthToken
+  func login(personalInformation: UserInformationModel) async throws -> AuthToken
 }

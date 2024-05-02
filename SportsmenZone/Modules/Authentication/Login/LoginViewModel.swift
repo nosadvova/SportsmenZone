@@ -9,6 +9,7 @@ import SwiftUI
 import Combine
 import SportUI
 import CacheProvider
+import Models
 
 @MainActor
 final class LoginViewModel: ObservableObject {
@@ -27,7 +28,7 @@ final class LoginViewModel: ObservableObject {
     
     init(
         networkService: AuthenticationAPI = RealAuthenticationAPI(),
-        cacheProvider: CacheProvider = LocalCacheProvider(identifier: Constants.StorageKey.identifier)
+        cacheProvider: CacheProvider = ServiceFacade.getService(CacheProvider.self)
     ) {
         self.networkService = networkService
         self.cacheProvider = cacheProvider
@@ -38,9 +39,9 @@ final class LoginViewModel: ObservableObject {
         Task {
             requestLoadable.loading()
             do {
-                let token = try await networkService.login(email: email, password: password)
-                print(token)
-                try cacheProvider.setValue(token, forKey: Constants.StorageKey.authToken)
+                let token: AuthToken = try await networkService.login(personalInformation: UserInformationModel(password: password, email: email))
+                try saveAuthToken(token)
+                /*cacheProvider.setSensitiveValue(token, forKey: Constants.StorageKey.authToken)*/
                 requestLoadable = .loaded(true)
             } catch let error as NetworkError {
                 print("Login error: ", error.customMessage)
@@ -48,6 +49,11 @@ final class LoginViewModel: ObservableObject {
                 requestLoadable = .failed(error)
             }
         }
+    }
+    
+    private func saveAuthToken(_ authToken: AuthToken) throws {
+        let simplifiedToken = SimplifiedAuthToken(token: authToken.token, refreshToken: authToken.refreshToken, isValid: authToken.isValid)
+        try cacheProvider.setSensitiveValue(simplifiedToken, forKey: Constants.StorageKey.authToken)
     }
     
     private func setupBindings() {

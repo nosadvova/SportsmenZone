@@ -7,6 +7,18 @@
 
 import Foundation
 
+public struct SimplifiedAuthToken: Codable {
+    public var token: String
+    public var refreshToken: String
+    public var isValid: Bool
+    
+    public init(token: String, refreshToken: String, isValid: Bool) {
+        self.token = token
+        self.refreshToken = refreshToken
+        self.isValid = isValid
+    }
+}
+
 public struct AuthToken {
     
     public var token: String
@@ -19,6 +31,11 @@ public struct AuthToken {
         self.refreshToken = refreshToken
         self.expiresAt = expiresAt
         self.createdAt = createdAt
+    }
+    
+    public var isValid: Bool {
+        let currentDate = Date()
+        return currentDate <= expiresAt
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CacheProvider
 
 protocol ServerRoute {
     var host: String { get }
@@ -15,6 +16,7 @@ protocol ServerRoute {
     var method: HTTPMethod { get }
     var header: [String: String]? { get }
     var body: Data? { get }
+    var authToken: String? { get }
 }
 
 extension ServerRoute {
@@ -28,5 +30,11 @@ extension ServerRoute {
     
     var port: Int? {
         return 8000
+    }
+    
+    var authToken: String? {
+        let token: SimplifiedAuthToken? = ServiceFacade.getService(CacheProvider.self).getSensitiveValue(forKey: Constants.StorageKey.authToken)
+        guard let token = token else { return nil }
+        return token.token
     }
 }

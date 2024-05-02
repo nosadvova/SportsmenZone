@@ -44,10 +44,10 @@ struct TrainingView: View {
                             print("Tap duration")
                         }
                 }
-                .disabled(user.personalInformation?.userType == .Trainer ? false : true)
+                .disabled(user.personalInformation?.userType == UserType.Trainer.rawValue ? false : true)
                 .modifier(RoundedViewModifier(title: "Date and time:", color: .white))
                 
-                if user.personalInformation?.userType == .Trainer {
+                if user.personalInformation?.userType == UserType.Trainer.rawValue {
                     editableTextField("Name", text: $viewModel.training.name)
                     editableTextField("Comment", text: $viewModel.training.commentary)
                     Button(action: {

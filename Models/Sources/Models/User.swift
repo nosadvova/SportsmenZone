@@ -9,14 +9,21 @@ import Foundation
 
 public struct User: Codable, Sendable, Identifiable {
     public var id: String
+//    public var userImage: String?
+//    public var firstName: String?
+//    public var lastName: String?
+//    public var password: String?
+//    public var email: String?
+//    public var userType: UserType?
+//    public var gym: String?
     public var personalInformation: PersonalInformation?
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case id = "ID"
         case personalInformation = "personal_information"
     }
     
-    public init(id: String, personalInformation: PersonalInformation? = nil) {
+    public init(id: String, personalInformation: PersonalInformation?) {
         self.id = id
         self.personalInformation = personalInformation
     }

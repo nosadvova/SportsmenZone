@@ -14,10 +14,12 @@ struct GymView: View {
     @EnvironmentObject private var routerManager: NavigationRouter
     @State private var isTrainingSheetPresented = false
     
+    @StateObject private var appViewModel = AppViewModel()
+    
     var body: some View {
         ShapeHeaderScreenStyle(title: "Gym", description: "Description of the gym dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj", color: .darkBlueColor, foregroundColor: .white, content: {
             ScrollView {
-                headButton
+                followButton
                 
                 HStack {
                     Text(S.Gym.allSportsmen)
@@ -42,11 +44,14 @@ struct GymView: View {
             }
         })
         .background(Color.backgroundColor)
+//        .task {
+//            await appViewModel.getUser()
+//        }
     }
 }
 
 private extension GymView {
-    var headButton: some View {
+    var followButton: some View {
         HStack {
             Text(S.Gym.followLabel)
                 .font(.sport.system(.caption))
@@ -54,7 +59,9 @@ private extension GymView {
                 .foregroundStyle(Color.gray)
             
             Button {
-                //
+                Task {
+                    await appViewModel.getUser()
+                }
             } label: {
                 Text(S.Gym.followButton)
                     .frame(width: 100)

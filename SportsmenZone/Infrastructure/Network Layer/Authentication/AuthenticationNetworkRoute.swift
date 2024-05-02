@@ -10,7 +10,7 @@ import Models
 
 enum AuthenticationNetworkRoute {
     case register(personalInformation: UserInformationModel)
-    case login(email: String, password: String)
+    case login(personalInformation: UserInformationModel)
 }
 
 extension AuthenticationNetworkRoute: ServerRoute {
@@ -28,23 +28,31 @@ extension AuthenticationNetworkRoute: ServerRoute {
     }
     
     var header: [String: String]? {
-        //        var headers: [String: String] = [:]
-        //        headers["Content-Type"] = "application/json"
         return nil
     }
     
     var body: Data? {
         switch self {
         case let .register(personalInformation):
-            return personalInformation.requestBody()
-            
-        case let .login(email, password):
             struct Request: Encodable {
-                let email: String
-                let password: String
+                let personalInformation: UserInformationModel
+                
+                enum CodingKeys: String, CodingKey {
+                    case personalInformation = "personal_information"
+                }
+            }
+            return Request(personalInformation: personalInformation).requestBody()
+            
+        case let .login(personalInformation):
+            struct Request: Encodable {
+                let personalInformation: UserInformationModel
+                
+                enum CodingKeys: String, CodingKey {
+                    case personalInformation = "personal_information"
+                }
             }
             
-            return Request(email: email, password: password).requestBody()
+            return Request(personalInformation: personalInformation).requestBody()
         }
     }
 }

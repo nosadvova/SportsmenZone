@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct SportsmenZoneApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @ObservedObject private var routerManager = NavigationRouter()
     
     var body: some Scene {
         WindowGroup {
             NavigationStack(path: $routerManager.path) {
-                ContentView()
+                AppView()
                     .navigationDestination(for: Route.self) { route in
                         route
                             .navigationBarBackButtonHidden(true)

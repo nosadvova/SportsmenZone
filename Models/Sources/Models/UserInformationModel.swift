@@ -8,11 +8,11 @@
 import Foundation
 
 public struct UserInformationModel: Encodable {
-    public var firstName: String
-    public var lastName: String
-    public var password: String
-    public var email: String
-    public var userType: String
+    public var firstName: String?
+    public var lastName: String?
+    public var password: String?
+    public var email: String?
+    public var userType: String?
     
     
     enum CodingKeys: String, CodingKey {
@@ -23,7 +23,7 @@ public struct UserInformationModel: Encodable {
         case userType = "user_type"
     }
     
-    public init(firstName: String, lastName: String, password: String, email: String, userType: String) {
+    public init(firstName: String? = nil, lastName: String? = nil, password: String? = nil, email: String? = nil, userType: String? = nil) {
         self.firstName = firstName
         self.lastName = lastName
         self.password = password

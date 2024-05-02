@@ -14,7 +14,7 @@ class RealAuthenticationAPI: NetworkService, AuthenticationAPI {
         return try await sendRequest(route: AuthenticationNetworkRoute.register(personalInformation: personalInformation))
     }
     
-    func login(email: String, password: String) async throws -> AuthToken {
-        return try await sendRequest(route: AuthenticationNetworkRoute.login(email: email, password: password))
+    func login(personalInformation: UserInformationModel) async throws -> AuthToken {
+        return try await sendRequest(route: AuthenticationNetworkRoute.login(personalInformation: personalInformation))
     }
 }

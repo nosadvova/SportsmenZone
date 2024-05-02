@@ -18,7 +18,7 @@ public struct PersonalInformation: Codable, Sendable {
     public var lastName: String?
     public var password: String?
     public var email: String?
-    public var userType: UserType?
+    public var userType: String?
     public var gym: String?
     
     
@@ -32,7 +32,7 @@ public struct PersonalInformation: Codable, Sendable {
         case gym
     }
     
-    public init(userImage: String? = nil, firstName: String? = nil, lastName: String? = nil, password: String? = nil, email: String? = nil, userType: UserType? = nil, gym: String? = nil) {
+    public init(userImage: String? = nil, firstName: String? = nil, lastName: String? = nil, password: String? = nil, email: String? = nil, userType: String? = nil, gym: String? = nil) {
         self.userImage = userImage
         self.firstName = firstName
         self.lastName = lastName
@@ -52,7 +52,7 @@ public struct PersonalInformation: Codable, Sendable {
         lastName: String? = nil,
         password: String? = nil,
         email: String? = nil,
-        userType: UserType? = nil,
+        userType: String? = nil,
         gym: String? = nil
     ) -> PersonalInformation {
         return PersonalInformation(

@@ -26,7 +26,7 @@ final class ChooseUserViewModel: ObservableObject {
             let personalInformation = await globalDataStorage.personalInformation
             email = personalInformation?.email ?? "no email provided"
 
-            let newPersonalInformation = personalInformation?.copy(userType: chosenUserType)
+            let newPersonalInformation = personalInformation?.copy(userType: chosenUserType?.rawValue)
             await globalDataStorage.setData(personalInformation: newPersonalInformation)
         }
     }

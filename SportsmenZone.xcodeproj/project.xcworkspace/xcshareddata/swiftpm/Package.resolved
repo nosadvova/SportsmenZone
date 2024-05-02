@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "swinject",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Swinject/Swinject",
+      "state" : {
+        "revision" : "c7920e1f2b237ee16150ab82388d7411b578d355",
+        "version" : "2.8.7"
+      }
+    },
+    {
       "identity" : "valet",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Square/Valet",
