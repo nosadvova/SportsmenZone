@@ -56,6 +56,8 @@
 		678761BE2B98B3EB001320C6 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678761BD2B98B3EB001320C6 /* LottieView.swift */; };
 		678761C02B98C68A001320C6 /* GymViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678761BF2B98C68A001320C6 /* GymViewModel.swift */; };
 		6790FE712BA1E88B007A7097 /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790FE702BA1E88B007A7097 /* TrainingView.swift */; };
+		679E99402BE39A1800684DC9 /* CreateGymView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E993F2BE39A1800684DC9 /* CreateGymView.swift */; };
+		679E99432BE50BBE00684DC9 /* CreateGymViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E99422BE50BBE00684DC9 /* CreateGymViewModel.swift */; };
 		67A818F32B8F4024004BEFA0 /* ChooseUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A818F22B8F4024004BEFA0 /* ChooseUserView.swift */; };
 		67A818F72B8F8353004BEFA0 /* AuthorizationSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A818F62B8F8353004BEFA0 /* AuthorizationSuccessView.swift */; };
 		67A819002B8F9683004BEFA0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 67A818FF2B8F9683004BEFA0 /* Lottie */; };
@@ -126,6 +128,8 @@
 		678761BD2B98B3EB001320C6 /* LottieView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		678761BF2B98C68A001320C6 /* GymViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymViewModel.swift; sourceTree = "<group>"; };
 		6790FE702BA1E88B007A7097 /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
+		679E993F2BE39A1800684DC9 /* CreateGymView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGymView.swift; sourceTree = "<group>"; };
+		679E99422BE50BBE00684DC9 /* CreateGymViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGymViewModel.swift; sourceTree = "<group>"; };
 		67A818F22B8F4024004BEFA0 /* ChooseUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseUserView.swift; sourceTree = "<group>"; };
 		67A818F62B8F8353004BEFA0 /* AuthorizationSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSuccessView.swift; sourceTree = "<group>"; };
 		67A819072B907FDF004BEFA0 /* Success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Success.json; sourceTree = "<group>"; };
@@ -385,6 +389,7 @@
 		675F822D2B97374900810407 /* Gym */ = {
 			isa = PBXGroup;
 			children = (
+				679E99412BE50BA800684DC9 /* Create Gym */,
 				673312422B9DE7C300C16B06 /* GymRoute.swift */,
 				67DE6D952BA47A1400042DC6 /* Training */,
 				670A37812B9B7D5300C83A54 /* UserList */,
@@ -432,6 +437,15 @@
 				67ECE2F42B98D8A500EA2637 /* SportExtensions */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		679E99412BE50BA800684DC9 /* Create Gym */ = {
+			isa = PBXGroup;
+			children = (
+				679E993F2BE39A1800684DC9 /* CreateGymView.swift */,
+				679E99422BE50BBE00684DC9 /* CreateGymViewModel.swift */,
+			);
+			path = "Create Gym";
 			sourceTree = "<group>";
 		};
 		67A818F12B8F400B004BEFA0 /* Choose User */ = {
@@ -588,8 +602,10 @@
 				671A24A92BB4822500B02782 /* CoreNetwork.swift in Sources */,
 				675F822F2B97379200810407 /* GymView.swift in Sources */,
 				67A818F32B8F4024004BEFA0 /* ChooseUserView.swift in Sources */,
+				679E99432BE50BBE00684DC9 /* CreateGymViewModel.swift in Sources */,
 				670E19602B8D34AD009EC037 /* OTPView.swift in Sources */,
 				671A24B62BB4875500B02782 /* AuthenticationNetworkRoute.swift in Sources */,
+				679E99402BE39A1800684DC9 /* CreateGymView.swift in Sources */,
 				678761C02B98C68A001320C6 /* GymViewModel.swift in Sources */,
 				67E0FAB32BDCED54001B29D5 /* AppDelegate.swift in Sources */,
 				678465FF2B8904D80062F736 /* LoginViewModel.swift in Sources */,

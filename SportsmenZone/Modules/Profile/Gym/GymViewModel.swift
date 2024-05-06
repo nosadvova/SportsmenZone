@@ -15,15 +15,19 @@ final class GymViewModel: ObservableObject {
     @Published var gym: Gym?
     
     let cacheProvider: CacheProvider
+    let globalDataStorage: GlobalDataStorage
     
-    init(cacheProvider: CacheProvider = ServiceFacade.getService(CacheProvider.self))
+    init(
+        cacheProvider: CacheProvider = ServiceFacade.getService(CacheProvider.self),
+        globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared
+    )
     {
         self.cacheProvider = cacheProvider
-//        getToken()
+        self.globalDataStorage = globalDataStorage
     }
     
-//    func getToken() {
-//        let token: SimplifiedAuthToken? = cacheProvider.getSensitiveValue(forKey: Constants.StorageKey.authToken)
-//        print(token?.token)
-//    }
+    func getGym() async {
+        let personalInformation = await globalDataStorage.user?.personalInformation
+        gym = personalInformation?.gym
+    }
 }

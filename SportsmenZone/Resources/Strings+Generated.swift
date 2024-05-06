@@ -37,6 +37,8 @@ internal enum S {
   internal static let registration = S.tr("Localizable", "registration", fallback: "Registration")
   /// Repeat password
   internal static let repeatPassword = S.tr("Localizable", "repeat-password", fallback: "Repeat password")
+  /// Save
+  internal static let save = S.tr("Localizable", "save", fallback: "Save")
   internal enum Otp {
     /// Enter 4 digit code we'll text you on Email
     internal static let description = S.tr("Localizable", "OTP.description", fallback: "Enter 4 digit code we'll text you on Email")
@@ -76,12 +78,30 @@ internal enum S {
     internal static let title = S.tr("Localizable", "forgotPassword.title", fallback: "Forgot password?")
   }
   internal enum Gym {
+    /// Add gym location:
+    internal static let addGymLocation = S.tr("Localizable", "gym.add-gym-location", fallback: "Add gym location:")
     /// All sportsmen
     internal static let allSportsmen = S.tr("Localizable", "gym.all-sportsmen", fallback: "All sportsmen")
+    /// Bulding Number
+    internal static let buildingNumber = S.tr("Localizable", "gym.buildingNumber", fallback: "Bulding Number")
+    /// Choose sport types
+    internal static let chooseSportTypes = S.tr("Localizable", "gym.choose-sport-types", fallback: "Choose sport types")
+    /// City
+    internal static let city = S.tr("Localizable", "gym.city", fallback: "City")
+    /// Create new gym
+    internal static let createNewGym = S.tr("Localizable", "gym.create-new-gym", fallback: "Create new gym")
+    /// Gym description
+    internal static let description = S.tr("Localizable", "gym.description", fallback: "Gym description")
+    /// District
+    internal static let district = S.tr("Localizable", "gym.district", fallback: "District")
     /// Follow
     internal static let followButton = S.tr("Localizable", "gym.followButton", fallback: "Follow")
     /// Do you want to follow the club?
     internal static let followLabel = S.tr("Localizable", "gym.followLabel", fallback: "Do you want to follow the club?")
+    /// Gym name
+    internal static let name = S.tr("Localizable", "gym.name", fallback: "Gym name")
+    /// Street
+    internal static let street = S.tr("Localizable", "gym.street", fallback: "Street")
   }
   internal enum RegisterPassword {
     /// Those passwords do not match

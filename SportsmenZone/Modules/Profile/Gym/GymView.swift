@@ -13,40 +13,56 @@ struct GymView: View {
     @StateObject private var viewModel = GymViewModel()
     @EnvironmentObject private var routerManager: NavigationRouter
     @State private var isTrainingSheetPresented = false
+    @State private var showCreateGymSheet = false
     
     @StateObject private var appViewModel = AppViewModel()
     
     var body: some View {
-        ShapeHeaderScreenStyle(title: "Gym", description: "Description of the gym dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj dfhdsfjdhfjdhfj", color: .darkBlueColor, foregroundColor: .white, content: {
-            ScrollView {
-                followButton
-                
-                HStack {
-                    Text(S.Gym.allSportsmen)
-                        .font(.sport.system(.title))
-                        .foregroundStyle(Color.gray)
+        if let gym = viewModel.gym {
+            ShapeHeaderScreenStyle(title: "gym.name", description: "gym.description", color: .darkBlueColor, foregroundColor: .white, content: {
+                ScrollView {
+                    followButton
                     
-                    Spacer()
-                }
-                
-                sportsmenList
-                
-                HStack {
-                    Text(S.Gym.allSportsmen)
-                        .font(.sport.system(.title))
-                        .foregroundStyle(Color.gray)
+                    HStack {
+                        Text(S.Gym.allSportsmen)
+                            .font(.sport.system(.title))
+                            .foregroundStyle(Color.gray)
+                        
+                        Spacer()
+                    }
                     
-                    Spacer()
+                    sportsmenList
+                    
+                    HStack {
+                        Text(S.Gym.allSportsmen)
+                            .font(.sport.system(.title))
+                            .foregroundStyle(Color.gray)
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 20)
+                    
+                    trainingsSliderView
                 }
-                .padding(.top, 20)
-                
-                trainingsSliderView
+            })
+            .background(Color.backgroundColor)
+        } else {
+            Button {
+                showCreateGymSheet = true
+            } label: {
+                HStack(spacing: 15) {
+                    Image(systemName: "plus")
+                    Text(S.Gym.createNewGym)
+                }
             }
-        })
-        .background(Color.backgroundColor)
-//        .task {
-//            await appViewModel.getUser()
-//        }
+            .padding(.top, 40)
+            .buttonStyle(RoundButtonStyle(backgroundColor: .darkBlueColor, foregroundStyle: .white))
+            .sheet(isPresented: $showCreateGymSheet, content: {
+                CreateGymView()
+            })
+            
+            Spacer()
+        }
     }
 }
 

@@ -28,7 +28,7 @@ public struct FontStyle {
         switch customTextStyle {
         case .button:
             fontName = .bold
-            fontSize = 20
+            fontSize = 18
         case .textField:
             fontName = .regular
             fontSize = 18

@@ -18,9 +18,7 @@ struct TrainingView: View {
     
     var body: some View {
         let training = viewModel.training
-        
         PrimaryScreenStyle(title: "Training", dismissButton: .close, backgroundColor: .white) {
-            
             VStack(spacing: 30) {
                 VStack {
                     timeField("Day of the week", text: training.trainingDay.rawValue)
@@ -55,7 +53,7 @@ struct TrainingView: View {
                         showMessage = true
                         isChanged = false
                     }, label: {
-                        Text("Save")
+                        Text(S.save)
                             .frame(width: 200)
                     })
                     .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))

@@ -31,7 +31,9 @@ public struct RoundedViewModifier: ViewModifier {
                 }
             }
             
-            content.background(
+            content
+                .padding(.top, 5)
+                .background(
                 RoundedRectangle(cornerRadius: 15)
                     .shadow(radius: 1.5)
                     .opacity(opacity)

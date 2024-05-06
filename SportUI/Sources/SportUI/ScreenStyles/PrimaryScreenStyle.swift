@@ -86,7 +86,7 @@ public struct PrimaryScreenStyle<Content>: View where Content: View {
                     maxHeight: .infinity,
                     alignment: .top
                 )
-                .padding()
+                .padding([.horizontal, .bottom])
         }
         .ignoresSafeArea(.keyboard)
         .background(backgroundColor)

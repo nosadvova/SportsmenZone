@@ -18,6 +18,7 @@
 "continue" = "Continue";
 "finish" = "Finish!";
 "dismiss" = "Dismiss";
+"save" = "Save";
 
 "registerPassword.noMatch" = "Those passwords do not match";
 "registerPassword.notValid" = "Password must be 6-18 characters(letters, numbers, special characters)";
@@ -44,3 +45,12 @@
 "gym.followLabel" = "Do you want to follow the club?";
 "gym.followButton" = "Follow";
 "gym.all-sportsmen" = "All sportsmen";
+"gym.create-new-gym" = "Create new gym";
+"gym.name" = "Gym name";
+"gym.description" = "Gym description";
+"gym.city" = "City";
+"gym.district" = "District";
+"gym.street" = "Street";
+"gym.buildingNumber" = "Bulding Number";
+"gym.choose-sport-types" = "Choose sport types";
+"gym.add-gym-location" = "Add gym location:";

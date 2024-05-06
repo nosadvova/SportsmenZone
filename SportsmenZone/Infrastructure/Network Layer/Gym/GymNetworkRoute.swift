@@ -9,7 +9,7 @@ import Foundation
 import Models
 
 enum GymNetworkRoute {
-    case createGym(gymInformation: GymInformation)
+    case createGym(gymInformation: Gym)
     case getGym(id: String)
     case getAllGyms
 }

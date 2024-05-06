@@ -9,7 +9,7 @@ import Foundation
 import Models
 
 class RealGymAPI: NetworkService, GymAPI {
-    func createGym(gymInformation: GymInformation) async throws {
+    func createGym(gymInformation: Gym) async throws {
         return try await sendRequest(route: GymNetworkRoute.createGym(gymInformation: gymInformation))
     }
     
