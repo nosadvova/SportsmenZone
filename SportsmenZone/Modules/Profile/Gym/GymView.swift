@@ -15,53 +15,59 @@ struct GymView: View {
     @State private var isTrainingSheetPresented = false
     @State private var showCreateGymSheet = false
     
-    @StateObject private var appViewModel = AppViewModel()
-    
     var body: some View {
-        if let gym = viewModel.gym {
-            ShapeHeaderScreenStyle(title: "gym.name", description: "gym.description", color: .darkBlueColor, foregroundColor: .white, content: {
-                ScrollView {
-                    followButton
-                    
-                    HStack {
-                        Text(S.Gym.allSportsmen)
-                            .font(.sport.system(.title))
-                            .foregroundStyle(Color.gray)
+        VStack {
+            if let gym = viewModel.gym {
+                ShapeHeaderScreenStyle(title: gym.name ?? "", description: gym.description, color: .darkBlueColor, foregroundColor: .white, content: {
+                    ScrollView {
+                        followButton
                         
-                        Spacer()
-                    }
-                    
-                    sportsmenList
-                    
-                    HStack {
-                        Text(S.Gym.allSportsmen)
-                            .font(.sport.system(.title))
-                            .foregroundStyle(Color.gray)
+                        HStack {
+                            Text(S.Gym.allSportsmen)
+                                .font(.sport.system(.title))
+                                .foregroundStyle(Color.gray)
+                            
+                            Spacer()
+                        }
                         
-                        Spacer()
+                        sportsmenList
+                        
+                        HStack {
+                            Text(S.Gym.allSportsmen)
+                                .font(.sport.system(.title))
+                                .foregroundStyle(Color.gray)
+                            
+                            Spacer()
+                        }
+                        .padding(.top, 20)
+                        
+                        trainingsSliderView
                     }
-                    .padding(.top, 20)
-                    
-                    trainingsSliderView
+                })
+                .background(Color.backgroundColor)
+            } else {
+                Button {
+                    showCreateGymSheet = true
+                    //                Task {
+                    //                    appViewModel.getUser()
+                    //                }
+                } label: {
+                    HStack(spacing: 15) {
+                        Image(systemName: "plus")
+                        Text(S.Gym.createNewGym)
+                    }
                 }
-            })
-            .background(Color.backgroundColor)
-        } else {
-            Button {
-                showCreateGymSheet = true
-            } label: {
-                HStack(spacing: 15) {
-                    Image(systemName: "plus")
-                    Text(S.Gym.createNewGym)
-                }
+                .padding(.top, 40)
+                .buttonStyle(RoundButtonStyle(backgroundColor: .darkBlueColor, foregroundStyle: .white))
+                .sheet(isPresented: $showCreateGymSheet, content: {
+                    CreateGymView()
+                })
+                
+                Spacer()
             }
-            .padding(.top, 40)
-            .buttonStyle(RoundButtonStyle(backgroundColor: .darkBlueColor, foregroundStyle: .white))
-            .sheet(isPresented: $showCreateGymSheet, content: {
-                CreateGymView()
-            })
-            
-            Spacer()
+        }
+        .onAppear {
+            viewModel.getGym()
         }
     }
 }
@@ -75,9 +81,9 @@ private extension GymView {
                 .foregroundStyle(Color.gray)
             
             Button {
-                Task {
-                    await appViewModel.getUser()
-                }
+//                Task {
+//                    await appViewModel.getUser()
+//                }
             } label: {
                 Text(S.Gym.followButton)
                     .frame(width: 100)

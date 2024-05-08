@@ -66,8 +66,8 @@ struct CreateGymView: View {
     //                }
                 }
             }
-            .modifier(PopupMessageViewModifier(isPresented: $viewModel.showMessage.0, type: .failure, message: viewModel.showMessage.1))
         }
+        .modifier(PopupMessageViewModifier(isPresented: $viewModel.showMessage.0, type: .failure, message: viewModel.showMessage.1))
     }
 }
 

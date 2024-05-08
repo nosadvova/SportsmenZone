@@ -13,12 +13,6 @@ enum UserNetworkRoute {
 }
 
 extension UserNetworkRoute: ServerRoute {
-//    var authToken: String? {
-//        let token: String? = ServiceFacade.getService(CacheProvider.self).getSensitiveValue(forKey: Constants.StorageKey.authToken)
-//        guard let token = token else { return nil }
-//        return token
-//    }
-    
     var path: String {
         return "/users/me"
     }

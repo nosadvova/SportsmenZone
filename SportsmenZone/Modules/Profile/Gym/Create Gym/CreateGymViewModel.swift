@@ -61,7 +61,10 @@ class CreateGymViewModel: ObservableObject {
             do {
                 guard let trainerID = await globalDataStorage.user?.id else { return }
                 let gym = Gym(name: name, description: description, location: Location(city: city, district: district, street: street, buildingNumber: buildingNumber), type: type, trainerID: trainerID)
-                _ = try await networkService.createGym(gymInformation: gym)
+                
+                let gymID = try await networkService.createGym(gymInformation: gym)
+                await globalDataStorage.setData(gym: gym)
+                print("Gym created with ID: \(gymID)")
             } catch let error as NetworkError {
                 print(error.customMessage)
                 showMessage = (true, error.customMessage)

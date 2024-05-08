@@ -58,6 +58,8 @@
 		6790FE712BA1E88B007A7097 /* TrainingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6790FE702BA1E88B007A7097 /* TrainingView.swift */; };
 		679E99402BE39A1800684DC9 /* CreateGymView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E993F2BE39A1800684DC9 /* CreateGymView.swift */; };
 		679E99432BE50BBE00684DC9 /* CreateGymViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 679E99422BE50BBE00684DC9 /* CreateGymViewModel.swift */; };
+		67A4904E2BEA7E7D008EBF38 /* AccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A4904D2BEA7E7D008EBF38 /* AccountView.swift */; };
+		67A490512BEA7E95008EBF38 /* MainPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A490502BEA7E95008EBF38 /* MainPageView.swift */; };
 		67A818F32B8F4024004BEFA0 /* ChooseUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A818F22B8F4024004BEFA0 /* ChooseUserView.swift */; };
 		67A818F72B8F8353004BEFA0 /* AuthorizationSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A818F62B8F8353004BEFA0 /* AuthorizationSuccessView.swift */; };
 		67A819002B8F9683004BEFA0 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 67A818FF2B8F9683004BEFA0 /* Lottie */; };
@@ -130,6 +132,8 @@
 		6790FE702BA1E88B007A7097 /* TrainingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingView.swift; sourceTree = "<group>"; };
 		679E993F2BE39A1800684DC9 /* CreateGymView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGymView.swift; sourceTree = "<group>"; };
 		679E99422BE50BBE00684DC9 /* CreateGymViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateGymViewModel.swift; sourceTree = "<group>"; };
+		67A4904D2BEA7E7D008EBF38 /* AccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountView.swift; sourceTree = "<group>"; };
+		67A490502BEA7E95008EBF38 /* MainPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageView.swift; sourceTree = "<group>"; };
 		67A818F22B8F4024004BEFA0 /* ChooseUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseUserView.swift; sourceTree = "<group>"; };
 		67A818F62B8F8353004BEFA0 /* AuthorizationSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationSuccessView.swift; sourceTree = "<group>"; };
 		67A819072B907FDF004BEFA0 /* Success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Success.json; sourceTree = "<group>"; };
@@ -380,6 +384,7 @@
 		675F822C2B97373E00810407 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				67A4904F2BEA7E85008EBF38 /* Main Page */,
 				675F82302B97379900810407 /* Account */,
 				675F822D2B97374900810407 /* Gym */,
 			);
@@ -402,6 +407,7 @@
 		675F82302B97379900810407 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				67A4904D2BEA7E7D008EBF38 /* AccountView.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -446,6 +452,14 @@
 				679E99422BE50BBE00684DC9 /* CreateGymViewModel.swift */,
 			);
 			path = "Create Gym";
+			sourceTree = "<group>";
+		};
+		67A4904F2BEA7E85008EBF38 /* Main Page */ = {
+			isa = PBXGroup;
+			children = (
+				67A490502BEA7E95008EBF38 /* MainPageView.swift */,
+			);
+			path = "Main Page";
 			sourceTree = "<group>";
 		};
 		67A818F12B8F400B004BEFA0 /* Choose User */ = {
@@ -592,6 +606,8 @@
 				670E195B2B8B6681009EC037 /* Route.swift in Sources */,
 				6764ABA22BB97913003D0AB5 /* RealAuthenticationAPI.swift in Sources */,
 				674D8EF12BB81C9D009D61CB /* Encodable + Extension.swift in Sources */,
+				67A4904E2BEA7E7D008EBF38 /* AccountView.swift in Sources */,
+				67A490512BEA7E95008EBF38 /* MainPageView.swift in Sources */,
 				6745D9DC2B8E7AC600E08171 /* PasswordRecoveryViewModel.swift in Sources */,
 				67D164292BBC0BF2003B1190 /* ChooseUserViewModel.swift in Sources */,
 				671A24962BB44EB900B02782 /* HTTPMethod.swift in Sources */,

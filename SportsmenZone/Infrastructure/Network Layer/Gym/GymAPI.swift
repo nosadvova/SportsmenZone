@@ -9,7 +9,7 @@ import Foundation
 import Models
 
 protocol GymAPI {
-    func createGym(gymInformation: Gym) async throws
-    func getGym(id: String) async throws
-    func getAllGyms() async throws
+    func createGym(gymInformation: Gym) async throws -> String
+    func getGym(id: String) async throws -> Gym
+    func getAllGyms() async throws -> [Gym]
 }

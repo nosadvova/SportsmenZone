@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import CacheProvider
 
 struct AppView: View {
     @StateObject private var viewModel = AppViewModel()
@@ -14,7 +13,10 @@ struct AppView: View {
     var body: some View {
         VStack {
             if viewModel.isUserAuth {
-                GymView()
+                SportsmenZoneTabView()
+                    .onAppear {
+                        viewModel.getUser()
+                    }
             } else {
                 LoginView()
             }

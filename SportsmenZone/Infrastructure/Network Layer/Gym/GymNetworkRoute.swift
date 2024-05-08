@@ -47,6 +47,4 @@ extension GymNetworkRoute: ServerRoute {
             return nil
         }
     }
-    
-    
 }

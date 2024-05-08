@@ -17,11 +17,14 @@ class AppViewModel: ObservableObject {
     init(
         cacheProvider: CacheProvider = ServiceFacade.getService(CacheProvider.self),
         userAPI: UserAPI = RealUserAPI(),
-        globalDataStorage: GlobalDataStorage = GlobalDataStorage()
+        globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared
     ) {
         self.cacheProvider = cacheProvider
         self.userAPI = userAPI
         self.globalDataStorage = globalDataStorage
+        
+        let authToken: SimplifiedAuthToken? = cacheProvider.getSensitiveValue(forKey: Constants.StorageKey.authToken)
+        print(authToken?.token ?? "no auth token provided")
     }
     
     var isUserAuth: Bool {
@@ -30,15 +33,18 @@ class AppViewModel: ObservableObject {
             return false
         }
         return true
-    }
+    }    
     
-    func getUser() async {
-        do {
-            let user = try await userAPI.getUser()
-            print(user)
-            await globalDataStorage.setData(user: user)
-        } catch {
-            print("Error: \(error)")
+    func getUser() {
+        Task {
+            do {
+                let user = try await userAPI.getUser()
+                await globalDataStorage.setData(user: user)
+                await globalDataStorage.setData(personalInformation: user.personalInformation)
+                print("User fetched: \(user)")
+            } catch {
+                print("Error fetching user: \(error)")
+            }
         }
     }
 }

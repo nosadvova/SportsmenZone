@@ -19,8 +19,7 @@ public struct PersonalInformation: Codable, Sendable {
     public var password: String?
     public var email: String?
     public var userType: String?
-    public var gym: Gym?
-    
+    public var gym: String?    
     
     enum CodingKeys: String, CodingKey {
         case userImage = "user_image"
@@ -32,7 +31,7 @@ public struct PersonalInformation: Codable, Sendable {
         case gym
     }
     
-    public init(userImage: String? = nil, firstName: String? = nil, lastName: String? = nil, password: String? = nil, email: String? = nil, userType: String? = nil, gym: Gym? = nil) {
+    public init(userImage: String? = nil, firstName: String? = nil, lastName: String? = nil, password: String? = nil, email: String? = nil, userType: String? = nil, gym: String? = nil) {
         self.userImage = userImage
         self.firstName = firstName
         self.lastName = lastName
@@ -53,7 +52,7 @@ public struct PersonalInformation: Codable, Sendable {
         password: String? = nil,
         email: String? = nil,
         userType: String? = nil,
-        gym: Gym? = nil
+        gym: String? = nil
     ) -> PersonalInformation {
         return PersonalInformation(
             userImage: userImage ?? self.userImage,

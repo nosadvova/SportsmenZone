@@ -8,16 +8,16 @@
 import Foundation
 import Models
 
-class RealGymAPI: NetworkService, GymAPI {
-    func createGym(gymInformation: Gym) async throws {
+class RealGymAPI: NetworkService, GymAPI {    
+    func createGym(gymInformation: Gym) async throws -> String {
         return try await sendRequest(route: GymNetworkRoute.createGym(gymInformation: gymInformation))
     }
     
-    func getGym(id: String) async throws {
+    func getGym(id: String) async throws -> Gym {
         return try await sendRequest(route: GymNetworkRoute.getGym(id: id))
     }
     
-    func getAllGyms() async throws {
+    func getAllGyms() async throws -> [Gym] {
         return try await sendRequest(route: GymNetworkRoute.getAllGyms)
     }
 }
