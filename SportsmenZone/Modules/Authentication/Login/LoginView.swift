@@ -64,6 +64,7 @@ struct LoginView: View {
             .buttonStyle(RoundButtonStyle(sideAlignment: .left, backgroundColor: .mustardColor, foregroundStyle: .white))
         }
         .background(Color.backgroundColor)
+        .modifier(LoadingViewModifier(isLoading: viewModel.requestLoadable.isLoading))
         .modifier(PopupMessageViewModifier(
             isPresented: $viewModel.showMessage.0,
             type: .failure,
@@ -72,7 +73,7 @@ struct LoginView: View {
         .onChange(of: viewModel.requestLoadable.value) { _, _ in
             Task {
                 if viewModel.requestLoadable == .loaded(true) {
-                    routerManager.replace(with: .gym(.gym))
+                    routerManager.replace(with: .mainBarRoute(.mainTabView))
                 }
                 viewModel.requestLoadable = .notRequested
             }

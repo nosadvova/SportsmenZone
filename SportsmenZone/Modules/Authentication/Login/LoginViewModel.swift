@@ -41,7 +41,6 @@ final class LoginViewModel: ObservableObject {
             do {
                 let token: AuthToken = try await networkService.login(personalInformation: UserInformationModel(password: password, email: email))
                 try saveAuthToken(token)
-                /*cacheProvider.setSensitiveValue(token, forKey: Constants.StorageKey.authToken)*/
                 requestLoadable = .loaded(true)
             } catch let error as NetworkError {
                 print("Login error: ", error.customMessage)

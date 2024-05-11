@@ -11,6 +11,7 @@ enum Route {
     case login
     case registration
     case authentication(AuthenticationRoute)
+    case mainBarRoute(MainBarRoute)
     case gym(GymRoute)
 }
 
@@ -22,6 +23,8 @@ extension Route: View {
         case .registration:
             RegistrationView()
         case .authentication(let route):
+            route.body
+        case .mainBarRoute(let route):
             route.body
         case .gym(let route):
             route.body

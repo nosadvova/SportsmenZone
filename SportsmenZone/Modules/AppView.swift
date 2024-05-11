@@ -14,9 +14,6 @@ struct AppView: View {
         VStack {
             if viewModel.isUserAuth {
                 SportsmenZoneTabView()
-                    .onAppear {
-                        viewModel.getUser()
-                    }
             } else {
                 LoginView()
             }

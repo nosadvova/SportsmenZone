@@ -23,8 +23,8 @@ class AppViewModel: ObservableObject {
         self.userAPI = userAPI
         self.globalDataStorage = globalDataStorage
         
-        let authToken: SimplifiedAuthToken? = cacheProvider.getSensitiveValue(forKey: Constants.StorageKey.authToken)
-        print(authToken?.token ?? "no auth token provided")
+//        let authToken: SimplifiedAuthToken? = cacheProvider.getSensitiveValue(forKey: Constants.StorageKey.authToken)
+//        print(authToken?.token ?? "no auth token provided")
     }
     
     var isUserAuth: Bool {
@@ -41,7 +41,7 @@ class AppViewModel: ObservableObject {
                 let user = try await userAPI.getUser()
                 await globalDataStorage.setData(user: user)
                 await globalDataStorage.setData(personalInformation: user.personalInformation)
-                print("User fetched: \(user)")
+//                print("User fetched: \(user)")
             } catch {
                 print("Error fetching user: \(error)")
             }

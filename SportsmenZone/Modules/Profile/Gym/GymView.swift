@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SportUI
+import Models
 import SportExtensions
 
 struct GymView: View {
@@ -20,7 +21,9 @@ struct GymView: View {
             if let gym = viewModel.gym {
                 ShapeHeaderScreenStyle(title: gym.name ?? "", description: gym.description, color: .darkBlueColor, foregroundColor: .white, content: {
                     ScrollView {
-                        followButton
+                        if viewModel.user?.personalInformation?.userType == UserType.Sportsman.rawValue {
+                            followButton
+                        }
                         
                         HStack {
                             Text(S.Gym.allSportsmen)
@@ -48,9 +51,6 @@ struct GymView: View {
             } else {
                 Button {
                     showCreateGymSheet = true
-                    //                Task {
-                    //                    appViewModel.getUser()
-                    //                }
                 } label: {
                     HStack(spacing: 15) {
                         Image(systemName: "plus")
@@ -66,6 +66,7 @@ struct GymView: View {
                 Spacer()
             }
         }
+        .modifier(LoadingViewModifier(isLoading: viewModel.requestLoadable.isLoading))
         .onAppear {
             viewModel.getGym()
         }
@@ -81,9 +82,7 @@ private extension GymView {
                 .foregroundStyle(Color.gray)
             
             Button {
-//                Task {
-//                    await appViewModel.getUser()
-//                }
+                //
             } label: {
                 Text(S.Gym.followButton)
                     .frame(width: 100)
@@ -116,6 +115,7 @@ private extension GymView {
                     .padding(.horizontal)
                 
                 Button(action: {
+                    print("Taped")
                     routerManager.push(.gym(.allSportsmen))
                 }, label: {
                     HStack {

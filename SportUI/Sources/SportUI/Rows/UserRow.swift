@@ -48,6 +48,8 @@ public struct UserRow<Content>: View where Content: View {
                     
                     Text(info)
                         .font(.sport.system(.caption))
+                        .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.5)
                         .foregroundStyle(.gray)
                 }
                 
@@ -64,7 +66,7 @@ public struct UserRow<Content>: View where Content: View {
             if isExpanded {
                 content()
                     .padding(.leading, 20)
-                    .transition(.scale)
+                    .transition(.opacity)
             }
             
         }

@@ -76,6 +76,7 @@ public enum SportType: String, CaseIterable, Codable, Sendable {
 
 public struct Gym: Codable, Sendable, Identifiable {
     public var id: String?
+    public var image: String?
     public var name: String?
     public var description: String?
     public var location: Location?
@@ -91,9 +92,17 @@ public struct Gym: Codable, Sendable, Identifiable {
         case sportsmen, trainings
     }
     
-    public init(id: String? = nil, name: String? = nil, description: String? = nil, location: Location? = nil, type: [SportType]? = nil,
-                trainerID: String, sportsmen: [String]? = nil, trainings: [String]? = nil) {
+    public init(id: String? = nil,
+                image: String? = nil,
+                name: String? = nil,
+                description: String? = nil,
+                location: Location? = nil,
+                type: [SportType]? = nil,
+                trainerID: String,
+                sportsmen: [String]? = nil,
+                trainings: [String]? = nil) {
         self.id = id
+        self.image = image
         self.name = name
         self.description = description
         self.location = location
@@ -107,6 +116,7 @@ public struct Gym: Codable, Sendable, Identifiable {
 public extension Gym {
     func copy(
     id: String? = nil,
+    image: String? = nil,
     name: String? = nil,
     description: String? = nil,
     location: Location? = nil,
@@ -116,6 +126,7 @@ public extension Gym {
     trainings: [String]? = nil
     ) -> Gym {
         return Gym(id: id ?? self.id,
+                   image: image ?? self.image,
                    name: name ?? self.name,
                    description: description ?? self.description,
                    location: location ?? self.location,

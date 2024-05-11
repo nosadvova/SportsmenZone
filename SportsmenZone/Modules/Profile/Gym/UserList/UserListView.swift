@@ -72,6 +72,13 @@ struct OptionButton: View {
                 Text(title)
                     .font(.sport.system(.caption))
                     .foregroundStyle(Color.mainTextColor)
+                
+                Spacer()
+//                
+//                Image(systemName: "chevron.forward")
+//                    .imageScale(.medium)
+//                    .padding(.trailing)
+//                    .foregroundStyle(.black)
             }
             .padding(.vertical, 5)
         }

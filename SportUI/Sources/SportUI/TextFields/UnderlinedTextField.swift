@@ -15,6 +15,8 @@ public struct UnderlinedTextField: View {
     @Binding var text: String
     @Binding var isCorrect: Bool
     private let icon: String?
+    let headerDisabled: Bool
+    let underlineDisabled: Bool
     
     private let defaultBorderColor: Color
     private let defaultForegroundStyle: Color
@@ -28,7 +30,9 @@ public struct UnderlinedTextField: View {
         text: Binding<String>,
         isCorrect: Binding<Bool> = .constant(true),
         icon: String? = nil,
-        defaultBorderColor: Color = .inactiveButtonBackgroundColor,
+        headerDisabled: Bool = false,
+        underlineDisabled: Bool = false,
+        defaultBorderColor: Color = .mainTextColor,
         defaultForegroundStyle: Color = .mainTextColor,
         isSecuredTextField: Bool = false
     ) {
@@ -36,6 +40,8 @@ public struct UnderlinedTextField: View {
         self._text = text
         self._isCorrect = isCorrect
         self.icon = icon
+        self.headerDisabled = headerDisabled
+        self.underlineDisabled = underlineDisabled
         self.defaultBorderColor = defaultBorderColor
         self.defaultForegroundStyle = defaultForegroundStyle
         self.isSecuredTextField = isSecuredTextField
@@ -43,23 +49,23 @@ public struct UnderlinedTextField: View {
     
     public var body: some View {
         VStack {
-            
-            HStack {
-                Text(placeholder)
-                    .font(.sport.system(.caption))
-                    .foregroundStyle(foregroundColor)
-                    .transition(.move(edge: .top).combined(with: .opacity))
-                    .animation(.easeOut, value: isTextFieldFocused)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .opacity(isTextFieldFocused || !text.isEmpty ? 1 : 0)
-                    .padding(.init(top: 10, leading: 15, bottom: 5, trailing: 0))
+            if !headerDisabled {
+                    Text(placeholder)
+                        .font(.sport.system(.caption))
+                        .foregroundStyle(foregroundColor)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                        .animation(.easeOut, value: isTextFieldFocused)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .opacity(isTextFieldFocused || !text.isEmpty ? 1 : 0)
+                        .padding(.init(top: 10, leading: 15, bottom: 5, trailing: 0))
             }
             
             HStack {
                 secureTextField
+                    .font(.sport.system(.textField))
                     .focused($isTextFieldFocused)
                 
-                if !text.isEmpty {
+                if !text.isEmpty && isTextFieldFocused {
                     if isSecuredTextField {
                         self.securedTextFieldButton
                     } else {
@@ -69,11 +75,12 @@ public struct UnderlinedTextField: View {
             }
             .padding(.horizontal, 20)
             
-            RoundedRectangle(cornerRadius: 5)
-                .frame(height: 1)
-                .foregroundStyle(foregroundColor)
-                .padding(.horizontal)
-            
+            if !underlineDisabled {
+                RoundedRectangle(cornerRadius: 5)
+                    .frame(height: 1)
+                    .foregroundStyle(defaultBorderColor)
+                    .padding(.horizontal)
+            }
         }
     }
     
@@ -93,7 +100,6 @@ public struct UnderlinedTextField: View {
         .keyboardType(.asciiCapable)
         .autocorrectionDisabled(isSecuredTextField)
         .textInputAutocapitalization(.never)
-        .font(.sport.system(.textField))
         .multilineTextAlignment(.leading)
         .foregroundColor(foregroundColor)
     }
@@ -134,7 +140,7 @@ extension UnderlinedTextField {
 
 #Preview {
     VStack {
-        UnderlinedTextField(placeholder: "Email", text: .constant(""), isCorrect: .constant(true), icon: "person.crop.circle.fill", isSecuredTextField: false)
+        UnderlinedTextField(placeholder: "Email", text: .constant("tytyt"), isCorrect: .constant(true), icon: "person.crop.circle.fill", headerDisabled: false, isSecuredTextField: false)
         UnderlinedTextField(placeholder: "Email", text: .constant("dfd"), isCorrect: .constant(true), isSecuredTextField: false)
         UnderlinedTextField(placeholder: "Password", text: .constant("dfd"), isCorrect: .constant(true), isSecuredTextField: true)
     }

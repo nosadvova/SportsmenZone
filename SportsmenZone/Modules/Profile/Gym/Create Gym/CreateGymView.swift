@@ -52,18 +52,6 @@ struct CreateGymView: View {
                     }
                     .disabled(!viewModel.isFormValid)
                     .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
-
-    //                if viewModel.type.count > 0 {
-    //                    Button {
-    //                        viewModel.type.removeAll()
-    //                    } label: {
-    //                        Text("Clear all")
-    //                            .font(.sport.custom(.black, size: 10))
-    //                            .foregroundStyle(.white)
-    //                            .padding(EdgeInsets(top: 0, leading: 5, bottom: 4, trailing: 5))
-    //                            .modifier(RoundedViewModifier(color: .red, opacity: 0.7))
-    //                    }
-    //                }
                 }
             }
         }
@@ -116,7 +104,7 @@ extension CreateGymView {
                 .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                 .minimumScaleFactor(0.5)
                 .lineLimit(2)
-            
+                        
             TextField(title, text: text, axis: .vertical)
                 .padding(8)
                 .font(.sport.system(.body))
@@ -128,10 +116,7 @@ extension CreateGymView {
     }
     
     func roundedTextField(_ title: String, showTitle: Bool = false, text: Binding<String>) -> some View {
-        TextField(title, text: text, axis: .vertical)
-            .padding()
-            .font(.sport.system(.body))
-            .frame(maxWidth: .infinity, alignment: .leading)
+        DefaultTextField(text: text, placeholder: title)
             .modifier(RoundedViewModifier(title: showTitle ? "\(title):" : "", color: .white))
     }
 }

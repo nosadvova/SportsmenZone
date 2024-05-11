@@ -9,6 +9,7 @@ import SwiftUI
 
 final class NavigationRouter: ObservableObject {
     @Published var path = NavigationPath()
+    @Published var selectedTab: AppScreen = .mainTabView
     
     public func back(_ steps: Int = 1) {
         path.removeLast(steps)

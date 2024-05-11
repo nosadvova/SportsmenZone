@@ -48,7 +48,7 @@ public struct RoundedTextField: View {
                     .foregroundStyle(foregroundColor)
                     .disabled(!isEditing)
                 
-                if isEditing {
+                if isEditing && !text.isEmpty {
                     Button(action: {
                         text = ""
                     }, label: {
@@ -76,5 +76,5 @@ extension RoundedTextField {
 }
 
 #Preview {
-    RoundedTextField(text: .constant("Hagahgahga"), isCorrect: .constant(true), placeholder: "Gym", isEditing: true)
+    RoundedTextField(text: .constant(""), isCorrect: .constant(true), placeholder: "Gym", isEditing: true)
 }
