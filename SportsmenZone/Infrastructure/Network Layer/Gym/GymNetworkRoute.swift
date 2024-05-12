@@ -43,7 +43,9 @@ extension GymNetworkRoute: ServerRoute {
         switch self {
         case .createGym(let gymInformation):
             return gymInformation.requestBody()
-        case .getGym, .getAllGyms:
+        case .getGym:
+            return nil
+        case .getAllGyms:
             return nil
         }
     }

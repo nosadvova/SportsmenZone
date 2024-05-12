@@ -25,19 +25,26 @@ final class GymViewModel: ObservableObject {
     init(
         cacheProvider: CacheProvider = ServiceFacade.getService(CacheProvider.self),
         globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared,
-        networkService: GymAPI = RealGymAPI()
+        networkService: GymAPI = RealGymAPI(),
+        gym: Gym? = nil
     )
     {
         self.cacheProvider = cacheProvider
         self.globalDataStorage = globalDataStorage
         self.networkService = networkService  
+        self.gym = gym
         
         setUser()
     }
     
     func getGym() {
-        requestLoadable.loading()
         Task {
+            if let gym = await globalDataStorage.gym {
+                self.gym = gym
+                return
+            }
+            
+            requestLoadable.loading()
             do {
                 guard let gymID = await globalDataStorage.personalInformation?.gym else {
                     gym = nil

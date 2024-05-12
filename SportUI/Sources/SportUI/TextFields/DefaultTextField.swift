@@ -19,7 +19,6 @@ public struct DefaultTextField: View {
     }
     public var body: some View {
         TextField(placeholder, text: $text, axis: .vertical)
-            .padding(.horizontal, 20)
             .frame(maxWidth: .infinity, alignment: .leading)
             .keyboardType(.asciiCapable)
             .autocorrectionDisabled(true)

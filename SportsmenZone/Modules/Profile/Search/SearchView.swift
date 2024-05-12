@@ -6,10 +6,18 @@
 //
 
 import SwiftUI
+import SportUI
 
 struct SearchView: View {
+    @State private var text: String = ""
+    @State private var isLoading = false
+    
+    @StateObject private var viewModel = SearchViewModel()
+    
     var body: some View {
-        Text("Search View")
+        PrimaryScreenStyle(title: "Find gym") {
+            SearchBar(text: $text, isLoading: $isLoading)
+        }
     }
 }
 

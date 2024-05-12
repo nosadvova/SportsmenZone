@@ -54,3 +54,5 @@
 "gym.buildingNumber" = "Bulding Number";
 "gym.choose-sport-types" = "Choose sport types";
 "gym.add-gym-location" = "Add gym location:";
+
+"search.searchGym" = "Search gym";

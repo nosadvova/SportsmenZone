@@ -117,6 +117,7 @@ extension CreateGymView {
     
     func roundedTextField(_ title: String, showTitle: Bool = false, text: Binding<String>) -> some View {
         DefaultTextField(text: text, placeholder: title)
+            .padding()
             .modifier(RoundedViewModifier(title: showTitle ? "\(title):" : "", color: .white))
     }
 }

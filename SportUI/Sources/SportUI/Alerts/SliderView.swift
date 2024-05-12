@@ -47,12 +47,13 @@ public struct SliderView<Content>: View where Content: View {
                     }
                     
                     content()
-                        .padding()
+                        .padding(.horizontal)
                 }
                 .frame(maxWidth: .infinity)
                 .background(Color.white)
                 .shadow(radius: 20)
                 .frame(maxHeight: .infinity, alignment: .bottom)
+                .toolbar(.hidden, for: .tabBar)
                 .transition(.move(edge: .bottom))
                 .zIndex(1)
             }

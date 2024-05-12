@@ -17,6 +17,10 @@ class AccountViewModel: ObservableObject {
     @Published var lastName: String = ""
     @Published var email: String = ""
     
+    var originalFirstName: String = ""
+    var originalLastName: String = ""
+    var originalEmail: String = ""
+    
     let globalDataStorage: GlobalDataStorage
     let cacheProvider: CacheProvider
     
@@ -38,6 +42,10 @@ class AccountViewModel: ObservableObject {
             lastName = personalInformation.lastName ?? ""
             email = personalInformation.email ?? ""
             
+            originalFirstName = firstName
+            originalLastName = lastName
+            originalEmail = email
+            
             guard let gym = await globalDataStorage.gym else { return }
             print(gym)
             self.gym = gym
@@ -46,5 +54,11 @@ class AccountViewModel: ObservableObject {
     
     func clearAuthToken() {
         cacheProvider.removeSensitiveValue(forKey: Constants.StorageKey.authToken)
+    }
+    
+    func checkChanges(newValue: String, oldValue: String) -> Bool {
+        let trimmedNewValue = newValue.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        return trimmedNewValue != oldValue && !trimmedNewValue.isEmpty ? true : false
     }
 }

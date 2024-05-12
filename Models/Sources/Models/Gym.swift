@@ -14,8 +14,8 @@ public struct Location: Codable, Sendable {
     public var buildingNumber: String?
     
     enum CodingKeys: String, CodingKey {
-        case city, district, street
         case buildingNumber = "building_number"
+        case city, district, street
     }
     
     public init(city: String? = nil, district: String? = nil, street: String? = nil, buildingNumber: String? = nil) {

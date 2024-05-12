@@ -37,6 +37,11 @@ class AppViewModel: ObservableObject {
     
     func getUser() {
         Task {
+            if let user = await globalDataStorage.user {
+                await globalDataStorage.setData(user: user)
+                return
+            }
+            
             do {
                 let user = try await userAPI.getUser()
                 await globalDataStorage.setData(user: user)

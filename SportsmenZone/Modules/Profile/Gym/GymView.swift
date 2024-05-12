@@ -20,7 +20,7 @@ struct GymView: View {
         VStack {
             if let gym = viewModel.gym {
                 ShapeHeaderScreenStyle(title: gym.name ?? "", description: gym.description, color: .darkBlueColor, foregroundColor: .white, content: {
-                    ScrollView {
+                    ScrollView(showsIndicators: false) {
                         if viewModel.user?.personalInformation?.userType == UserType.Sportsman.rawValue {
                             followButton
                         }
@@ -65,6 +65,9 @@ struct GymView: View {
                 
                 Spacer()
             }
+        }
+        .refreshable {
+            viewModel.getGym()
         }
         .modifier(LoadingViewModifier(isLoading: viewModel.requestLoadable.isLoading))
         .onAppear {

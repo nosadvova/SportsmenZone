@@ -12,6 +12,7 @@ struct AccountView: View {
     @StateObject private var viewModel = AccountViewModel()
     @EnvironmentObject private var routerManager: NavigationRouter
     @State private var showSettings = false
+    @State private var isChanged = false
     
     var body: some View {
         ZStack {
@@ -28,8 +29,22 @@ struct AccountView: View {
                         )
                     
                     personalInformationView
+                        .padding(.top)
                     
                     gymView
+                        .padding(.top)
+                    
+                    Spacer()
+                    
+                    Button {
+                        print("Tapped save changes account")
+                    } label: {
+                        Text("Save changes")
+                            .font(.sport.system(.button))
+                            .frame(width: 200)
+                    }
+                    .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
+                    .disabled(!isChanged)
                 }
             }
             .overlay(alignment: .topTrailing) {
@@ -48,9 +63,8 @@ struct AccountView: View {
                     routerManager.replace(with: .login)
                     viewModel.clearAuthToken()
                 }
-                .padding()
-                .modifier(RoundedViewModifier(color: .white))
-                .ignoresSafeArea(.all)
+                .padding(.horizontal, 10)
+                .foregroundStyle(.white)
             }
         }
     }
@@ -65,8 +79,19 @@ extension AccountView {
             
             VStack(spacing: 25) {
                 UnderlinedTextField(placeholder: S.firstName, text: $viewModel.firstName, headerDisabled: true, defaultBorderColor: .lightGrayColor)
+                    .onChange(of: viewModel.firstName) { oldValue, newValue in
+                        isChanged = viewModel.checkChanges(newValue: newValue, oldValue: viewModel.originalFirstName)
+                    }
+                
                 UnderlinedTextField(placeholder: S.lastName, text: $viewModel.lastName, headerDisabled: true, defaultBorderColor: .lightGrayColor)
+                    .onChange(of: viewModel.lastName) { oldValue, newValue in
+                        isChanged = viewModel.checkChanges(newValue: newValue, oldValue: viewModel.originalLastName)
+                    }
+                
                 UnderlinedTextField(placeholder: S.email, text: $viewModel.email, headerDisabled: true, underlineDisabled: true)
+                    .onChange(of: viewModel.email) { oldValue, newValue in
+                        isChanged = newValue.isEmailValid && viewModel.checkChanges(newValue: newValue, oldValue: viewModel.originalEmail)
+                    }
             }
             .padding(.vertical)
             .modifier(RoundedViewModifier(color: .white))

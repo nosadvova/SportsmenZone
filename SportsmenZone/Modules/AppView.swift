@@ -11,9 +11,14 @@ struct AppView: View {
     @StateObject private var viewModel = AppViewModel()
     
     var body: some View {
+        //        LoginView()
+        
         VStack {
             if viewModel.isUserAuth {
                 SportsmenZoneTabView()
+                    .refreshable {
+                        viewModel.getUser()
+                    }
             } else {
                 LoginView()
             }
