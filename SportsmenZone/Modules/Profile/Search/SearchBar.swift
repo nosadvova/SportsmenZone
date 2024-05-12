@@ -12,7 +12,7 @@ import SportExtensions
 struct SearchBar: View {
     @Binding var text: String
     
-    @State var isEditing = true
+    @State var isEditing = false
     
     @Binding var isLoading: Bool
     

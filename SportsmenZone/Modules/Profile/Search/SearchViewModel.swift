@@ -7,10 +7,12 @@
 
 import Foundation
 import Models
+import SportUI
 
 @MainActor
 class SearchViewModel: ObservableObject {
     @Published var gyms: [Gym]?
+    @Published var requestLoadable: Loadable<Bool> = .notRequested
     
     let networkService: GymAPI
     let globalDataStorage: GlobalDataStorage
@@ -27,11 +29,13 @@ class SearchViewModel: ObservableObject {
     
     func getAllGyms() {
         Task {
+            requestLoadable.loading()
             do {
-                let gyms = try await networkService.getAllGyms()
-                self.gyms = gyms
-                print(gyms.count)
+                let allGyms = try await networkService.getAllGyms()
+                self.gyms = allGyms.gyms
+                requestLoadable = .loaded(true)
             } catch let error as NetworkError {
+                requestLoadable = .failed(error)
                 print(error.customMessage)
             }
         }

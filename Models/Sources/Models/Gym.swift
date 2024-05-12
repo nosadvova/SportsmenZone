@@ -74,6 +74,18 @@ public enum SportType: String, CaseIterable, Codable, Sendable {
     }
 }
 
+public struct GymsResponse: Codable {
+    public var gyms: [Gym]
+    
+    enum CodingKeys: String, CodingKey {
+        case gyms
+    }
+    
+    public init(gyms: [Gym]) {
+        self.gyms = gyms
+    }
+}
+
 public struct Gym: Codable, Sendable, Identifiable {
     public var id: String?
     public var image: String?
@@ -86,7 +98,7 @@ public struct Gym: Codable, Sendable, Identifiable {
     public var trainings: [String]?
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case id = "_id"
         case name, description, location, type
         case trainerID = "trainer_id"
         case sportsmen, trainings

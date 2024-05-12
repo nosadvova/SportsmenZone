@@ -16,8 +16,33 @@ struct SearchView: View {
     
     var body: some View {
         PrimaryScreenStyle(title: "Find gym") {
-            SearchBar(text: $text, isLoading: $isLoading)
+            VStack {
+                SearchBar(text: $text, isLoading: $isLoading)
+                
+                gymList
+                    .frame(maxWidth: .infinity)
+                    .ignoresSafeArea(.all)
+            }
         }
+        .modifier(LoadingViewModifier(isLoading: viewModel.requestLoadable.isLoading))
+    }
+}
+
+extension SearchView {
+    var gymList: some View {
+        List {
+            ForEach(viewModel.gyms ?? []) { gym in
+                UserRow(isInteractionAllowed: true, fullName: gym.name ?? "", info: gym.description ?? "") {
+                    HStack {
+                        Text("Info")
+                        ForEach(gym.type ?? [], id: \.self) {
+                            Image(systemName: $0.image)
+                        }
+                    }
+                }
+            }
+        }
+        .listStyle(PlainListStyle())
     }
 }
 
