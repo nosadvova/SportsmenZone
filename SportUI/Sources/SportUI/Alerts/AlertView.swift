@@ -8,20 +8,26 @@
 import SwiftUI
 import SportExtensions
 
-public struct AlertView: View {
+public struct AlertView<Content>: View where Content: View {
     @Binding var isActive: Bool
     let title: String
-    let message: String
+    let message: String?
     let buttonTitle: String
-    var action: () -> ()
+    var content: () -> Content
     @State private var offset: CGFloat = 1000
     
-    public init(isActive: Binding<Bool>, title: String, message: String, buttonTitle: String = "Dismiss", action: @escaping () -> Void) {
+    public init(
+        isActive: Binding<Bool>,
+        title: String,
+        message: String? = nil,
+        buttonTitle: String = "Dismiss",
+        @ViewBuilder content: @escaping () -> Content
+    ) {
         self._isActive = isActive
         self.title = title
         self.message = message
         self.buttonTitle = buttonTitle
-        self.action = action
+        self.content = content
     }
     
     public var body: some View {
@@ -29,6 +35,9 @@ public struct AlertView: View {
             if isActive {
                 Color.black
                     .opacity(isActive ? 0.2 : 0)
+                    .onTapGesture {
+                        close()
+                    }
                 
                 VStack {
                     Text(title)
@@ -37,12 +46,16 @@ public struct AlertView: View {
                         .multilineTextAlignment(.center)
                         .frame(alignment: .center)
                     
-                    Text(message)
-                        .padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0))
-                        .font(.headline)
-                        .foregroundStyle(.gray)
-                        .multilineTextAlignment(.center)
-                        .frame(alignment: .center)
+                    if let message = message {
+                        Text(message)
+                            .padding(EdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0))
+                            .font(.headline)
+                            .foregroundStyle(.gray)
+                            .multilineTextAlignment(.center)
+                            .frame(alignment: .center)
+                    }
+                    
+                    content()
                                         
                     Button(action: {
                         close()
@@ -72,13 +85,12 @@ public struct AlertView: View {
         withAnimation(.smooth) {
             offset = 1000
             isActive = false
-            action()
         }
     }
 }
 
 #Preview {
-    AlertView(isActive: .constant(true), title: "Title", message: "Description for alert", action: {
-        print("Tapped")
+    AlertView(isActive: .constant(true), title: "Title", message: "Description for alert", content: {
+        Text("SS")
     })
 }

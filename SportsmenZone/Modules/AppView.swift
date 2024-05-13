@@ -11,7 +11,7 @@ struct AppView: View {
     @StateObject private var viewModel = AppViewModel()
     
     var body: some View {
-        //        LoginView()
+//                LoginView()
         
         VStack {
             if viewModel.isUserAuth {

@@ -53,10 +53,15 @@ public struct ExpandableView<Content>: View where Content: View {
 
 
 #Preview {
-    ExpandableView(title: "Press me", image: Image(systemName: "plus.circle.fill")) {
-        Text("Hey")
-        Text("Hey")
-        Text("Hey")
-        Text("Hey")
+    ZStack {
+        Color.black.ignoresSafeArea()
+        
+        ExpandableView(title: "Press me", image: Image(systemName: "plus.circle.fill")) {
+            Text("Hey")
+            Text("Hey")
+            Text("Hey")
+            Text("Hey")
+        }
+        .background(Color.white)
     }
 }
