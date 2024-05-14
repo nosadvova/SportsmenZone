@@ -18,7 +18,7 @@ struct UserListView: View {
             VStack {
                 ForEach(viewModel.sportsmen) { user in
                     UserRow(
-                        isInteractionAllowed: true,
+                        isInteractionAllowed: viewModel.isOwner,
                         userImage: user.personalInformation?.userImage,
                         fullName: user.personalInformation?.fullName ?? "",
                         info: user.personalInformation?.email ?? "")

@@ -10,9 +10,13 @@ import Models
 
 final class TrainingViewModel: ObservableObject {
     @Published var training: Training
+    let user: User
+    let isOwner: Bool
     
-    init(training: Training) {
+    init(training: Training, user: User, isOwner: Bool) {
         self.training = training
+        self.isOwner = isOwner
+        self.user = user
     }
     
     func saveTraining() {

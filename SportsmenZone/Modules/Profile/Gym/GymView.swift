@@ -167,7 +167,7 @@ private extension GymView {
                             isTrainingSheetPresented = true
                         }
                         .sheet(isPresented: $isTrainingSheetPresented) {
-                            TrainingView(viewModel: TrainingViewModel(training: training, gym: viewModel.gym!, user: viewModel.user!))
+                            TrainingView(viewModel: TrainingViewModel(training: training, user: viewModel.user!, isOwner: viewModel.isOwner))
                         }
                         .background(
                             RoundedRectangle(cornerRadius: 15)

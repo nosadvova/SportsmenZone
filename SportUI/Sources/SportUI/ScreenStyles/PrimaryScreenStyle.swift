@@ -57,6 +57,8 @@ public struct PrimaryScreenStyle<Content>: View where Content: View {
                             Spacer()
                         case .forward:
                             EmptyView()
+                        case .none:
+                            EmptyView()
                         }
                     }
                     .padding(10)

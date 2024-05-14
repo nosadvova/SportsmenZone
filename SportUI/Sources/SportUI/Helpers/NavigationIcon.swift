@@ -11,6 +11,7 @@ public enum NavigationIcon {
     case close
     case back
     case forward
+    case none
     
     var image: Image? {
         switch self {
@@ -20,6 +21,8 @@ public enum NavigationIcon {
             Image(systemName: "arrow.backward")
         case .forward:
             Image(systemName: "arrow.forward")
+        case .none:
+            nil
         }
     }
 }

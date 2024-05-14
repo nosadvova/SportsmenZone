@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SportUI
+import Models
 
 struct SearchView: View {
     @State private var text: String = ""
@@ -15,6 +16,15 @@ struct SearchView: View {
     @State private var locationDetails = ""
     @StateObject private var viewModel = SearchViewModel()
     @EnvironmentObject private var routerManager: NavigationRouter
+    
+    var searchResults: [Gym] {
+        guard let gyms = viewModel.gyms else { return [] }
+        if text.isEmpty {
+            return gyms
+        } else {
+            return gyms.filter { $0.name?.lowercased().contains(text.lowercased()) ?? false } 
+        }
+    }
     
     var body: some View {
         PrimaryScreenStyle(title: "Find gym") {
@@ -28,6 +38,8 @@ struct SearchView: View {
         .overlay {
             AlertView(isActive: $showAddress, title: "Gym location", buttonTitle: "Dismiss") {
                 Text(locationDetails)
+                    .padding()
+                    .font(.sport.system(.button))
             }
         }
     }
@@ -36,7 +48,7 @@ struct SearchView: View {
 extension SearchView {
     var gymList: some View {
         List {
-            ForEach(viewModel.gyms ?? []) { gym in
+            ForEach(searchResults) { gym in
                 HStack {
                     Image(gym.image ?? "placeholder-image")
                         .resizable()
@@ -81,22 +93,48 @@ extension SearchView {
                             .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
                             .modifier(RoundedViewModifier(color: .white, opacity: 0.5))
                             .onTapGesture {
-                                print("Button tapped")
-                                showAddress = true
-                                
                                 locationDetails = "Location: \(location.city ?? ""), \(location.district ?? "")"
+                                
+                                showAddress = true
                             }
                     }
                 }
-//                .onTapGesture {
-//                    print("Tapped")
-//                    routerManager.push(.gym(.gym(gym: gym)))
-//                }
+                .onTapGesture {
+                    print("Tapped")
+                    routerManager.push(.gym(.gym(gym: gym, isHomeScreen: false)))
+                }
             }
         }
         .frame(maxWidth: .infinity)
         .listStyle(PlainListStyle())
         .ignoresSafeArea(.all)
+    }
+    
+    var sportTypeMenu: some View {
+        HStack {
+            Menu {
+                ScrollView {
+                    VStack {
+                        ForEach(SportType.allCases, id: \.self) { type in
+                            Button(action: {
+                                //
+                            }) {
+                                HStack {
+                                    Image(systemName: type.image)
+                                    Text(type.displayName)
+                                }
+                            }
+                        }
+                    }
+                }
+            } label: {
+                Image(systemName: "line.3.horizontal.decrease")
+            }
+            
+            Spacer()
+        }
+        .font(.sport.system(.button))
+        .padding(.horizontal, 5)
     }
 }
 

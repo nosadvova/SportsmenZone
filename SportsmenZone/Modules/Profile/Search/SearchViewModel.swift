@@ -13,6 +13,7 @@ import SportUI
 class SearchViewModel: ObservableObject {
     @Published var gyms: [Gym]?
     @Published var requestLoadable: Loadable<Bool> = .notRequested
+    @Published var filteredGyms: [Gym] = []
     
     let networkService: GymAPI
     let globalDataStorage: GlobalDataStorage
@@ -40,4 +41,6 @@ class SearchViewModel: ObservableObject {
             }
         }
     }
+    
+
 }

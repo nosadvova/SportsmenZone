@@ -14,8 +14,6 @@ struct TrainingView: View {
     @State var isChanged = false
     @State var showMessage = false
     
-    let user: User
-    
     var body: some View {
         let training = viewModel.training
         PrimaryScreenStyle(title: "Training", dismissButton: .close, backgroundColor: .white) {
@@ -42,10 +40,10 @@ struct TrainingView: View {
                             print("Tap duration")
                         }
                 }
-                .disabled(user.personalInformation?.userType == UserType.Trainer.rawValue ? false : true)
+                .disabled(!viewModel.isOwner)
                 .modifier(RoundedViewModifier(title: "Date and time:", color: .white))
                 
-                if user.personalInformation?.userType == UserType.Trainer.rawValue {
+                if viewModel.isOwner {
                     editableTextField("Name", text: $viewModel.training.name)
                     editableTextField("Comment", text: $viewModel.training.commentary)
                     Button(action: {
@@ -108,5 +106,5 @@ private extension TrainingView {
 }
 
 #Preview {
-    TrainingView(viewModel: TrainingViewModel(training: MockData.training1), user: MockData.user4)
+    TrainingView(viewModel: TrainingViewModel(training: MockData.training1, user: MockData.user4, isOwner: true))
 }

@@ -26,7 +26,7 @@ extension MainBarRoute: View {
         case .search:
             SearchView()
         case .gym:
-            GymView()
+            GymView(viewModel: GymViewModel())
         case .profile:
             AccountView()
         }
