@@ -98,7 +98,7 @@ public struct Gym: Codable, Sendable, Identifiable {
     public var trainings: [String]?
     
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
+        case id = "gym_id"
         case name, description, location, type
         case trainerID = "trainer_id"
         case sportsmen, trainings
@@ -149,3 +149,9 @@ public extension Gym {
         )
     }
 }
+//
+//extension Gym: Equatable {
+//    public static func ==(lhs: Gym, rhs: Gym) -> Bool {
+//        return lhs.id == rhs.id && lhs.trainerID == rhs.trainerID
+//    }
+//}

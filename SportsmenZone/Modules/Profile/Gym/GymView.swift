@@ -11,7 +11,7 @@ import Models
 import SportExtensions
 
 struct GymView: View {
-    @StateObject private var viewModel = GymViewModel()
+    @StateObject var viewModel: GymViewModel
     @EnvironmentObject private var routerManager: NavigationRouter
     @State private var isTrainingSheetPresented = false
     @State private var showCreateGymSheet = false
@@ -19,7 +19,7 @@ struct GymView: View {
     var body: some View {
         VStack {
             if let gym = viewModel.gym {
-                ShapeHeaderScreenStyle(title: gym.name ?? "", description: gym.description, color: .darkBlueColor, foregroundColor: .white, content: {
+                ShapeHeaderScreenStyle(title: gym.name ?? "", description: gym.description, color: .darkBlueColor, dismissButton: viewModel.isHomeScreen ?? true ? NavigationIcon.none : .back, foregroundColor: .white, content: {
                     ScrollView(showsIndicators: false) {
                         if viewModel.user?.personalInformation?.userType == UserType.Sportsman.rawValue {
                             followButton
@@ -66,11 +66,8 @@ struct GymView: View {
                 Spacer()
             }
         }
-        .refreshable {
-            viewModel.getGym()
-        }
         .modifier(LoadingViewModifier(isLoading: viewModel.requestLoadable.isLoading))
-        .onAppear {
+        .refreshable {
             viewModel.getGym()
         }
     }
@@ -119,7 +116,7 @@ private extension GymView {
                 
                 Button(action: {
                     print("Taped")
-                    routerManager.push(.gym(.allSportsmen))
+                    routerManager.push(.gym(.allSportsmen(gym: viewModel.gym)))
                 }, label: {
                     HStack {
                         Text("Show more")
@@ -170,7 +167,7 @@ private extension GymView {
                             isTrainingSheetPresented = true
                         }
                         .sheet(isPresented: $isTrainingSheetPresented) {
-                            TrainingView(viewModel: TrainingViewModel(training: training), user: MockData.user4)
+                            TrainingView(viewModel: TrainingViewModel(training: training, gym: viewModel.gym!, user: viewModel.user!))
                         }
                         .background(
                             RoundedRectangle(cornerRadius: 15)
@@ -186,6 +183,6 @@ private extension GymView {
 }
 
 
-#Preview {
-    GymView()
-}
+//#Preview {
+//    GymView()
+//}

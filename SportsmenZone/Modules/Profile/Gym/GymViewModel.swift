@@ -17,6 +17,7 @@ final class GymViewModel: ObservableObject {
     @Published var requestLoadable: Loadable<Bool> = .notRequested
     @Published var gym: Gym?
     @Published var user: User?
+    let isHomeScreen: Bool?
     
     let cacheProvider: CacheProvider
     let globalDataStorage: GlobalDataStorage
@@ -26,35 +27,53 @@ final class GymViewModel: ObservableObject {
         cacheProvider: CacheProvider = ServiceFacade.getService(CacheProvider.self),
         globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared,
         networkService: GymAPI = RealGymAPI(),
-        gym: Gym? = nil
+        gym: Gym? = nil,
+        isHomeScreen: Bool? = nil
     )
     {
         self.cacheProvider = cacheProvider
         self.globalDataStorage = globalDataStorage
-        self.networkService = networkService  
+        self.networkService = networkService
         self.gym = gym
+        self.isHomeScreen = isHomeScreen
         
+        getGym()
         setUser()
     }
     
+    var isOwner: Bool {
+        guard let userType = user?.personalInformation?.userType,
+              userType == UserType.Trainer.rawValue,
+              let userGymId = user?.personalInformation?.gym,
+              let currentGymId = gym?.id,
+              userGymId == currentGymId else {
+            return false
+        }
+        return true
+    }
+    
     func getGym() {
-        Task {
-            if let gym = await globalDataStorage.gym {
-                self.gym = gym
-                return
-            }
-            
-            requestLoadable.loading()
-            do {
-                guard let gymID = await globalDataStorage.personalInformation?.gym else {
-                    gym = nil
+        if gym == nil {
+            Task {
+                if let storedGym = await globalDataStorage.gym {
+                    gym = storedGym
+                    requestLoadable = .loaded(true)
                     return
                 }
-                gym = try await networkService.getGym(id: gymID)
-                await globalDataStorage.setData(gym: gym)
-                requestLoadable = .loaded(true)
-            } catch {
-                requestLoadable = .failed(error)
+                
+                requestLoadable.loading()
+                do {
+                    guard let gymID = await globalDataStorage.personalInformation?.gym else {
+                        gym = nil
+                        requestLoadable = .notRequested
+                        return
+                    }
+                    gym = try await networkService.getGym(id: gymID)
+                    await globalDataStorage.setData(gym: gym)
+                    requestLoadable = .loaded(true)
+                } catch {
+                    requestLoadable = .failed(error)
+                }
             }
         }
     }

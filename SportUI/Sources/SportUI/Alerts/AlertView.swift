@@ -72,7 +72,7 @@ public struct AlertView<Content>: View where Content: View {
                 .padding(24)
                 .offset(x: 0, y: offset)
                 .onAppear {
-                  withAnimation(.spring()) {
+                    withAnimation(.smooth(duration: 0.5)) {
                     offset = 0
                   }
                 }
@@ -82,7 +82,7 @@ public struct AlertView<Content>: View where Content: View {
     }
     
     private func close() {
-        withAnimation(.smooth) {
+        withAnimation(.smooth(duration: 0.5)) {
             offset = 1000
             isActive = false
         }

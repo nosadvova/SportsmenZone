@@ -19,6 +19,8 @@ struct MockData {
     
     static let users = [user1, user2, user3, user4, user5]
     
+    static let gym1 = Gym(id: "1112", name: "Mock Gym", description: "Text Mock data gym", trainerID: "10")
+    
     func generateUsers(_ amount: Int) -> [User] {
         var users: [User] = []
         
