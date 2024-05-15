@@ -40,7 +40,7 @@ public struct FontStyle {
             fontSize = 15
         case .description:
             fontName = .light
-            fontSize = 15
+            fontSize = 14
         case .title:
             fontName = .regular
             fontSize = 24
@@ -49,7 +49,7 @@ public struct FontStyle {
             fontSize = 18
         case .largeTitle:
             fontName = .bold
-            fontSize = 38
+            fontSize = 30
         }
         
         return (fontName: fontName.rawValue, size: fontSize)

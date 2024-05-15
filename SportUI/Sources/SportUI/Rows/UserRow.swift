@@ -32,50 +32,50 @@ public struct UserRow<Content>: View where Content: View {
     }
     
     public var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Image(userImage ?? "placeholder-image")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-                    .shadow(radius: 3)
-                
-                VStack(alignment: .leading) {
-                    Text(fullName)
-                        .font(.sport.system(.body))
-                        .foregroundStyle(Color.mainTextColor)
+            VStack(alignment: .leading) {
+                HStack {
+                    Image(userImage ?? "placeholder-image")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .shadow(radius: 3)
                     
-                    Text(info)
-                        .font(.sport.system(.caption))
-                        .multilineTextAlignment(.leading)
-                        .minimumScaleFactor(0.5)
-                        .foregroundStyle(.gray)
+                    VStack(alignment: .leading) {
+                        Text(fullName)
+                            .font(.sport.system(.body))
+                            .foregroundStyle(Color.mainTextColor)
+                        
+                        Text(info)
+                            .font(.sport.system(.caption))
+                            .multilineTextAlignment(.leading)
+                            .minimumScaleFactor(0.5)
+                            .foregroundStyle(.gray)
+                    }
+                    
+                    Spacer()
                 }
-                
-                Spacer()
-            }
-            .frame(maxWidth: .infinity)
-            .onTapGesture {
-                withAnimation(.bouncy) {
-                    if isInteractionAllowed {
-                        isExpanded.toggle()
+                .frame(maxWidth: .infinity)
+                .onTapGesture {
+                    withAnimation(.bouncy) {
+                        if isInteractionAllowed {
+                            isExpanded.toggle()
+                        }
                     }
                 }
+                if isExpanded {
+                    content()
+                        .padding(.leading, 20)
+                        .transition(.opacity)
+                }
+                
             }
-            if isExpanded {
-                content()
-                    .padding(.leading, 20)
-                    .transition(.opacity)
-            }
-            
+            .background(
+                isInteractionAllowed ?
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.white) : nil
+            )
         }
-        .background(
-            isInteractionAllowed ?
-            RoundedRectangle(cornerRadius: 10)
-                .fill(.white) : nil
-        )
-    }
 }
 
 #Preview {

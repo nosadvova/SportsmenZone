@@ -32,11 +32,12 @@ struct GymView: View {
                             
                             Spacer()
                         }
+                        .padding(.top, 15)
                         
                         sportsmenList
                         
                         HStack {
-                            Text(S.Gym.allSportsmen)
+                            Text(S.Gym.trainings)
                                 .font(.sport.system(.title))
                                 .foregroundStyle(Color.gray)
                             
@@ -183,6 +184,6 @@ private extension GymView {
 }
 
 
-//#Preview {
-//    GymView()
-//}
+#Preview {
+    GymView(viewModel: GymViewModel(gym: MockData.gym1))
+}

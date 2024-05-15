@@ -72,6 +72,7 @@ public struct ShapeHeaderScreenStyle<Content>: View where Content: View {
                 if let description {
                     Text(description)
                         .font(.sport.system(.description))
+                        .opacity(0.6)
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundStyle(foregroundColor)

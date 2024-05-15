@@ -12,8 +12,8 @@ import SportUI
 @MainActor
 class SearchViewModel: ObservableObject {
     @Published var gyms: [Gym]?
+    @Published var typesFilter: [SportType] = []
     @Published var requestLoadable: Loadable<Bool> = .notRequested
-    @Published var filteredGyms: [Gym] = []
     
     let networkService: GymAPI
     let globalDataStorage: GlobalDataStorage
@@ -26,6 +26,14 @@ class SearchViewModel: ObservableObject {
         self.globalDataStorage = globalDataStorage
         
         getAllGyms()
+    }
+    
+    func pickTypeFilter(sportType: SportType) {
+        if let index = typesFilter.firstIndex(of: sportType) {
+            typesFilter.remove(at: index)
+        } else {
+            typesFilter.append(sportType)
+        }
     }
     
     func getAllGyms() {
@@ -41,6 +49,4 @@ class SearchViewModel: ObservableObject {
             }
         }
     }
-    
-
 }
