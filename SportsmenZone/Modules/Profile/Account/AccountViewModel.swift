@@ -52,8 +52,9 @@ class AccountViewModel: ObservableObject {
         }
     }
     
-    func clearAuthToken() {
+    func clearAuthToken() async {
         cacheProvider.removeSensitiveValue(forKey: Constants.StorageKey.authToken)
+        await globalDataStorage.reset()
     }
     
     func checkChanges(newValue: String, oldValue: String) -> Bool {

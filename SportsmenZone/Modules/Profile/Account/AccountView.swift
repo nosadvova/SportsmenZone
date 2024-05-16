@@ -60,8 +60,10 @@ struct AccountView: View {
             
             SliderView(showModal: $showSettings) {
                 OptionButton(image: "door.right.hand.open", imageColor: .red, title: "Log out") {
+                    Task {
+                        await viewModel.clearAuthToken()
+                    }
                     routerManager.replace(with: .login)
-                    viewModel.clearAuthToken()
                 }
                 .padding(.horizontal, 10)
                 .foregroundStyle(.white)

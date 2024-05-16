@@ -50,6 +50,51 @@ struct GymView: View {
                 })
                 .background(Color.backgroundColor)
             } else {
+                newGymButton
+                Spacer()
+            }
+        }
+        .modifier(LoadingViewModifier(isLoading: viewModel.requestLoadable.isLoading))
+        .refreshable {
+            viewModel.getGym()
+        }
+    }
+}
+
+private extension GymView {
+    var newGymButton: some View {
+        VStack(alignment: .leading) {
+            if viewModel.user?.personalInformation?.userType == UserType.Sportsman.rawValue {
+                Button {
+                    routerManager.selectedTab = .gym
+                } label: {
+                    HStack {
+                        Image(viewModel.gym?.image ?? "placeholder-image")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                            .shadow(radius: 3)
+                        
+                        VStack(alignment: .leading) {
+                            Text(viewModel.gym?.name ?? "")
+                                .font(.sport.system(.body))
+                                .foregroundStyle(Color.mainTextColor)
+                            
+                            Text(viewModel.gym?.description ?? "")
+                                .font(.sport.system(.caption))
+                                .multilineTextAlignment(.leading)
+                                .minimumScaleFactor(0.5)
+                                .foregroundStyle(.gray)
+                        }
+                        
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding()
+                    .modifier(RoundedViewModifier(color: .white))
+                }
+            } else {
                 Button {
                     showCreateGymSheet = true
                 } label: {
@@ -63,18 +108,10 @@ struct GymView: View {
                 .sheet(isPresented: $showCreateGymSheet, content: {
                     CreateGymView()
                 })
-                
-                Spacer()
             }
         }
-        .modifier(LoadingViewModifier(isLoading: viewModel.requestLoadable.isLoading))
-        .refreshable {
-            viewModel.getGym()
-        }
     }
-}
-
-private extension GymView {
+    
     var followButton: some View {
         HStack {
             Text(S.Gym.followLabel)
