@@ -23,8 +23,7 @@ struct RegistrationView: View {
                 .padding()
             
             Button {
-                routerManager
-                    .back()
+                routerManager.replace(with: .login)
             } label: {
                 HStack {
                     Image(systemName: "arrow.backward")

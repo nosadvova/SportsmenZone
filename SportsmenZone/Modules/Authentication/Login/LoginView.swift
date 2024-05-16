@@ -51,7 +51,7 @@ struct LoginView: View {
             
             Button {
                 routerManager
-                    .replace(with: [.registration])
+                    .replace(with: .registration)
             } label: {
                 HStack {
                     Text(S.register)

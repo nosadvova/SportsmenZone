@@ -28,10 +28,7 @@ extension CoreNetwork {
         if let authToken = route.authToken {
             request.addValue(authToken, forHTTPHeaderField: "Authorization")
         }
-//        var headers = route.header ?? [:]
-//        if let authToken = route.authToken {
-//            headers["Authorization"] = "\(authToken)"
-//        }
+        
         request.httpMethod = route.method.rawValue
         request.allHTTPHeaderFields = route.header
         request.httpBody = route.body
