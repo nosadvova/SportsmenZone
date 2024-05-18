@@ -44,7 +44,14 @@ final class GymViewModel: ObservableObject {
     var isOwner: Bool {
         guard let userType = user?.personalInformation?.userType,
               userType == UserType.Trainer.rawValue,
-              let userGymId = user?.personalInformation?.gym,
+              isUserSubscriber else {
+            return false
+        }
+        return true
+    }
+    
+    var isUserSubscriber: Bool {
+        guard let userGymId = user?.personalInformation?.gym,
               let currentGymId = gym?.id,
               userGymId == currentGymId else {
             return false
@@ -54,7 +61,7 @@ final class GymViewModel: ObservableObject {
     
     func getGym() {
         if gym == nil {
-            Task {
+            Task {                
                 if let storedGym = await globalDataStorage.gym {
                     gym = storedGym
                     requestLoadable = .loaded(true)
@@ -74,6 +81,26 @@ final class GymViewModel: ObservableObject {
                 } catch {
                     requestLoadable = .failed(error)
                 }
+            }
+        }
+    }
+    
+    func followGym() {
+        Task {
+            requestLoadable.loading()
+            do {
+                guard let gymId = gym?.id else {
+                    requestLoadable = .notRequested
+                    return
+                }
+                
+                _ = try await networkService.followGym(id: gymId)
+                requestLoadable = .loaded(true)
+                user?.personalInformation?.gym = gymId
+                await globalDataStorage.setData(user: user)
+            } catch let error as NetworkError {
+                print(error.customMessage)
+                requestLoadable = .failed(error)
             }
         }
     }

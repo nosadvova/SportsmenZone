@@ -12,6 +12,7 @@ enum GymNetworkRoute {
     case createGym(gymInformation: Gym)
     case getGym(id: String)
     case getAllGyms
+    case followGym(id: String)
 }
 
 extension GymNetworkRoute: ServerRoute {
@@ -23,12 +24,14 @@ extension GymNetworkRoute: ServerRoute {
             "/gym/\(id)"
         case .getAllGyms:
             "/gym"
+        case .followGym(let id):
+            "/gym/\(id)/follow"
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .createGym:
+        case .createGym, .followGym:
             return .post
         case .getGym, .getAllGyms:
             return .get
@@ -43,9 +46,9 @@ extension GymNetworkRoute: ServerRoute {
         switch self {
         case .createGym(let gymInformation):
             return gymInformation.requestBody()
-        case .getGym:
+        case .getGym, .getAllGyms:
             return nil
-        case .getAllGyms:
+        case .followGym:
             return nil
         }
     }

@@ -63,6 +63,7 @@ struct AccountView: View {
                     Task {
                         await viewModel.clearAuthToken()
                     }
+                    routerManager.selectedTab = .mainView
                     routerManager.replace(with: .login)
                 }
                 .padding(.horizontal, 10)

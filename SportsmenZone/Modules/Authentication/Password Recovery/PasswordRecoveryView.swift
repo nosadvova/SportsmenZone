@@ -22,7 +22,7 @@ struct PasswordRecoveryView: View {
                 Spacer()
                 
                 Button(action: {
-                    routerManager.replace(with: [.login])
+                    routerManager.replace(with: .login)
                 }, label: {
                     Text(S.continue)
                         .frame(width: 200)

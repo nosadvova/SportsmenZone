@@ -68,31 +68,18 @@ private extension GymView {
                 Button {
                     routerManager.selectedTab = .gym
                 } label: {
-                    HStack {
-                        Image(viewModel.gym?.image ?? "placeholder-image")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                            .shadow(radius: 3)
-                        
-                        VStack(alignment: .leading) {
-                            Text(viewModel.gym?.name ?? "")
-                                .font(.sport.system(.body))
-                                .foregroundStyle(Color.mainTextColor)
-                            
-                            Text(viewModel.gym?.description ?? "")
-                                .font(.sport.system(.caption))
-                                .multilineTextAlignment(.leading)
-                                .minimumScaleFactor(0.5)
-                                .foregroundStyle(.gray)
-                        }
-                        
-                        Spacer()
+                    HStack(spacing: 20) {
+                        Image(systemName: "magnifyingglass")
+                        Text("Find new gym")
+                            .padding(.trailing)
                     }
-                    .frame(maxWidth: .infinity)
+                    .font(.sport.system(.button))
                     .padding()
+                    .foregroundStyle(Color.oliveColor)
                     .modifier(RoundedViewModifier(color: .white))
+                    .onTapGesture {
+                        routerManager.selectedTab = .search
+                    }
                 }
             } else {
                 Button {
@@ -103,32 +90,44 @@ private extension GymView {
                         Text(S.Gym.createNewGym)
                     }
                 }
-                .padding(.top, 40)
                 .buttonStyle(RoundButtonStyle(backgroundColor: .darkBlueColor, foregroundStyle: .white))
                 .sheet(isPresented: $showCreateGymSheet, content: {
                     CreateGymView()
                 })
             }
         }
+        .padding(.top, 40)
     }
     
     var followButton: some View {
-        HStack {
-            Text(S.Gym.followLabel)
-                .font(.sport.system(.caption))
-                .padding(.trailing, 20)
-                .foregroundStyle(Color.gray)
-            
-            Button {
-                //
-            } label: {
-                Text(S.Gym.followButton)
-                    .frame(width: 100)
+        VStack {
+            if viewModel.isUserSubscriber {
+                Button {
+                    //
+                } label: {
+                    Text(S.Gym.unfollowButton)
+                        .frame(width: 100)
+                }
+                .frame(height: 30)
+                .buttonStyle(RectangleButtonStyle(backgroundColor: .white, foregroundStyle: .red))
+            } else {
+                HStack {
+                    Text(S.Gym.followLabel)
+                        .font(.sport.system(.caption))
+                        .padding(.trailing, 20)
+                        .foregroundStyle(Color.gray)
+                    
+                    Button {
+                        viewModel.followGym()
+                    } label: {
+                        Text(S.Gym.followButton)
+                            .frame(width: 100)
+                    }
+                    .frame(height: 30)
+                    .buttonStyle(RectangleButtonStyle(backgroundColor: .mainTextColor, foregroundStyle: .white))
+                }
             }
-            .frame(height: 30)
-            .buttonStyle(RectangleButtonStyle(backgroundColor: .mainTextColor, foregroundStyle: .white))
         }
-        .padding(.vertical)
     }
     
     var sportsmenList: some View {

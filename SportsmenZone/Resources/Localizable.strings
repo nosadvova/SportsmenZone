@@ -44,6 +44,7 @@
 
 "gym.followLabel" = "Do you want to follow the club?";
 "gym.followButton" = "Follow";
+"gym.unfollowButton" = "Unfollow";
 "gym.all-sportsmen" = "All sportsmen";
 "gym.trainings" = "Trainings";
 "gym.create-new-gym" = "Create new gym";

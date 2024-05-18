@@ -46,7 +46,7 @@ class AppViewModel: ObservableObject {
                 let user = try await userAPI.getUser()
                 await globalDataStorage.setData(user: user)
                 await globalDataStorage.setData(personalInformation: user.personalInformation)
-//                print("User fetched: \(user)")
+                print("User fetched: \(user)")
             } catch {
                 print("Error fetching user: \(error)")
             }

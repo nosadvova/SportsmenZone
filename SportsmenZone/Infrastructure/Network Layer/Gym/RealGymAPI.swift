@@ -20,4 +20,8 @@ class RealGymAPI: NetworkService, GymAPI {
     func getAllGyms() async throws -> GymsResponse {
         return try await sendRequest(route: GymNetworkRoute.getAllGyms)
     }
+    
+    func followGym(id: String) async throws {
+        return try await sendRequest(route: GymNetworkRoute.followGym(id: id))
+    }
 }

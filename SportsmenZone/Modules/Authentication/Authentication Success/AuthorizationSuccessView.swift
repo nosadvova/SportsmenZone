@@ -18,7 +18,7 @@ struct AuthorizationSuccessView: View {
                 LottieView(name: "Success", loopMode: .playOnce)
                 
                 Button(action: {
-                    routerManager.replace(with: [])
+                    routerManager.replace(with: .login)
                 }, label: {
                     Text(S.finish)
                         .frame(width: 200)
