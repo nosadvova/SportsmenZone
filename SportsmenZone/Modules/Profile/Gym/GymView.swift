@@ -102,14 +102,23 @@ private extension GymView {
     var followButton: some View {
         VStack {
             if viewModel.isUserSubscriber {
-                Button {
-                    //
-                } label: {
-                    Text(S.Gym.unfollowButton)
-                        .frame(width: 100)
+                HStack {
+                    Text(S.Gym.unfollowLabel)
+                        .font(.sport.system(.caption))
+                        .minimumScaleFactor(0.6)
+                        .lineLimit(1)
+                        .padding(.trailing, 20)
+                        .foregroundStyle(Color.gray)
+                    
+                    Button {
+                        //
+                    } label: {
+                        Text(S.Gym.unfollowButton)
+                            .frame(width: 100)
+                    }
+                    .frame(height: 30)
+                    .buttonStyle(RectangleButtonStyle(backgroundColor: .white, foregroundStyle: .red))
                 }
-                .frame(height: 30)
-                .buttonStyle(RectangleButtonStyle(backgroundColor: .white, foregroundStyle: .red))
             } else {
                 HStack {
                     Text(S.Gym.followLabel)

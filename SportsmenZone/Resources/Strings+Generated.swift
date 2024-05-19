@@ -106,6 +106,8 @@ internal enum S {
     internal static let trainings = S.tr("Localizable", "gym.trainings", fallback: "Trainings")
     /// Unfollow
     internal static let unfollowButton = S.tr("Localizable", "gym.unfollowButton", fallback: "Unfollow")
+    /// Do you want to unfollow the club?
+    internal static let unfollowLabel = S.tr("Localizable", "gym.unfollowLabel", fallback: "Do you want to unfollow the club?")
   }
   internal enum RegisterPassword {
     /// Those passwords do not match

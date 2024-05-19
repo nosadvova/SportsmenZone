@@ -60,6 +60,7 @@ final class GymViewModel: ObservableObject {
     }
     
     func getGym() {
+        print("Check for the gym")
         if gym == nil {
             Task {                
                 if let storedGym = await globalDataStorage.gym {

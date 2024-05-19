@@ -43,6 +43,7 @@
 "authorizationSuccess.description" = "Congratulations, your account has been successfully created!";
 
 "gym.followLabel" = "Do you want to follow the club?";
+"gym.unfollowLabel" = "Do you want to unfollow the club?";
 "gym.followButton" = "Follow";
 "gym.unfollowButton" = "Unfollow";
 "gym.all-sportsmen" = "All sportsmen";
