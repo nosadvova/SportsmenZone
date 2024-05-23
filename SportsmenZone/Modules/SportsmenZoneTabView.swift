@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SportsmenZoneTabView: View {
     @StateObject var appViewModel = AppViewModel()
-//    @State var selectedTab: AppScreen = .mainTabView
     @EnvironmentObject var routerManager: NavigationRouter
     
     var body: some View {
