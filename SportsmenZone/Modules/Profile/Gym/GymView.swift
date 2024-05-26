@@ -42,12 +42,34 @@ struct GymView: View {
                                 .foregroundStyle(Color.gray)
                             
                             Spacer()
+                            
+                            Button {
+                                //
+                            } label: {
+                                HStack {
+                                    Text("Add")
+                                    Image(systemName: "plus")
+                                }
+                                .padding(.trailing, 13)
+                                .foregroundStyle(Color.sunsetColor)
+                            }
+
                         }
                         .padding(.top, 20)
                         
                         trainingsSliderView
                     }
                 })
+                .overlay(alignment: .topTrailing) {
+                    Button {
+                        //
+                    } label: {
+                        Image(systemName: "bell.fill")
+                            .imageScale(.medium)
+                            .foregroundStyle(Color.mustardColor)
+                    }
+                    .offset(x: -20, y: 40)
+                }
                 .background(Color.backgroundColor)
             } else {
                 newGymButton
