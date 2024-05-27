@@ -24,6 +24,9 @@
 		6713DEB02BFF9F1C00179016 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6713DEAF2BFF9F1B00179016 /* GoogleService-Info.plist */; };
 		6713DEB32C00D49100179016 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6713DEB22C00D49100179016 /* NotificationView.swift */; };
 		6713DEB52C00D4AF00179016 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6713DEB42C00D4AF00179016 /* NotificationViewModel.swift */; };
+		6713DEBB2C046B2700179016 /* NotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6713DEBA2C046B2700179016 /* NotificationAPI.swift */; };
+		6713DEBD2C046B5400179016 /* NotificationNetworkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6713DEBC2C046B5400179016 /* NotificationNetworkRoute.swift */; };
+		6713DEBF2C046B7B00179016 /* RealNotificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6713DEBE2C046B7B00179016 /* RealNotificationAPI.swift */; };
 		6718380C2BD17BEE00058A95 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6718380B2BD17BEE00058A95 /* Constants.swift */; };
 		671838132BD661D200058A95 /* GymAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671838122BD661D200058A95 /* GymAPI.swift */; };
 		671838152BD6625E00058A95 /* GymNetworkRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671838142BD6625E00058A95 /* GymNetworkRoute.swift */; };
@@ -104,6 +107,9 @@
 		6713DEAF2BFF9F1B00179016 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6713DEB22C00D49100179016 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		6713DEB42C00D4AF00179016 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		6713DEBA2C046B2700179016 /* NotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationAPI.swift; sourceTree = "<group>"; };
+		6713DEBC2C046B5400179016 /* NotificationNetworkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNetworkRoute.swift; sourceTree = "<group>"; };
+		6713DEBE2C046B7B00179016 /* RealNotificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealNotificationAPI.swift; sourceTree = "<group>"; };
 		6718380B2BD17BEE00058A95 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		671838122BD661D200058A95 /* GymAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymAPI.swift; sourceTree = "<group>"; };
 		671838142BD6625E00058A95 /* GymNetworkRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymNetworkRoute.swift; sourceTree = "<group>"; };
@@ -305,6 +311,16 @@
 			path = Notifications;
 			sourceTree = "<group>";
 		};
+		6713DEB62C0468FD00179016 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				6713DEBA2C046B2700179016 /* NotificationAPI.swift */,
+				6713DEBC2C046B5400179016 /* NotificationNetworkRoute.swift */,
+				6713DEBE2C046B7B00179016 /* RealNotificationAPI.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		6718380D2BD6619A00058A95 /* Gym */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,6 +342,7 @@
 		671A24922BB44E1700B02782 /* Network Layer */ = {
 			isa = PBXGroup;
 			children = (
+				6713DEB62C0468FD00179016 /* Notification */,
 				6740944A2BDAB07E0094B34F /* User */,
 				6718380D2BD6619A00058A95 /* Gym */,
 				671A249B2BB4772B00B02782 /* Authentication */,
@@ -653,6 +670,7 @@
 				6745D9E02B8F2ED400E08171 /* SportsmenZoneTabView.swift in Sources */,
 				67DE6D972BA47A2A00042DC6 /* TrainingViewModel.swift in Sources */,
 				673312432B9DE7C300C16B06 /* GymRoute.swift in Sources */,
+				6713DEBB2C046B2700179016 /* NotificationAPI.swift in Sources */,
 				674094502BDAB2140094B34F /* RealUserAPI.swift in Sources */,
 				671DE0872B9A6107007E8E58 /* MockData.swift in Sources */,
 				6701AEAB2B825A6800127364 /* AppView.swift in Sources */,
@@ -669,9 +687,11 @@
 				67F6460F2BEFDE6B00EDE107 /* SearchViewModel.swift in Sources */,
 				6745D9D42B8E61F900E08171 /* ForgotPasswordViewModel.swift in Sources */,
 				6718380C2BD17BEE00058A95 /* Constants.swift in Sources */,
+				6713DEBF2C046B7B00179016 /* RealNotificationAPI.swift in Sources */,
 				67AFDB8E2BDBA4F9000D9617 /* ServiceFacade.swift in Sources */,
 				671838132BD661D200058A95 /* GymAPI.swift in Sources */,
 				670E195B2B8B6681009EC037 /* Route.swift in Sources */,
+				6713DEBD2C046B5400179016 /* NotificationNetworkRoute.swift in Sources */,
 				6713DEB32C00D49100179016 /* NotificationView.swift in Sources */,
 				671D90612BEB945E00332388 /* AccountViewModel.swift in Sources */,
 				6764ABA22BB97913003D0AB5 /* RealAuthenticationAPI.swift in Sources */,
