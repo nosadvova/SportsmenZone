@@ -40,6 +40,7 @@ final class LoginViewModel: ObservableObject {
             requestLoadable.loading()
             do {
                 let token: AuthToken = try await networkService.login(personalInformation: UserInformationModel(password: password, email: email))
+                print(token)
                 try saveAuthToken(token)
                 requestLoadable = .loaded(true)
             } catch let error as NetworkError {

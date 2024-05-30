@@ -47,7 +47,6 @@ class AccountViewModel: ObservableObject {
             originalEmail = email
             
             guard let gym = await globalDataStorage.gym else { return }
-            print(gym)
             self.gym = gym
         }
     }
