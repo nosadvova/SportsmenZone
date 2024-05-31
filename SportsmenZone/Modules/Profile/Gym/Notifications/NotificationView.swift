@@ -7,13 +7,15 @@
 
 import SwiftUI
 import SportUI
+import Models
 
 struct NotificationView: View {
-    @StateObject private var viewModel = NotificationViewModel()
+    @StateObject var viewModel = NotificationViewModel()
     
     var body: some View {
-        PrimaryScreenStyle(title: "Notifications", dismissButton: .back, backgroundColor: .black) {
-            
+        PrimaryScreenStyle(title: "Notifications", dismissButton: .back, backgroundColor: .white) {
+            notificationList
+                .ignoresSafeArea(.all)
         }
         .task {
             await viewModel.fetchNotifications()
@@ -23,17 +25,26 @@ struct NotificationView: View {
 
 private extension NotificationView {
     var notificationList: some View {
-        ScrollView(.vertical) {
-            ForEach(viewModel.notifications) { notification in
-                UserRow(isInteractionAllowed: false, fullName: notification.title ?? "", info: notification.message ?? "") {
-                    //
+        List {
+            if let notifications = viewModel.notifications {
+                ForEach(notifications) { notification in
+                    UserRow(isInteractionAllowed: false, userImage: notification.type?.image, fullName: notification.title ?? "", info: notification.message ?? "") {
+                        //
+                    }
+                    .foregroundStyle(notification.type?.rawValue == "Major" ? .yellow : .green)
+                    .modifier(RoundedViewModifier(color: .white))
                 }
-                .modifier(RoundedViewModifier(color: .white))
+                .padding(.vertical, 10)
+                .ignoresSafeArea(.all)
+                .listRowSeparator(.hidden)
+//                .onDelete(perform: viewModel.deleteNotification)
             }
         }
+        .listStyle(.plain)
+        .ignoresSafeArea(.all)
     }
 }
 
 #Preview {
-        NotificationView()
+    NotificationView()
 }

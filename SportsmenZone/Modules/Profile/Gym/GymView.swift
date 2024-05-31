@@ -51,7 +51,7 @@ struct GymView: View {
                                     Image(systemName: "plus")
                                 }
                                 .padding(.trailing, 13)
-                                .foregroundStyle(Color.sunsetColor)
+                                .foregroundStyle(Color.darkBlueColor)
                             }
 
                         }
@@ -62,11 +62,11 @@ struct GymView: View {
                 })
                 .overlay(alignment: .topTrailing) {
                     Button {
-                        //
+                        routerManager.push(.gym(.notifications))
                     } label: {
                         Image(systemName: "bell.fill")
                             .imageScale(.medium)
-                            .foregroundStyle(Color.mustardColor)
+                            .foregroundStyle(.white)
                     }
                     .offset(x: -20, y: 40)
                 }

@@ -19,7 +19,7 @@ public struct UserRow<Content>: View where Content: View {
     
     public init(
         isInteractionAllowed: Bool,
-        userImage: String? = nil,
+        userImage: String? = "bubble.left.fill",
         fullName: String,
         info: String,
         @ViewBuilder content: @escaping () -> Content
@@ -34,12 +34,21 @@ public struct UserRow<Content>: View where Content: View {
     public var body: some View {
             VStack(alignment: .leading) {
                 HStack {
-                    Image(userImage ?? "placeholder-image")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                        .shadow(radius: 3)
+                    if let userImage = userImage {
+                        Image(systemName: userImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 25, height: 25)
+                            .padding(.horizontal, 10)
+                    } else {
+                        Image("placeholder-image")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                            .shadow(radius: 3)
+                    }
+                    
                     
                     VStack(alignment: .leading) {
                         Text(fullName)
@@ -55,7 +64,7 @@ public struct UserRow<Content>: View where Content: View {
                     
                     Spacer()
                 }
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .onTapGesture {
                     withAnimation(.bouncy) {
                         if isInteractionAllowed {
