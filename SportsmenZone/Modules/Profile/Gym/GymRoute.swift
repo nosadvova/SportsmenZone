@@ -11,6 +11,8 @@ import Models
 enum GymRoute {
     case gym(gym: Gym?, isHomeScreen: Bool)
     case allSportsmen(gym: Gym?)
+//    case notifications(user: User?)
+    case notifications
 }
 
 extension GymRoute: View {
@@ -24,12 +26,20 @@ extension GymRoute: View {
             }
         case .allSportsmen(let gym):
             UserListView(viewModel: GymViewModel(gym: gym))
+        case .notifications:
+            NotificationView()
         }
     }
 }
 
 extension Gym: Equatable {
     public static func ==(lhs: Gym, rhs: Gym) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+extension User: Equatable {
+    public static func == (lhs: User, rhs: User) -> Bool {
         return lhs.id == rhs.id
     }
 }

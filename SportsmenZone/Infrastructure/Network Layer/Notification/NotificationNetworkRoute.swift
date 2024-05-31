@@ -11,6 +11,7 @@ import Models
 enum NotificationNetworkRoute {
     case createNotification(notification: NotificationModel)
     case fetchNotifications
+    case deleteNotification(id: String)
 }
 
 extension NotificationNetworkRoute: ServerRoute {
@@ -20,6 +21,8 @@ extension NotificationNetworkRoute: ServerRoute {
             "/notifications"
         case .fetchNotifications:
             "/notifications"
+        case .deleteNotification(let id):
+            "/notifications/\(id)"
         }
     }
     
@@ -29,6 +32,8 @@ extension NotificationNetworkRoute: ServerRoute {
             return .post
         case .fetchNotifications:
             return .get
+        case .deleteNotification:
+            return .delete
         }
     }
     
@@ -41,6 +46,8 @@ extension NotificationNetworkRoute: ServerRoute {
         case .createNotification(let notification):
             return notification.requestBody()
         case .fetchNotifications:
+            return nil
+        case .deleteNotification:
             return nil
         }
     }

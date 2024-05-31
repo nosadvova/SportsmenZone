@@ -21,25 +21,40 @@ public enum NotificationType: String, CaseIterable, Codable, Sendable {
     }
 }
 
+public struct NotificationResponse: Codable {
+    public var notifications: [NotificationModel]
+    
+    enum CodingKeys: String, CodingKey {
+        case notifications
+    }
+    
+    public init(notifications: [NotificationModel]) {
+        self.notifications = notifications
+    }
+}
+
 public struct NotificationModel: Identifiable, Codable, Sendable {
     public var id: String?
     public var gymID: String?
+    public var trainerID: String?
     public var title: String?
     public var message: String?
     public var type: NotificationType?
-    public var createdAt: Date?
+//    public var createdAt: Date?
 
     enum CodingKeys: String, CodingKey {
-        case id = "_id"
+        case id = "ID"
         case gymID = "gym_id"
+        case trainerID = "trainer_id"
         case title
         case message
         case type
-        case createdAt = "created_at"
+//        case createdAt = "created_at"
     }
     
     public init(id: String? = nil,
                 gymID: String? = nil,
+                trainerID: String? = nil,
                 title: String? = nil,
                 message: String? = nil,
                 type: NotificationType? = nil,
@@ -47,10 +62,11 @@ public struct NotificationModel: Identifiable, Codable, Sendable {
     {
         self.id = id
         self.gymID = gymID
+        self.trainerID = trainerID
         self.title = title
         self.message = message
         self.type = type
-        self.createdAt = createdAt
+//        self.createdAt = createdAt
     }
 }
 
@@ -58,18 +74,20 @@ extension NotificationModel {
     func copy(
         id: String? = nil,
         gymID: String? = nil,
+        trainerID: String? = nil,
         title: String? = nil,
         message: String? = nil,
-        type: NotificationType? = nil,
-        createdAt: Date? = nil
+        type: NotificationType? = nil
+//        createdAt: Date? = nil
     ) -> NotificationModel {
         return NotificationModel(
             id: id ?? self.id,
             gymID: gymID ?? self.gymID,
+            trainerID: trainerID ?? self.trainerID,
             title: title ?? self.title,
             message: message ?? self.message,
-            type: type ?? self.type,
-            createdAt: createdAt ?? self.createdAt
+            type: type ?? self.type
+//            createdAt: createdAt ?? self.createdAt
         )
     }
 }

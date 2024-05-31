@@ -11,4 +11,5 @@ import Models
 protocol NotificationAPI {
     func createNotification(notification: NotificationModel) async throws
     func fetchNotifications() async throws -> [NotificationModel]
+    func deleteNotification(id: String) async throws
 }

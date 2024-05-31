@@ -16,4 +16,8 @@ class RealNotificationAPI: NetworkService, NotificationAPI {
     func fetchNotifications() async throws -> [NotificationModel] {
         return try await sendRequest(route: NotificationNetworkRoute.fetchNotifications)
     }
+    
+    func deleteNotification(id: String) async throws {
+        return try await sendRequest(route: NotificationNetworkRoute.deleteNotification(id: id))
+    }
 }
