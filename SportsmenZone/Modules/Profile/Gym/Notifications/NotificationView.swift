@@ -14,6 +14,15 @@ struct NotificationView: View {
     
     var body: some View {
         PrimaryScreenStyle(title: "Notifications", dismissButton: .back, backgroundColor: .white) {
+            
+            Button {
+                //
+            } label: {
+                Text("Create new notification")
+            }
+            .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
+            .frame(width: 250)
+
             notificationList
                 .ignoresSafeArea(.all)
         }
@@ -34,7 +43,7 @@ private extension NotificationView {
                     .foregroundStyle(notification.type?.rawValue == "Major" ? .yellow : .green)
                     .modifier(RoundedViewModifier(color: .white))
                 }
-                .padding(.vertical, 10)
+                .padding(.vertical, 2)
                 .ignoresSafeArea(.all)
                 .listRowSeparator(.hidden)
 //                .onDelete(perform: viewModel.deleteNotification)
