@@ -11,20 +11,26 @@ import Models
 
 struct NotificationView: View {
     @StateObject var viewModel = NotificationViewModel()
+    @State private var showNotificationScreen = false
+//    @EnvironmentObject private var routerManager: NavigationRouter
     
     var body: some View {
         PrimaryScreenStyle(title: "Notifications", dismissButton: .back, backgroundColor: .white) {
-            
-            Button {
-                //
-            } label: {
-                Text("Create new notification")
-            }
-            .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
-            .frame(width: 250)
+            VStack(spacing: 20) {
+                Button {
+                    showNotificationScreen = true
+                } label: {
+                    Text("Create notification")
+                        .font(.sport.system(.button))
+                        .frame(width: 200)
+                }
+                .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
+                
+                Divider()
 
-            notificationList
-                .ignoresSafeArea(.all)
+                notificationList
+                    .ignoresSafeArea(.all)
+            }
         }
         .task {
             await viewModel.fetchNotifications()

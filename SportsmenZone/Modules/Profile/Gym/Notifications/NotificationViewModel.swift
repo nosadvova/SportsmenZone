@@ -29,6 +29,18 @@ class NotificationViewModel: ObservableObject {
         self.globalDataStorage = globalDataStorage
     }
     
+    func createNotification(notification: NotificationModel) {
+        Task {
+            do {
+                _ = try await networkService.createNotification(notification: notification)
+                notifications?.append(notification)
+                await globalDataStorage.setData(notifications: notifications)
+            } catch let error as NetworkError {
+                showMessage = (true, error.customMessage)
+            }
+        }
+    }
+    
     func fetchNotifications() async {
         do {
             if let localNotifications = await globalDataStorage.notifications {
