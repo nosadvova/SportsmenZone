@@ -59,3 +59,6 @@
 "gym.add-gym-location" = "Add gym location:";
 
 "search.searchGym" = "Search gym";
+
+"notifications.create-notification" = "Create notification";
+"notifications.choose-notification-type" = "Choose notification type";

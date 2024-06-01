@@ -33,9 +33,7 @@ struct AccountView: View {
                     
                     gymView
                         .padding(.top)
-                    
-                    Spacer()
-                    
+                                        
                     Button {
                         print("Tapped save changes account")
                     } label: {

@@ -109,6 +109,12 @@ internal enum S {
     /// Do you want to unfollow the club?
     internal static let unfollowLabel = S.tr("Localizable", "gym.unfollowLabel", fallback: "Do you want to unfollow the club?")
   }
+  internal enum Notifications {
+    /// Choose notification type
+    internal static let chooseNotificationType = S.tr("Localizable", "notifications.choose-notification-type", fallback: "Choose notification type")
+    /// Create notification
+    internal static let createNotification = S.tr("Localizable", "notifications.create-notification", fallback: "Create notification")
+  }
   internal enum RegisterPassword {
     /// Those passwords do not match
     internal static let noMatch = S.tr("Localizable", "registerPassword.noMatch", fallback: "Those passwords do not match")

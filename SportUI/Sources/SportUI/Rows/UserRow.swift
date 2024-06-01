@@ -64,7 +64,7 @@ public struct UserRow<Content>: View where Content: View {
                     
                     Spacer()
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .frame(maxWidth: .infinity)
                 .onTapGesture {
                     withAnimation(.bouncy) {
                         if isInteractionAllowed {
