@@ -12,7 +12,6 @@ import Models
 struct NotificationView: View {
     @StateObject var viewModel = NotificationViewModel()
     @State private var showNotificationScreen = false
-//    @EnvironmentObject private var routerManager: NavigationRouter
     
     var body: some View {
         PrimaryScreenStyle(title: "Notifications", dismissButton: .back, backgroundColor: .white) {
@@ -32,6 +31,10 @@ struct NotificationView: View {
                     .ignoresSafeArea(.all)
             }
         }
+        .sheet(isPresented: $showNotificationScreen) {
+            CreateNotificationView()
+                .environmentObject(viewModel)
+        }
         .task {
             await viewModel.fetchNotifications()
         }
@@ -44,7 +47,9 @@ private extension NotificationView {
             if let notifications = viewModel.notifications {
                 ForEach(notifications) { notification in
                     UserRow(isInteractionAllowed: false, userImage: notification.type?.image, fullName: notification.title ?? "", info: notification.message ?? "") {
-                        //
+                        OptionButton(image: "trash", imageColor: .red, title: "Delete notification") {
+//                            viewModel.deleteNotification(offset:)
+                        }
                     }
                     .foregroundStyle(notification.type?.rawValue == "Major" ? .yellow : .green)
                     .modifier(RoundedViewModifier(color: .white))
@@ -52,7 +57,6 @@ private extension NotificationView {
                 .padding(.vertical, 2)
                 .ignoresSafeArea(.all)
                 .listRowSeparator(.hidden)
-//                .onDelete(perform: viewModel.deleteNotification)
             }
         }
         .listStyle(.plain)

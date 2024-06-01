@@ -12,6 +12,9 @@ import SportUI
 @MainActor
 class NotificationViewModel: ObservableObject {
     @Published var notifications: [NotificationModel]?
+    @Published var title: String = ""
+    @Published var message: String = ""
+    @Published var type: NotificationType? = nil
     @Published var requestLoadable: Loadable<Bool> = .notRequested
     @Published var showMessage = (false, "")
     
@@ -72,5 +75,18 @@ class NotificationViewModel: ObservableObject {
                 }
             }
         }
+    }
+}
+
+extension NotificationViewModel {
+    var notificationTypeLabel: String {
+        let label: String
+        
+        if let type {
+            label = type.displayName
+        } else {
+            label = S.Notifications.chooseNotificationType
+        }
+        return label
     }
 }

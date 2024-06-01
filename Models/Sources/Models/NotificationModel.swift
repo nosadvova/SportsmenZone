@@ -19,6 +19,10 @@ public enum NotificationType: String, CaseIterable, Codable, Sendable {
             "exclamationmark.triangle.fill"
         }
     }
+    
+    public var displayName: String {
+        return self.rawValue
+    }
 }
 
 public struct NotificationResponse: Codable {
