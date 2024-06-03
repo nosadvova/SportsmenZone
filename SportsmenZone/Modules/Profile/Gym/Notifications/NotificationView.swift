@@ -11,13 +11,12 @@ import Models
 
 struct NotificationView: View {
     @StateObject var viewModel = NotificationViewModel()
-    @State private var showNotificationScreen = false
     
     var body: some View {
         PrimaryScreenStyle(title: "Notifications", dismissButton: .back, backgroundColor: .white) {
             VStack(spacing: 20) {
                 Button {
-                    showNotificationScreen = true
+                    viewModel.showNotificationScreen = true
                 } label: {
                     Text("Create notification")
                         .font(.sport.system(.button))
@@ -31,7 +30,7 @@ struct NotificationView: View {
                     .ignoresSafeArea(.all)
             }
         }
-        .sheet(isPresented: $showNotificationScreen) {
+        .sheet(isPresented: $viewModel.showNotificationScreen) {
             CreateNotificationView()
                 .environmentObject(viewModel)
         }
@@ -46,9 +45,9 @@ private extension NotificationView {
         List {
             if let notifications = viewModel.notifications {
                 ForEach(notifications) { notification in
-                    UserRow(isInteractionAllowed: false, userImage: notification.type?.image, fullName: notification.title ?? "", info: notification.message ?? "") {
+                    UserRow(isInteractionAllowed: true, userImage: notification.type?.image, fullName: notification.title ?? "", info: notification.message ?? "") {
                         OptionButton(image: "trash", imageColor: .red, title: "Delete notification") {
-//                            viewModel.deleteNotification(offset:)
+                            viewModel.deleteNotification(id: notification.id ?? "")
                         }
                     }
                     .foregroundStyle(notification.type?.rawValue == "Major" ? .yellow : .green)

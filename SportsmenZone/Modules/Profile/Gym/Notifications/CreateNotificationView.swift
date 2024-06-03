@@ -21,6 +21,16 @@ struct CreateNotificationView: View {
                 notificationType
                     .padding()
                     .modifier(RoundedViewModifier(color: .white))
+                
+                Spacer()
+                
+                Button {
+                    viewModel.createNotification(notification: NotificationModel(gymID: viewModel.gym?.id, trainerID: viewModel.user?.id, title: viewModel.title, message: viewModel.message, type: viewModel.type))
+                } label: {
+                    Text("Save notification")
+                }
+                .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
+
             }
         }
     }

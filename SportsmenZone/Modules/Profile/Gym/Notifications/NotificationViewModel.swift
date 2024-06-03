@@ -12,29 +12,39 @@ import SportUI
 @MainActor
 class NotificationViewModel: ObservableObject {
     @Published var notifications: [NotificationModel]?
+    @Published var notification: NotificationModel?
     @Published var title: String = ""
     @Published var message: String = ""
     @Published var type: NotificationType? = nil
     @Published var requestLoadable: Loadable<Bool> = .notRequested
     @Published var showMessage = (false, "")
+    @Published var showNotificationScreen = false
     
-//    var user: User?
+    var user: User?
+    var gym: Gym?
     let networkService: NotificationAPI
     let globalDataStorage: GlobalDataStorage
     
     init(
-//        user: User? = nil,
         networkService: NotificationAPI = RealNotificationAPI(),
         globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared
     ) {
-//        self.user = user
         self.networkService = networkService
         self.globalDataStorage = globalDataStorage
+        setupVariables()
+    }
+    
+    private func setupVariables() {
+        Task {
+            user = await globalDataStorage.user
+            gym = await globalDataStorage.gym
+        }
     }
     
     func createNotification(notification: NotificationModel) {
         Task {
             do {
+                print(notification)
                 _ = try await networkService.createNotification(notification: notification)
                 notifications?.append(notification)
                 await globalDataStorage.setData(notifications: notifications)
@@ -63,13 +73,13 @@ class NotificationViewModel: ObservableObject {
         }
     }
     
-    func deleteNotification(offset: IndexSet) {
-        offset.forEach { index in
-            let notification = notifications?[index]
+    func deleteNotification(id: String) {
+        if let index = notifications?.firstIndex(where: { $0.id == id }) {
             Task {
                 do {
-                    _ = try await networkService.deleteNotification(id: notification?.id ?? "")
+                    _ = try await networkService.deleteNotification(id: id)
                     notifications?.remove(at: index)
+                    showNotificationScreen = false
                 } catch let error as NetworkError {
                     showMessage = (true, error.customMessage)
                 }
