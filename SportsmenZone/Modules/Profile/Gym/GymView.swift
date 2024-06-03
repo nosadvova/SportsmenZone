@@ -61,14 +61,16 @@ struct GymView: View {
                     }
                 })
                 .overlay(alignment: .topTrailing) {
-                    Button {
-                        routerManager.push(.gym(.notifications))
-                    } label: {
-                        Image(systemName: "bell.fill")
-                            .imageScale(.medium)
-                            .foregroundStyle(.white)
+                    if viewModel.isUserSubscriber {
+                        Button {
+                            routerManager.push(.gym(.notifications))
+                        } label: {
+                            Image(systemName: "bell.fill")
+                                .imageScale(.medium)
+                                .foregroundStyle(.white)
+                        }
+                        .offset(x: -20, y: 40)
                     }
-                    .offset(x: -20, y: 40)
                 }
                 .background(Color.backgroundColor)
             } else {
