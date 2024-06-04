@@ -53,9 +53,9 @@ struct MockData {
 
 //MARK: - Trainings
 extension MockData {
-    static let training1 = Training(id: "1", name: "Practice punches", trainingDay: .monday, duration: 2, time: .now, commentary: "Everyone have to be present but this one will be longer due to frame width")
-    static let training2 = Training(id: "2", name: "Practice kicks", trainingDay: .wednesday, duration: 2, time: .now, commentary: "Everyone have to be present")
-    static let training3 = Training(id: "3", name: "Practice throws", trainingDay: .friday, duration: 2, time: .now, commentary: "Everyone have to be present")
+    static let training1 = Training(id: "1", name: "Practice punches", trainingDay: .Monday, duration: 2, time: .now, commentary: "Everyone have to be present but this one will be longer due to frame width")
+    static let training2 = Training(id: "2", name: "Practice kicks", trainingDay: .Wednesday, duration: 2, time: .now, commentary: "Everyone have to be present")
+    static let training3 = Training(id: "3", name: "Practice throws", trainingDay: .Friday, duration: 2, time: .now, commentary: "Everyone have to be present")
     
     static let trainings = [training1, training2, training3]
 }

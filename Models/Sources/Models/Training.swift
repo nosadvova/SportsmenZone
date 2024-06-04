@@ -7,17 +7,21 @@
 
 import Foundation
 
-public enum TrainingDay: String, Codable {
-    case monday = "Monday"
-    case tuesday = "Tuesday"
-    case wednesday = "Wednesday"
-    case thursday = "Thursday"
-    case friday = "Friday"
-    case saturday = "Saturday"
-    case sunday = "Sunday"
+public enum TrainingDay: String, CaseIterable, Codable, Sendable {
+    case Monday
+    case Tuesday
+    case Wednesday
+    case Thursday
+    case Friday
+    case Saturday
+    case Sunday
+    
+    public var displayName: String {
+        return self.rawValue
+    }
 }
 
-public struct Training: Identifiable {
+public struct Training: Codable, Sendable, Identifiable {
     public var id: String
     public var name: String
     public var trainingDay: TrainingDay

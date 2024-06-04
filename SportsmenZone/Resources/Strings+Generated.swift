@@ -102,6 +102,8 @@ internal enum S {
     internal static let name = S.tr("Localizable", "gym.name", fallback: "Gym name")
     /// Street
     internal static let street = S.tr("Localizable", "gym.street", fallback: "Street")
+    /// Training day
+    internal static let trainingDay = S.tr("Localizable", "gym.training-day", fallback: "Training day")
     /// Trainings
     internal static let trainings = S.tr("Localizable", "gym.trainings", fallback: "Trainings")
     /// Unfollow
