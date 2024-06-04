@@ -43,17 +43,18 @@ struct GymView: View {
                             
                             Spacer()
                             
-                            Button {
-                                //
-                            } label: {
-                                HStack {
-                                    Text("Add")
-                                    Image(systemName: "plus")
+                            if viewModel.isOwner {
+                                Button {
+                                    routerManager.push(.gym(.training(isOwner: viewModel.isOwner)))
+                                } label: {
+                                    HStack {
+                                        Text("Add")
+                                        Image(systemName: "plus")
+                                    }
+                                    .padding(.trailing, 13)
+                                    .foregroundStyle(Color.darkBlueColor)
                                 }
-                                .padding(.trailing, 13)
-                                .foregroundStyle(Color.darkBlueColor)
                             }
-
                         }
                         .padding(.top, 20)
                         
@@ -213,7 +214,7 @@ private extension GymView {
                 HStack {
                     ForEach(viewModel.trainings) { training in
                         VStack(alignment: .leading) {
-                            Text(training.trainingDay.rawValue)
+                            Text(training.trainingDay.displayName)
                                 .font(.sport.system(.title2))
                             
                             Divider()
@@ -237,7 +238,7 @@ private extension GymView {
                             isTrainingSheetPresented = true
                         }
                         .sheet(isPresented: $isTrainingSheetPresented) {
-                            TrainingView(viewModel: TrainingViewModel(training: training, user: viewModel.user!, isOwner: viewModel.isOwner))
+                            TrainingView(viewModel: TrainingViewModel(training: training, isOwner: viewModel.isOwner))
                         }
                         .background(
                             RoundedRectangle(cornerRadius: 15)

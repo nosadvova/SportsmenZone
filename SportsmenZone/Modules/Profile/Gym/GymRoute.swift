@@ -11,8 +11,8 @@ import Models
 enum GymRoute {
     case gym(gym: Gym?, isHomeScreen: Bool)
     case allSportsmen(gym: Gym?)
-//    case notifications(user: User?)
     case notifications
+    case training(isOwner: Bool)
 }
 
 extension GymRoute: View {
@@ -28,6 +28,8 @@ extension GymRoute: View {
             UserListView(viewModel: GymViewModel(gym: gym))
         case .notifications:
             NotificationView()
+        case .training(let isOwner):
+            TrainingView(viewModel: TrainingViewModel(isOwner: isOwner))
         }
     }
 }
