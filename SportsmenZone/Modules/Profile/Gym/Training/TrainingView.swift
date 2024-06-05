@@ -15,48 +15,20 @@ struct TrainingView: View {
     @State var showMessage = false
     
     var body: some View {
-        if let training = viewModel.training {
-            PrimaryScreenStyle(title: "Training", dismissButton: .close, backgroundColor: .white) {
-                VStack(spacing: 30) {
-                    VStack {
-                        trainingDayMenu
-                        
-                        Divider()
-                            .padding(.horizontal, 10)
-                        
-                        timeField("Time", text: training.time.trainingTime())
-                            .onTapGesture {
-                                print("Tap time")
-                            }
-                        
-                        Divider()
-                            .padding(.horizontal, 10)
-                        
-                        timeField("Duration", text: "\(training.duration) hours")
-                            .onTapGesture {
-                                print("Tap duration")
-                            }
-                    }
-                    .disabled(!viewModel.isOwner)
-                    .modifier(RoundedViewModifier(title: "Date and time:", color: .white))
+        PrimaryScreenStyle(title: "Training", dismissButton: .close, backgroundColor: .white) {
+            VStack(spacing: 30) {
+                if let training = viewModel.training {
+                    dayAndTimeView
                     
                     if viewModel.isOwner {
-                        editableTextField("Name", text: $viewModel.name)
-                        editableTextField("Comment", text: $viewModel.commentary)
-                        Button(action: {
-                            viewModel.saveTraining()
-                            showMessage = true
-                            isChanged = false
-                        }, label: {
-                            Text(S.save)
-                                .frame(width: 200)
-                        })
-                        .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
-                        .disabled(!isChanged)
+                        trainingInformationView
                     } else {
                         staticText("Name", text: training.name)
                         staticText("Comment", text: training.commentary)
                     }
+                } else {
+                    dayAndTimeView
+                    trainingInformationView
                 }
             }
             .modifier(PopupMessageViewModifier(isPresented: $showMessage, type: .success, message: "Information saved successfully"))
@@ -92,6 +64,47 @@ private extension TrainingView {
         .foregroundStyle(.black)
         .font(.sport.system(.button))
         .padding(.horizontal, 5)
+    }
+    
+    var dayAndTimeView: some View {
+        VStack {
+            trainingDayMenu
+            
+            Divider()
+                .padding(.horizontal, 10)
+            
+            timeField("Time", text: viewModel.time?.trainingTime() ?? "")
+                .onTapGesture {
+                    print("Tap time")
+                }
+            
+            Divider()
+                .padding(.horizontal, 10)
+            
+            timeField("Duration", text: "\(viewModel.duration ?? 0) hours")
+                .onTapGesture {
+                    print("Tap duration")
+                }
+        }
+        .disabled(!viewModel.isOwner)
+        .modifier(RoundedViewModifier(title: "Date and time:", color: .white))
+    }
+    
+    var trainingInformationView: some View {
+        VStack(spacing: 20) {
+            editableTextField("Name", text: $viewModel.name)
+            editableTextField("Comment", text: $viewModel.commentary)
+            Button(action: {
+                viewModel.saveTraining()
+                showMessage = true
+                isChanged = false
+            }, label: {
+                Text(S.save)
+                    .frame(width: 200)
+            })
+            .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
+            .disabled(!isChanged)
+        }
     }
 }
 

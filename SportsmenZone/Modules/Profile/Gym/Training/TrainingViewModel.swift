@@ -13,22 +13,29 @@ final class TrainingViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var commentary: String = ""
     @Published var trainingDay: TrainingDay?
+    @Published var duration: Int?
+    @Published var time: Date?
     let isOwner: Bool
     
     init(training: Training? = nil, isOwner: Bool) {
         self.training = training
         self.isOwner = isOwner
+        
+        initialLoad()
     }
     
-    var trainingDayLabel: String {
-        let label: String
-        
-        if let trainingDay {
-            label = trainingDay.displayName
-        } else {
-            label = S.Gym.trainingDay
+    private func initialLoad() {
+        if let training {
+            name = training.name
+            commentary = training.commentary
+            trainingDay = training.trainingDay
+            duration = training.duration
+            time = training.time
         }
-        return label
+    }
+    
+    var trainingDayLabel: String {        
+        return trainingDay?.displayName ?? S.Gym.trainingDay
     }
     
     func saveTraining() {
