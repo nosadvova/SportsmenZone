@@ -12,7 +12,7 @@ public struct UserInformationModel: Encodable {
     public var lastName: String?
     public var password: String?
     public var email: String?
-    public var userType: String?
+    public var userType: UserType?
     
     
     enum CodingKeys: String, CodingKey {
@@ -23,7 +23,7 @@ public struct UserInformationModel: Encodable {
         case userType = "user_type"
     }
     
-    public init(firstName: String? = nil, lastName: String? = nil, password: String? = nil, email: String? = nil, userType: String? = nil) {
+    public init(firstName: String? = nil, lastName: String? = nil, password: String? = nil, email: String? = nil, userType: UserType? = nil) {
         self.firstName = firstName
         self.lastName = lastName
         self.password = password

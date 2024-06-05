@@ -53,7 +53,7 @@ final class OTPViewModel: ObservableObject {
                                                        lastName: personalInformation.lastName ?? "",
                                                        password: personalInformation.password ?? "",
                                                        email: personalInformation.email ?? "",
-                                                       userType: personalInformation.userType ?? "")
+                                                       userType: personalInformation.userType)
             
             requestLoadable.loading()
             do {

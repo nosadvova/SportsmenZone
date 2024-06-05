@@ -10,12 +10,12 @@ import Models
 
 //MARK: - Users
 struct MockData {
-    static let user1 = User(id: "91", personalInformation: PersonalInformation(firstName: "Abham", lastName: "Dulabi", email: "abham1@gmail.com", userType: UserType.Sportsman.rawValue))
-    static let user2 = User(id: "43", personalInformation: PersonalInformation(firstName: "Abrtryt", lastName: "Dulabi", email: "abham2@gmail.com", userType: UserType.Sportsman.rawValue))
-    static let user3 = User(id: "57", personalInformation: PersonalInformation(firstName: "Vinard", lastName: "Limpare", email: "abham2@gmail.com", userType: UserType.Sportsman.rawValue))
-    static let user4 = User(id: "12", personalInformation: PersonalInformation(firstName: "Elferik", lastName: "Nabari", email: "abham2@gmail.com", userType: UserType.Trainer.rawValue))
-    static let user5 = User(id: "10", personalInformation: PersonalInformation(firstName: "adfdffd", lastName: "ASDweweiwoi", email: "abham2@gmail.com", userType: UserType.Trainer.rawValue))
-    static let user6 = User(id: "11", personalInformation: PersonalInformation(firstName: "Absurd", lastName: "ASDweweiwoi", email: "abham2@gmail.com", userType: UserType.Trainer.rawValue))
+    static let user1 = User(id: "91", personalInformation: PersonalInformation(firstName: "Abham", lastName: "Dulabi", email: "abham1@gmail.com", userType: .Sportsman))
+    static let user2 = User(id: "43", personalInformation: PersonalInformation(firstName: "Abrtryt", lastName: "Dulabi", email: "abham2@gmail.com", userType: .Sportsman))
+    static let user3 = User(id: "57", personalInformation: PersonalInformation(firstName: "Vinard", lastName: "Limpare", email: "abham2@gmail.com", userType: .Sportsman))
+    static let user4 = User(id: "12", personalInformation: PersonalInformation(firstName: "Elferik", lastName: "Nabari", email: "abham2@gmail.com", userType: .Trainer))
+    static let user5 = User(id: "10", personalInformation: PersonalInformation(firstName: "adfdffd", lastName: "ASDweweiwoi", email: "abham2@gmail.com", userType: .Trainer))
+    static let user6 = User(id: "11", personalInformation: PersonalInformation(firstName: "Absurd", lastName: "ASDweweiwoi", email: "abham2@gmail.com", userType: .Trainer))
     
     static let users = [user1, user2, user3, user4, user5]
     
@@ -36,7 +36,7 @@ struct MockData {
             let emails = ["Ren@gmail.com", "Unhetik@gmail.com", "Vilnew@gmail.com", "Grabol@gmail.com", "Cylen@gmail.com", "Ayeuwn@gmail.com", "Banana@gmail.com"]
             let email = getRandString(strArr: emails)
                         
-            let user = User(id: id, personalInformation: PersonalInformation(firstName: firstName, lastName: lastName, email: email, userType: UserType.Sportsman.rawValue))
+            let user = User(id: id, personalInformation: PersonalInformation(firstName: firstName, lastName: lastName, email: email, userType: .Sportsman))
             
             users.append(user)
         }

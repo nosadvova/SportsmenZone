@@ -12,6 +12,7 @@ import Models
 public struct UserRow<Content>: View where Content: View {
     @State var isExpanded: Bool = false
     var isInteractionAllowed: Bool
+    var isSystemImage: Bool
     var userImage: String?
     var fullName: String
     var info: String
@@ -19,12 +20,14 @@ public struct UserRow<Content>: View where Content: View {
     
     public init(
         isInteractionAllowed: Bool,
+        isSystemImage: Bool = false,
         userImage: String? = "bubble.left.fill",
         fullName: String,
         info: String,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.isInteractionAllowed = isInteractionAllowed
+        self.isSystemImage = isSystemImage
         self.userImage = userImage
         self.fullName = fullName
         self.info = info
@@ -34,19 +37,18 @@ public struct UserRow<Content>: View where Content: View {
     public var body: some View {
             VStack(alignment: .leading) {
                 HStack {
-                    if let userImage = userImage {
-                        Image(systemName: userImage)
+                    if isSystemImage {
+                        Image(systemName: userImage!)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 25, height: 25)
                             .padding(.horizontal, 10)
                     } else {
-                        Image("placeholder-image")
+                        Image(userImage ?? "placeholder-image")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 50, height: 50)
                             .clipShape(Circle())
-                            .shadow(radius: 3)
                     }
                     
                     
