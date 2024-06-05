@@ -19,7 +19,7 @@ struct UserListView: View {
                 ForEach(viewModel.sportsmen) { user in
                     UserRow(
                         isInteractionAllowed: viewModel.isOwner,
-                        userImage: user.personalInformation?.userImage,
+                        userImage:  user.personalInformation?.userType?.image,
                         fullName: user.personalInformation?.fullName ?? "",
                         info: user.personalInformation?.email ?? "")
                     {

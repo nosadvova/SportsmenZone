@@ -21,7 +21,7 @@ struct GymView: View {
             if let gym = viewModel.gym {
                 ShapeHeaderScreenStyle(title: gym.name ?? "", description: gym.description, color: .darkBlueColor, dismissButton: viewModel.isHomeScreen ?? true ? NavigationIcon.none : .back, foregroundColor: .white, content: {
                     ScrollView(showsIndicators: false) {
-                        if viewModel.user?.personalInformation?.userType == UserType.Sportsman.rawValue {
+                        if viewModel.user?.personalInformation?.userType == .Sportsman {
                             followButton
                         }
                         
@@ -89,7 +89,7 @@ struct GymView: View {
 private extension GymView {
     var newGymButton: some View {
         VStack(alignment: .leading) {
-            if viewModel.user?.personalInformation?.userType == UserType.Sportsman.rawValue {
+            if viewModel.user?.personalInformation?.userType == .Sportsman {
                 Button {
                     routerManager.selectedTab = .gym
                 } label: {
@@ -172,7 +172,7 @@ private extension GymView {
                 VStack {
                     UserRow(
                         isInteractionAllowed: false,
-                        userImage: sportsman.personalInformation?.userImage,
+                        userImage: sportsman.personalInformation?.userType?.image,
                         fullName: sportsman.personalInformation?.fullName ?? "",
                         info: sportsman.personalInformation?.email ?? "") {}
                 }

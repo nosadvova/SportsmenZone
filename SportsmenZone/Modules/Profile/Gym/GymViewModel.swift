@@ -43,7 +43,7 @@ final class GymViewModel: ObservableObject {
     
     var isOwner: Bool {
         guard let userType = user?.personalInformation?.userType,
-              userType == UserType.Trainer.rawValue,
+              userType == .Trainer,
               isUserSubscriber else {
             return false
         }

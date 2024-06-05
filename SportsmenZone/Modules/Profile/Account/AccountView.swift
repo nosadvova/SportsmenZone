@@ -18,15 +18,17 @@ struct AccountView: View {
         ZStack {
             PrimaryScreenStyle(title: "Profile", textAlignment: .center, frameAlignment: .leading, backgroundColor: .white) {
                 VStack(spacing: 20) {
-                    Image(viewModel.personalInformation?.userImage ?? "placeholder-image")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 135, height: 135)
-                        .clipShape(Capsule())
-                        .overlay(
-                            Capsule()
-                                .stroke(Color.black, lineWidth: 1)
-                        )
+                    if let personalInformation = viewModel.personalInformation {
+                        Image(personalInformation.userImage ?? personalInformation.userType!.image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 135, height: 135)
+                            .clipShape(Capsule())
+                            .overlay(
+                                Capsule()
+                                    .stroke(Color.black, lineWidth: 1)
+                            )
+                    }
                     
                     personalInformationView
                         .padding(.top)
