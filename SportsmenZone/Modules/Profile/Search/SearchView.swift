@@ -110,7 +110,6 @@ extension SearchView {
                     }
                 }
                 .onTapGesture {
-                    print("Tapped")
                     routerManager.push(.gym(.gym(gym: gym, isHomeScreen: false)))
                 }
             }
