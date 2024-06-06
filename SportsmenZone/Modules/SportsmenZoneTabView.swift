@@ -25,7 +25,7 @@ struct SportsmenZoneTabView: View {
                 }
                 .tag(AppScreen.search)
             
-            GymView(viewModel: GymViewModel())
+            GymView(viewModel: GymViewModel(isHomeScreen: true))
                 .tabItem {
                         Label("Gym", systemImage: "dumbbell")
                 }

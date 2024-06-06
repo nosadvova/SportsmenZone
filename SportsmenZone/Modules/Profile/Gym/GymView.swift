@@ -61,16 +61,20 @@ struct GymView: View {
                         trainingsSliderView
                     }
                 })
+                .refreshable {
+                    viewModel.getGym()
+                }
                 .overlay(alignment: .topTrailing) {
                     if viewModel.isUserSubscriber {
                         Button {
                             routerManager.push(.gym(.notifications))
                         } label: {
                             Image(systemName: "bell.fill")
-                                .imageScale(.medium)
+                                .resizable()
+                                .frame(width: 20, height: 22)
                                 .foregroundStyle(.white)
                         }
-                        .offset(x: -20, y: 40)
+                        .offset(x: -20, y: 10)
                     }
                 }
                 .background(Color.backgroundColor)
@@ -80,7 +84,7 @@ struct GymView: View {
             }
         }
         .modifier(LoadingViewModifier(isLoading: viewModel.requestLoadable.isLoading))
-        .refreshable {
+        .onAppear {
             viewModel.getGym()
         }
     }

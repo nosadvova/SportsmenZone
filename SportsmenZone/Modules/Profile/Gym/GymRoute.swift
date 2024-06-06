@@ -19,11 +19,7 @@ extension GymRoute: View {
     var body: some View {
         switch self {
         case .gym(let gym, let isHomeScreen):
-            if let gym = gym {
-                GymView(viewModel: GymViewModel(gym: gym, isHomeScreen: isHomeScreen))
-            } else {
-                GymView(viewModel: GymViewModel(isHomeScreen: isHomeScreen))
-            }
+            GymView(viewModel: GymViewModel(gym: gym, isHomeScreen: isHomeScreen))
         case .allSportsmen(let gym):
             UserListView(viewModel: GymViewModel(gym: gym))
         case .notifications:

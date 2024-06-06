@@ -60,14 +60,16 @@ final class GymViewModel: ObservableObject {
     }
     
     func getGym() {
-        if gym == nil {
-            Task {                
-                if let storedGym = await globalDataStorage.gym {
+            Task {
+                if isHomeScreen ?? false,
+                   let storedGym = await globalDataStorage.gym,
+                   let storedUser = await globalDataStorage.user {
                     gym = storedGym
-                    requestLoadable = .loaded(true)
+                    user = storedUser
                     return
                 }
                 
+                if gym == nil {
                 requestLoadable.loading()
                 do {
                     guard let gymID = await globalDataStorage.personalInformation?.gym else {
@@ -87,7 +89,6 @@ final class GymViewModel: ObservableObject {
     
     func followGym() {
         Task {
-            requestLoadable.loading()
             do {
                 guard let gymId = gym?.id else {
                     requestLoadable = .notRequested
@@ -95,12 +96,14 @@ final class GymViewModel: ObservableObject {
                 }
                 
                 _ = try await networkService.followGym(id: gymId)
-                requestLoadable = .loaded(true)
+//                requestLoadable = .loaded(true)
                 user?.personalInformation?.gym = gymId
+                gym?.id = gymId
                 await globalDataStorage.setData(user: user)
+                await globalDataStorage.setData(gym: gym)
             } catch let error as NetworkError {
                 print(error.customMessage)
-                requestLoadable = .failed(error)
+//                requestLoadable = .failed(error)
             }
         }
     }

@@ -12,15 +12,18 @@ import Models
 class AppViewModel: ObservableObject {
     private let cacheProvider: CacheProvider
     private let userAPI: UserAPI
+    private let gymAPI: GymAPI
     private let globalDataStorage: GlobalDataStorage
     
     init(
         cacheProvider: CacheProvider = ServiceFacade.getService(CacheProvider.self),
         userAPI: UserAPI = RealUserAPI(),
+        gymAPI: GymAPI = RealGymAPI(),
         globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared
     ) {
         self.cacheProvider = cacheProvider
         self.userAPI = userAPI
+        self.gymAPI = gymAPI
         self.globalDataStorage = globalDataStorage
         
 //        let authToken: SimplifiedAuthToken? = cacheProvider.getSensitiveValue(forKey: Constants.StorageKey.authToken)
@@ -33,7 +36,7 @@ class AppViewModel: ObservableObject {
             return false
         }
         return true
-    }    
+    }
     
     func getUser() {
         Task {
