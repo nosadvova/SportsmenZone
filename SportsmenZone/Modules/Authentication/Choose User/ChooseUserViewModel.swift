@@ -9,11 +9,12 @@ import Foundation
 import Models
 
 final class ChooseUserViewModel: ObservableObject {
-    let globalDataStorage: GlobalDataStorage
-    var email: String = ""
+    @Published var email: String = ""
     @Published var chosenUserType: UserType?
     @Published var isSportsmenSelected = false
     @Published var isTrainerSelected = false
+    
+    let globalDataStorage: GlobalDataStorage
     
     init(globalDataStorage: GlobalDataStorage = GlobalDataStorage.shared) {
         self.globalDataStorage = globalDataStorage

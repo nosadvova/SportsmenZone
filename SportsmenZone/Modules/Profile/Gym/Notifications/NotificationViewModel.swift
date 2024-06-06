@@ -19,9 +19,9 @@ class NotificationViewModel: ObservableObject {
     @Published var requestLoadable: Loadable<Bool> = .notRequested
     @Published var showMessage = (false, "")
     @Published var showNotificationScreen = false
+    @Published var user: User?
+    @Published var gym: Gym?
     
-    var user: User?
-    var gym: Gym?
     let networkService: NotificationAPI
     let globalDataStorage: GlobalDataStorage
     
@@ -41,6 +41,10 @@ class NotificationViewModel: ObservableObject {
         }
     }
     
+    var isOwner: Bool {
+        return user?.personalInformation?.userType == .Trainer
+    }
+    
     func createNotification(notification: NotificationModel) {
         Task {
             do {
@@ -55,12 +59,7 @@ class NotificationViewModel: ObservableObject {
     }
     
     func fetchNotifications() async {
-        do {
-            if let localNotifications = await globalDataStorage.notifications {
-                self.notifications = localNotifications
-                return
-            }
-            
+        do {            
             requestLoadable.loading()
             let notificationResponse = try await networkService.fetchNotifications()
             self.notifications = notificationResponse

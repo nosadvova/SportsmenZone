@@ -15,16 +15,18 @@ struct NotificationView: View {
     var body: some View {
         PrimaryScreenStyle(title: "Notifications", dismissButton: .back, backgroundColor: .white) {
             VStack(spacing: 20) {
-                Button {
-                    viewModel.showNotificationScreen = true
-                } label: {
-                    Text("Create notification")
-                        .font(.sport.system(.button))
-                        .frame(width: 200)
+                if viewModel.isOwner {
+                    Button {
+                        viewModel.showNotificationScreen = true
+                    } label: {
+                        Text("Create notification")
+                            .font(.sport.system(.button))
+                            .frame(width: 200)
+                    }
+                    .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
+                    
+                    Divider()
                 }
-                .buttonStyle(RoundButtonStyle(backgroundColor: .green, foregroundStyle: .white))
-                
-                Divider()
 
                 notificationList
                     .ignoresSafeArea(.all)
@@ -45,7 +47,7 @@ private extension NotificationView {
         List {
             if let notifications = viewModel.notifications {
                 ForEach(notifications) { notification in
-                    UserRow(isInteractionAllowed: true, userImage: notification.type?.image, fullName: notification.title ?? "", info: notification.message ?? "") {
+                    UserRow(isInteractionAllowed: viewModel.isOwner, isSystemImage: true, userImage: notification.type?.image, fullName: notification.title ?? "", info: notification.message ?? "") {
                         OptionButton(image: "trash", imageColor: .red, title: "Delete notification") {
                             viewModel.deleteNotification(id: notification.id ?? "")
                         }
