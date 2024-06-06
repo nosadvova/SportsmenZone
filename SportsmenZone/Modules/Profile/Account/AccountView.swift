@@ -37,7 +37,7 @@ struct AccountView: View {
                         .padding(.top)
                                         
                     Button {
-                        print("Tapped save changes account")
+                        viewModel.saveChanges()
                     } label: {
                         Text("Save changes")
                             .font(.sport.system(.button))

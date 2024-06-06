@@ -51,6 +51,16 @@ class AccountViewModel: ObservableObject {
         }
     }
     
+    func saveChanges() {
+        Task {
+            personalInformation?.firstName = firstName
+            personalInformation?.lastName = lastName
+            personalInformation?.email = email
+            
+            await globalDataStorage.setData(personalInformation: personalInformation)
+        }
+    }
+    
     func clearAuthToken() async {
         cacheProvider.removeSensitiveValue(forKey: Constants.StorageKey.authToken)
         await globalDataStorage.reset()
