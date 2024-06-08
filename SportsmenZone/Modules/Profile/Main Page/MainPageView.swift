@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import SportUI
 
 struct MainPageView: View {
     var body: some View {
-        Text("")
+        ShapeHeaderScreenStyle(title: "Welcome back!", description: "What would you like to do next?", color: .oliveColor) {
+            //
+        }
     }
 }
 
