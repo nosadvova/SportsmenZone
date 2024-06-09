@@ -112,11 +112,11 @@ extension AccountView {
                     routerManager.selectedTab = .gym
                 } label: {
                     HStack {
-                        Image(viewModel.gym?.image ?? "placeholder-image")
+                        Image(systemName: viewModel.gymImage)
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(.black)
                             .shadow(radius: 3)
                         
                         VStack(alignment: .leading) {

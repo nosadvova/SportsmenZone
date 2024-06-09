@@ -34,6 +34,13 @@ class AccountViewModel: ObservableObject {
         initialLoad()
     }
     
+    var gymImage: String {
+        if let image = gym?.type?.first {
+            return image.image
+        }
+        return "figure.run"
+    }
+    
     private func initialLoad() {
         Task {
             guard let personalInformation = await globalDataStorage.user?.personalInformation else { return }
