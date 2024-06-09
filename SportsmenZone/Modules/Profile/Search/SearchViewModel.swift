@@ -14,6 +14,7 @@ class SearchViewModel: ObservableObject {
     @Published var gyms: [Gym]?
     @Published var typesFilter: [SportType] = []
     @Published var requestLoadable: Loadable<Bool> = .notRequested
+    @Published var showAddress = false
     
     let networkService: GymAPI
     let globalDataStorage: GlobalDataStorage
@@ -26,6 +27,20 @@ class SearchViewModel: ObservableObject {
         self.globalDataStorage = globalDataStorage
         
         getAllGyms()
+    }
+    
+    func getGymLocation(gym: Gym?) -> String {
+        if let city = gym?.location?.city, let district = gym?.location?.district {
+            return "\(city), \(district)"
+        }
+        return "No location provided"
+    }
+
+    func getGymImage(gym: Gym?) -> String {
+        if let image = gym?.type?.first {
+            return image.image
+        }
+        return "figure.run"
     }
     
     func pickTypeFilter(sportType: SportType) {

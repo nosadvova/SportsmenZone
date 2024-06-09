@@ -44,7 +44,7 @@ struct SearchView: View {
                 }
             }
             
-            AlertView(isActive: $showAddress, title: "Gym location", buttonTitle: "Dismiss") {
+            AlertView(isActive: $viewModel.showAddress, title: "Gym location", buttonTitle: "Dismiss") {
                 Text(locationDetails)
                     .padding()
                     .font(.sport.system(.button))
@@ -59,11 +59,10 @@ extension SearchView {
         List {
             ForEach(searchResults) { gym in
                 HStack {
-                    Image(gym.image ?? "placeholder-image")
+                    Image(systemName: viewModel.getGymImage(gym: gym))
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
+                        .frame(width: 25, height: 25)
                         .shadow(radius: 3)
                     
                     VStack(alignment: .leading) {
@@ -103,12 +102,13 @@ extension SearchView {
                             .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
                             .modifier(RoundedViewModifier(color: .white, opacity: 0.5))
                             .onTapGesture {
-                                locationDetails = "Location: \(location.city ?? ""), \(location.district ?? "")"
+                                locationDetails = viewModel.getGymLocation(gym: gym)
                                 
-                                showAddress = true
+                                viewModel.showAddress = true
                             }
                     }
                 }
+                .frame(height: 50)
                 .onTapGesture {
                     routerManager.push(.gym(.gym(gym: gym, isHomeScreen: false)))
                 }
