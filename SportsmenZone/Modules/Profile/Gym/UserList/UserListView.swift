@@ -24,7 +24,7 @@ struct UserListView: View {
                         info: user.personalInformation?.email ?? "")
                     {
                         OptionButton(image: "trash.fill", imageColor: .red, title: "Delete user") {
-                            print("User deleted")
+                            viewModel.deleteSportsman(id: user.id)
                         }
                         
                         Divider()
