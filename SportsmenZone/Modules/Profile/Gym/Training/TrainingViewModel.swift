@@ -13,8 +13,8 @@ final class TrainingViewModel: ObservableObject {
     @Published var name: String = ""
     @Published var commentary: String = ""
     @Published var trainingDay: TrainingDay?
-    @Published var duration: Int?
-    @Published var time: Date?
+    @Published var duration: Int = 2
+    @Published var time: Date = .now
     let isOwner: Bool
     
     init(training: Training? = nil, isOwner: Bool) {

@@ -114,4 +114,10 @@ final class GymViewModel: ObservableObject {
             user = currentUser
         }
     }
+    
+    func deleteSportsman(id: String) {
+        if let index = sportsmen.firstIndex(where: { $0.id == id }) {
+                sportsmen.remove(at: index)
+        }
+    }
 }

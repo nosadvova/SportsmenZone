@@ -73,7 +73,7 @@ private extension TrainingView {
             Divider()
                 .padding(.horizontal, 10)
             
-            timeField("Time", text: viewModel.time?.trainingTime() ?? "")
+            timeField("Time", text: viewModel.time.trainingTime())
                 .onTapGesture {
                     print("Tap time")
                 }
@@ -81,7 +81,7 @@ private extension TrainingView {
             Divider()
                 .padding(.horizontal, 10)
             
-            timeField("Duration", text: "\(viewModel.duration ?? 0) hours")
+            timeField("Duration", text: "\(viewModel.duration) hours")
                 .onTapGesture {
                     print("Tap duration")
                 }
