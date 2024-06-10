@@ -62,7 +62,6 @@
 		675F822F2B97379200810407 /* GymView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675F822E2B97379200810407 /* GymView.swift */; };
 		6764ABA22BB97913003D0AB5 /* RealAuthenticationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6764ABA12BB97913003D0AB5 /* RealAuthenticationAPI.swift */; };
 		677D43B82C0B38D200FFF386 /* CreateNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677D43B72C0B38D200FFF386 /* CreateNotificationView.swift */; };
-		677D43BB2C0B3B2300FFF386 /* CreateNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 677D43BA2C0B3B2200FFF386 /* CreateNotificationViewModel.swift */; };
 		678465FF2B8904D80062F736 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678465FE2B8904D80062F736 /* LoginViewModel.swift */; };
 		678761BE2B98B3EB001320C6 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678761BD2B98B3EB001320C6 /* LottieView.swift */; };
 		678761C02B98C68A001320C6 /* GymViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678761BF2B98C68A001320C6 /* GymViewModel.swift */; };
@@ -141,7 +140,6 @@
 		675F822E2B97379200810407 /* GymView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymView.swift; sourceTree = "<group>"; };
 		6764ABA12BB97913003D0AB5 /* RealAuthenticationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealAuthenticationAPI.swift; sourceTree = "<group>"; };
 		677D43B72C0B38D200FFF386 /* CreateNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CreateNotificationView.swift; path = ../CreateNotificationView.swift; sourceTree = "<group>"; };
-		677D43BA2C0B3B2200FFF386 /* CreateNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNotificationViewModel.swift; sourceTree = "<group>"; };
 		6782B2EB2B87A37C00AE8F1A /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
 		6782B2ED2B87A37C00AE8F1A /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
 		6782B2EE2B87A37C00AE8F1A /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
@@ -475,7 +473,6 @@
 			isa = PBXGroup;
 			children = (
 				677D43B72C0B38D200FFF386 /* CreateNotificationView.swift */,
-				677D43BA2C0B3B2200FFF386 /* CreateNotificationViewModel.swift */,
 			);
 			path = "Create Notification";
 			sourceTree = "<group>";
@@ -688,7 +685,6 @@
 				67D164292BBC0BF2003B1190 /* ChooseUserViewModel.swift in Sources */,
 				671A24962BB44EB900B02782 /* HTTPMethod.swift in Sources */,
 				674094522BDAB4BE0094B34F /* AppViewModel.swift in Sources */,
-				677D43BB2C0B3B2300FFF386 /* CreateNotificationViewModel.swift in Sources */,
 				6745D9D72B8E74D400E08171 /* AuthenticationRoute.swift in Sources */,
 				678761BE2B98B3EB001320C6 /* LottieView.swift in Sources */,
 				6745D9DA2B8E7AA000E08171 /* PasswordRecoveryView.swift in Sources */,

@@ -8,6 +8,7 @@
 import Foundation
 import Models
 
+@MainActor
 final class ChooseUserViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var chosenUserType: UserType?

@@ -13,8 +13,8 @@ import Models
 
 @MainActor
 final class LoginViewModel: ObservableObject {
-    @Published var email: String = "trainer@gmail.com"
-    @Published var password: String = "123456"
+    @Published var email: String = ""
+    @Published var password: String = ""
     
     @Published var isEmailValid = true
     @Published var isPasswordValid = true

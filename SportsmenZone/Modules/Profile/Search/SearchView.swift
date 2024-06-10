@@ -97,7 +97,7 @@ extension SearchView {
                     
                     Spacer()
                     
-                    if let location = gym.location {
+                    if gym.location != nil {
                         Image(systemName: "mappin")
                             .padding(EdgeInsets(top: 5, leading: 8, bottom: 5, trailing: 8))
                             .modifier(RoundedViewModifier(color: .white, opacity: 0.5))

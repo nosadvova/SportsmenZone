@@ -10,11 +10,11 @@ import Models
 import Combine
 
 final class RegistrationViewModel: ObservableObject {
-    @Published var firstName: String = "My"
-    @Published var lastName: String = "Name"
-    @Published var email: String = "asdfrt@gmail.com"
-    @Published var password: String = "123456"
-    @Published var repeatPassword: String = "123456"
+    @Published var firstName: String = ""
+    @Published var lastName: String = ""
+    @Published var email: String = ""
+    @Published var password: String = ""
+    @Published var repeatPassword: String = ""
     @Published var errorText: String = ""
     
     @Published var isFirstNameValid = false

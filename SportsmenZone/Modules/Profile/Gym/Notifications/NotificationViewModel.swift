@@ -48,7 +48,6 @@ class NotificationViewModel: ObservableObject {
     func createNotification(notification: NotificationModel) {
         Task {
             do {
-                print(notification)
                 _ = try await networkService.createNotification(notification: notification)
                 notifications?.append(notification)
                 await globalDataStorage.setData(notifications: notifications)
@@ -59,7 +58,11 @@ class NotificationViewModel: ObservableObject {
     }
     
     func fetchNotifications() async {
-        do {            
+        do {  
+            if let notifications = await globalDataStorage.notifications {
+                self.notifications = notifications
+                return
+            }
             requestLoadable.loading()
             let notificationResponse = try await networkService.fetchNotifications()
             self.notifications = notificationResponse
