@@ -66,7 +66,7 @@ public struct ShapeHeaderScreenStyle<Content>: View where Content: View {
                     .foregroundStyle(foregroundColor)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(EdgeInsets(top: 15, leading: 10, bottom: 0.5, trailing: 35))
+                    .padding(EdgeInsets(top: 15, leading: 10, bottom: 0.5, trailing: 15))
                 
                 if let description {
                     Text(description)

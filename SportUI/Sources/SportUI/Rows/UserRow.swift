@@ -58,9 +58,9 @@ public struct UserRow<Content>: View where Content: View {
                             .foregroundStyle(Color.mainTextColor)
                         
                         Text(info)
-                            .font(.sport.system(.caption))
+                            .font(.sport.system(.description))
                             .multilineTextAlignment(.leading)
-                            .minimumScaleFactor(0.5)
+                            .lineLimit(2)
                             .foregroundStyle(.gray)
                     }
                     

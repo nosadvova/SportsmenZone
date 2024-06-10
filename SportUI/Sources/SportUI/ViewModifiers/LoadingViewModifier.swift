@@ -9,9 +9,11 @@ import SwiftUI
 
 public struct LoadingViewModifier: ViewModifier {
     @Binding var isLoading: Bool
+    var opacity: Double
     
-    public init(isLoading: Binding<Bool>) {
+    public init(isLoading: Binding<Bool>, opacity: Double = 0.1) {
         self._isLoading = isLoading
+        self.opacity = opacity
     }
     
     public func body(content: Content) -> some View {
@@ -25,7 +27,7 @@ public struct LoadingViewModifier: ViewModifier {
                     .progressViewStyle(CircularProgressViewStyle(tint: .inactiveButtonBackgroundColor))
                     .scaleEffect(1.5)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.black.opacity(0.1).edgesIgnoringSafeArea(.all))
+                    .background(Color.black.opacity(opacity).edgesIgnoringSafeArea(.all))
             }
         }
     }
