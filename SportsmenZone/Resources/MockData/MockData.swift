@@ -44,6 +44,52 @@ struct MockData {
         return users
     }
     
+    func generateNotifications(_ amount: Int) -> [NotificationModel] {
+        var notifications: [NotificationModel] = []
+        
+        for _ in 0..<amount {
+            let id = UUID().uuidString
+            
+            let titles = [
+                "New Training Session Announced",
+                "Upcoming Sports Event",
+                "Updated Gym Schedule",
+                "Special Workshop on Nutrition",
+                "One-on-One Training Slots Available",
+                "New Trainer Introduction",
+                "Gym Maintenance Notice",
+                "Monthly Fitness Challenge",
+                "Personal Best Achievements",
+                "Important Safety Measures"
+            ]
+
+            let title = getRandString(strArr: titles)
+            
+            let descriptions = [
+                "Join us for a new training session this Friday at 6 PM. Don't miss it!",
+                "We have an exciting sports event coming up next week. Register now to participate and showcase your skills.",
+                "Please check the updated gym schedule for this month. We've added new sessions and adjusted the timings for some classes.",
+                "Attend our special workshop on nutrition and learn how to optimize your diet for better performance. Limited seats available.",
+                "Take advantage of our one-on-one training sessions with your favorite trainers. Book your slot today!",
+                "We are excited to introduce a new trainer to our team. Meet Coach Alex in our next session and get to know their training style.",
+                "Please be aware that the gym will be closed for maintenance this weekend. We apologize for any inconvenience caused.",
+                "Participate in our monthly fitness challenge and stand a chance to win exciting prizes. Challenge yourself and stay motivated!",
+                "Congratulations to all members who achieved their personal bests this month. Keep up the great work and continue pushing your limits.",
+                "Please adhere to the updated safety measures and guidelines to ensure a safe and healthy environment for everyone."
+            ]            
+            let description = getRandString(strArr: descriptions)
+            
+            let types: [NotificationType] = [.Major, .Minor]
+            let type = types.randomElement()
+                        
+            let notification = NotificationModel(id: id, title: title, message: description, type: type)
+            
+            notifications.append(notification)
+        }
+        
+        return notifications
+    }
+    
     func getRandString(strArr: [String]) -> String {
         let element = Int.random(in: 0..<strArr.count)
         

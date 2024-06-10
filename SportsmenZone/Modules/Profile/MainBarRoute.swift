@@ -22,7 +22,7 @@ extension MainBarRoute: View {
         case .mainTabView:
             SportsmenZoneTabView()
         case .mainView:
-            MainPageView()
+            MainPageView(viewModel: AppViewModel())
         case .search:
             SearchView()
         case .gym:

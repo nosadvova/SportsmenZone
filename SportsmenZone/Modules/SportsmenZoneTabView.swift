@@ -13,7 +13,7 @@ struct SportsmenZoneTabView: View {
     
     var body: some View {
         TabView(selection: $routerManager.selectedTab) {
-            MainPageView()
+            MainPageView(viewModel: appViewModel)
                 .tabItem {
                     Label("Main Page", systemImage: "house.fill")
                 }
