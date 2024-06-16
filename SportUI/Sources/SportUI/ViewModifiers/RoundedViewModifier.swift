@@ -1,6 +1,6 @@
 //
 //  RoundedViewModifier.swift
-//  
+//
 //
 //  Created by Vova Novosad on 06.03.2024.
 //
@@ -34,12 +34,12 @@ public struct RoundedViewModifier: ViewModifier {
             content
                 .padding(.top, 5)
                 .background(
-                RoundedRectangle(cornerRadius: 15)
-                    .shadow(radius: 1.5)
-                    .opacity(opacity)
-                    .foregroundStyle(color)
-                    .frame(maxWidth: .infinity)
-            )
+                    RoundedRectangle(cornerRadius: 15)
+                        .shadow(radius: 1.5)
+                        .opacity(opacity)
+                        .foregroundStyle(color)
+                        .frame(maxWidth: .infinity)
+                )
         }
     }
 }
